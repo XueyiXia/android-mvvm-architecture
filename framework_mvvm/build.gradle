@@ -4,7 +4,11 @@ import com.framework.versionplugin.BuildVersions
 plugins {
     id 'com.android.library'
     id 'org.jetbrains.kotlin.android'
+    id 'maven-publish'
 }
+
+group = 'com.github.XueyiXia'
+version = '1.0'
 
 android {
     namespace 'com.framework.mvvm'
@@ -39,6 +43,20 @@ android {
         viewBinding = true  //view绑定
     }
 
+}
+
+afterEvaluate {
+    publishing {
+        publications {
+            // Creates a Maven publication called "release".
+            release(MavenPublication) {
+                from components.release
+                groupId = 'com.github.XueyiXia'
+                artifactId = 'android-mvvm-architecture'
+                version = '1.0'
+            }
+        }
+    }
 }
 
 dependencies {
