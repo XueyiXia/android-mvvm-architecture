@@ -1,0 +1,53 @@
+import com.framework.versionplugin.AndroidX
+import com.framework.versionplugin.BuildVersions
+
+plugins {
+    id 'com.android.library'
+    id 'org.jetbrains.kotlin.android'
+}
+
+android {
+    namespace 'com.framework.mvvm'
+    compileSdk BuildVersions.compileSdk
+
+    defaultConfig {
+        minSdk BuildVersions.minSdk
+        targetSdk BuildVersions.targetSdk
+        versionCode BuildVersions.versionCode
+        versionName BuildVersions.versionName
+
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+        consumerProguardFiles "consumer-rules.pro"
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+    }
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+    kotlinOptions {
+        jvmTarget = '1.8'
+    }
+
+    buildFeatures {
+        dataBinding = true  //数据绑定
+        viewBinding = true  //view绑定
+    }
+
+}
+
+dependencies {
+    implementation AndroidX.coreKtx
+    implementation AndroidX.appcompat
+    implementation AndroidX.recyclerview
+    implementation AndroidX.material
+    implementation AndroidX.constraintLayout
+    implementation AndroidX.viewmodel
+    implementation AndroidX.livedata
+
+}
