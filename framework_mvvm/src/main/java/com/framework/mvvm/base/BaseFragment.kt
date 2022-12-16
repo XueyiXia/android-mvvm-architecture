@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.databinding.ViewDataBinding
 import androidx.fragment.app.Fragment
 import com.framework.mvvm.viewmodel.BaseViewModel
 
@@ -14,8 +15,11 @@ import com.framework.mvvm.viewmodel.BaseViewModel
  * @说明:
  */
 
-abstract class BaseFragment<VM:BaseViewModel> :Fragment() {
+abstract class BaseFragment<VM: BaseViewModel,VB: ViewDataBinding> :Fragment() {
 
+    private lateinit var mViewModel:VM;
+
+    private lateinit var mViewDataBinding:VB;
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
