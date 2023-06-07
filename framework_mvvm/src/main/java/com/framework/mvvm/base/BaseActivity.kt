@@ -1,10 +1,13 @@
 package com.framework.mvvm.base
 
 import android.os.Bundle
-import android.view.WindowManager
+import android.util.Log
+import android.view.View
 import androidx.appcompat.app.AppCompatActivity
-import androidx.databinding.DataBindingUtil
 import androidx.databinding.ViewDataBinding
+import androidx.lifecycle.ViewModelProvider
+import com.framework.mvvm.utils.getVmClazz
+import com.framework.mvvm.utils.inflateBindingWithGeneric
 import com.framework.mvvm.viewmodel.BaseViewModel
 
 /**
@@ -14,19 +17,63 @@ import com.framework.mvvm.viewmodel.BaseViewModel
  * @说明:
  */
 
-abstract class BaseActivity <VM: BaseViewModel,VB: ViewDataBinding,repository:BaseRepository> : AppCompatActivity(){
+abstract class BaseActivity <viewDataBinding: ViewDataBinding,viewMode: BaseViewModel> : AppCompatActivity(){
 
+    companion object{
+        private const val TAG = "BaseActivity"
+    }
 
-    private lateinit var mViewModel:VM;
+    lateinit var mViewDataBinding:viewDataBinding
 
-    private lateinit var mViewDataBinding:VB;
-
-    private lateinit var mRepository:repository;
+    lateinit var mViewModel:viewMode
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-//        mViewDataBinding = DataBindingUtil.setContentView(this, getLayoutResId())
 
+        Log.e(TAG, "跳转界面--->>" + this.javaClass.simpleName)
+
+        mViewDataBinding = inflateBindingWithGeneric(layoutInflater)
+
+        /**
+         * 绑定Ui
+         */
+        setContentView(mViewDataBinding.root)
+
+        /**
+         * 创建ViewModel
+         */
+        mViewModel = createViewModel()
+
+
+        /**
+         * 函数入口
+         */
+        initView(mViewDataBinding.root, savedInstanceState)
+
+
+        /**
+         * 创建LiveData数据观察者
+         */
+        createObserver()
     }
 
+
+    /**
+     * 创建ViewModel
+     * @return VM
+     */
+    private fun createViewModel(): viewMode {
+        return ViewModelProvider(this)[getVmClazz(this)]
+    }
+
+
+    /**
+     * 创建LiveData数据观察者
+     */
+    abstract fun createObserver()
+
+    /**
+     * 入口函数
+     */
+    abstract fun initView(rootView: View, savedInstanceState: Bundle?)
 }

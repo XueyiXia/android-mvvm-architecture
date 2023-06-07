@@ -46,5 +46,8 @@ dependencies {
     implementation AndroidX.recyclerview
     implementation AndroidX.material
     implementation AndroidX.constraintLayout
-
+    implementation 'androidx.preference:preference-ktx:1.2.0'
+    implementation 'com.android.support:multidex:1.0.3'
+    //项目核心框架
+    implementation project(path: ':framework_mvvm')
 }

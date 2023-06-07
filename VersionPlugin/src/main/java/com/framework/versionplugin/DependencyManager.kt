@@ -15,9 +15,9 @@ object Versions {
     const val constraintLayout="2.1.4"
     const val material = "1.6.1"
 
-    const val lifecycle_viewmodel = "2.2.0"
+    const val lifecycle_viewmodel = "2.5.0"
 
-    const val lifecycle_livedata = "2.2.0"
+    const val lifecycle_livedata = "2.5.0"
 }
 
 object AndroidX {
@@ -26,10 +26,10 @@ object AndroidX {
     const val recyclerview = "androidx.recyclerview:recyclerview:${Versions.recyclerview}"
     const val material = "com.google.android.material:material:${Versions.material}"
     const val constraintLayout = "androidx.constraintlayout:constraintlayout:${Versions.constraintLayout}"
-
-    const val viewmodel = "androidx.lifecycle:lifecycle-viewmodel:${Versions.lifecycle_viewmodel}"
-
-    const val livedata = "androidx.lifecycle:lifecycle-livedata:${Versions.lifecycle_livedata}"
+//
+//    const val viewmodel = "androidx.lifecycle:lifecycle-viewmodel:${Versions.lifecycle_viewmodel}"
+//
+//    const val livedata = "androidx.lifecycle:lifecycle-livedata:${Versions.lifecycle_livedata}"
 }
 
 
