@@ -17,18 +17,18 @@ import com.framework.mvvm.viewmodel.BaseViewModel
  * @说明:
  */
 
-abstract class BaseMvvmActivity <DB: ViewDataBinding,VM: BaseViewModel> : BaseActivity<DB,VM>(){
-
+abstract class BaseMvvmActivity <DB: ViewDataBinding,VM: BaseViewModel> : BaseActivity<VM>(){
     companion object{
         private const val TAG = "BaseMvvmActivity"
     }
 
-    override fun initView(rootView: View, savedInstanceState: Bundle?) {
-        Log.e(TAG, "BaseMvvmActivity--->>" + this.javaClass.simpleName)
-    }
+    lateinit var mViewDataBinding: DB
 
+    override fun createDataBinding(): View {
+        mViewDataBinding = inflateBindingWithGeneric(layoutInflater)
+        return mViewDataBinding.root
+    }
     override fun createObserver() {
         Log.e(TAG, "createObserver--->>${mViewModel}" )
     }
-
 }
