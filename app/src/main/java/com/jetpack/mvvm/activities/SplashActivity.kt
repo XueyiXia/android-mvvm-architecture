@@ -24,20 +24,17 @@ import com.jetpack.mvvm.viewmodel.SplashViewModel
 @SuppressLint("CustomSplashScreen")
 class SplashActivity  : BaseMvvmActivity<ActivitySplashBinding,SplashViewModel>(){
 
-    private val viewModel: SplashViewModel by viewModels()
-
     private var i=0
     override fun createObserver() {
-        viewModel.name.observe(this, Observer {
+        mViewModel.name.observe(this, Observer {
             Log.e("SplashActivity", "it--->>$it" )
-
+            mViewDataBinding.tvCount.text=it
         })
     }
 
     override fun initView(rootView: View, savedInstanceState: Bundle?) {
         mViewDataBinding.click=ProxyClick()
-        viewModel.name.value="test toMain ${i++}"
-        Log.e("SplashActivity", "createViewModel--->>$mViewModel" )
+        Log.e("SplashActivity", "initView--->>" + this.javaClass.simpleName)
     }
 
 
@@ -51,4 +48,6 @@ class SplashActivity  : BaseMvvmActivity<ActivitySplashBinding,SplashViewModel>(
 //            overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out)
         }
     }
+
+
 }
