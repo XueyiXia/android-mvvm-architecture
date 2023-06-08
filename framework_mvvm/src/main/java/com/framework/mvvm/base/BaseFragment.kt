@@ -1,18 +1,15 @@
 package com.framework.mvvm.base
 
+import android.content.Context
 import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
-import android.view.LayoutInflater
 import android.view.View
-import android.view.ViewGroup
-import androidx.databinding.ViewDataBinding
+import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import com.framework.mvvm.utils.getVmClazz
-import com.framework.mvvm.utils.inflateBindingWithGeneric
 import com.framework.mvvm.viewmodel.BaseViewModel
-import java.lang.reflect.ParameterizedType
 
 /**
  * @author: xiaxueyi
@@ -21,28 +18,77 @@ import java.lang.reflect.ParameterizedType
  * @说明:
  */
 
-abstract class BaseFragment<VB: ViewDataBinding> :Fragment() {
+abstract class BaseFragment<VM : BaseViewModel> :Fragment() {
+
+    lateinit var mActivity: AppCompatActivity
 
     private val mHandler = Handler(Looper.getMainLooper())
 
-    private lateinit var mViewDataBinding:VB;
-    private var _binding: VB? = null
-    val mDatabind: VB get() = _binding!!
-    override fun onCreateView(
-        inflater: LayoutInflater,
-        container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
-        mViewDataBinding  = inflateBindingWithGeneric(inflater,container,false)
-        return mViewDataBinding.root
+    lateinit var mViewModel: VM
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+
+        /**
+         * 实例化创建ViewModel
+         */
+        mViewModel = createViewModel()
+
+        /**
+         * 函数入口
+         */
+        initView(view,savedInstanceState)
+
+        /**
+         * 创建LiveData数据观察者
+         */
+        createObserver()
+
+
     }
 
 
 
+    /**
+     * 创建ViewModel
+     * @return VM
+     */
+    private fun createViewModel(): VM {
+        return ViewModelProvider(this)[getVmClazz(this)]
+    }
 
-    override fun onDestroyView() {
-        super.onDestroyView()
-        mViewDataBinding.unbind()
+    /**
+     * 获取绑定的View
+     * @return View
+     */
+    private fun getDataBinding(): View = createDataBinding()
+
+    /**
+     * 创建DataBinding
+     * @return View
+     */
+    abstract fun createDataBinding(): View
+
+    /**
+     * 创建LiveData数据观察者
+     */
+    abstract fun createObserver()
+
+    /**
+     * 入口函数
+     * @param rootView View
+     * @param savedInstanceState Bundle?
+     */
+    abstract fun initView(rootView: View, savedInstanceState: Bundle?)
+
+
+    override fun onAttach(context: Context) {
+        super.onAttach(context)
+        mActivity = context as AppCompatActivity
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
         mHandler.removeCallbacksAndMessages(null)
     }
 }

@@ -19,23 +19,23 @@ import java.lang.reflect.ParameterizedType
  * @说明:
  */
 
-abstract class BaseMvvmFragment<VM: BaseViewModel,VB: ViewDataBinding> :Fragment() {
+abstract class BaseMvvmFragment<DB: ViewDataBinding,VM: BaseViewModel> :BaseFragment<VM>() {
 
-    private lateinit var mViewModel:VM;
+    lateinit var mViewDataBinding:DB;
 
-    private lateinit var mViewDataBinding:VB;
-
-    override fun onCreateView(
-        inflater: LayoutInflater,
-        container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         mViewDataBinding  = inflateBindingWithGeneric(inflater,container,false)
         return mViewDataBinding.root
     }
 
 
+    override fun createDataBinding(): View {
+        return mViewDataBinding.root
+    }
 
+    override fun createObserver() {
+
+    }
 
     override fun onDestroyView() {
         super.onDestroyView()

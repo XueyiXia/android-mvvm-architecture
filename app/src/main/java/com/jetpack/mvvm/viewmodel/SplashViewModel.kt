@@ -1,11 +1,15 @@
 package com.jetpack.mvvm.viewmodel
 
-import com.framework.mvvm.livedata.StringLiveData
+import android.graphics.Color
+import com.framework.mvvm.databind.IntObservableField
+import com.framework.mvvm.databind.StringObservableField
 import com.framework.mvvm.viewmodel.BaseViewModel
 
 
 class SplashViewModel : BaseViewModel() {
 
-    var name = StringLiveData()
+    var name = StringObservableField()
+
+    var bgColor = IntObservableField(Color.GRAY)
 
 }

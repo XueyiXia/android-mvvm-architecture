@@ -1,11 +1,18 @@
 package com.jetpack.mvvm.fragment
 
+import android.content.Intent
+import android.graphics.Color
 import android.os.Bundle
-import android.view.LayoutInflater
+import android.util.Log
 import android.view.View
-import android.view.ViewGroup
-import androidx.fragment.app.Fragment
-import com.jetpack.mvvm.R
+import androidx.core.graphics.ColorUtils
+import androidx.lifecycle.Observer
+import androidx.lifecycle.viewModelScope
+import com.framework.mvvm.base.BaseMvvmFragment
+import com.framework.mvvm.viewmodel.BaseViewModel
+import com.jetpack.mvvm.activities.MainActivity
+import com.jetpack.mvvm.databinding.FragmentHomeBinding
+import com.jetpack.mvvm.viewmodel.SplashViewModel
 
 /**
  * @author: xiaxueyi
@@ -14,17 +21,39 @@ import com.jetpack.mvvm.R
  * @说明:
  */
 
-class HomeFragment :Fragment(){
+class HomeFragment :BaseMvvmFragment<FragmentHomeBinding, SplashViewModel>(){
 
-    private var mRootView: View? = null
-
-
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        mRootView = inflater.inflate(R.layout.fragment_home, container, false)
-        return mRootView
+    override fun createObserver() {
+        mViewModel.name.notifyChange()
+        Log.e("HomeFragment", "createObserver--->> ViewModel--->>$mViewModel ")
+//        mViewModel.name.observe(viewLifecycleOwner, Observer {
+//            Log.e("HomeFragment", "it--->>$it" )
+//            mViewDataBinding.next.text=it
+//        })
+//
+//        mViewModel.bgColor.observe(viewLifecycleOwner, Observer {
+//            Log.e("HomeFragment", "it--->>$it" )
+//            mViewModel.bgColor.value=it
+//
+//        })
     }
 
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
+    override fun initView(rootView: View, savedInstanceState: Bundle?) {
+        mViewDataBinding.onclick = ProxyClick()
+//        mViewModel.name.value="test+++++ "
+//        mViewModel.bgColor.value=Color.YELLOW
+        mViewModel.name.set("dadadasd")
+        Log.e("HomeFragment", "initView：   ViewModel--->>$mViewModel    rootView--->>$rootView    savedInstanceState--->>$savedInstanceState ")
     }
+
+
+
+    inner class ProxyClick {
+        fun updateUi() {
+            mViewModel.name.set("dadadasd")
+            mViewModel.name.notifyChange()
+//            mViewModel.bgColor.set(00000)
+        }
+    }
+
 }

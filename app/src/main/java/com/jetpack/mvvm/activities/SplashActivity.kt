@@ -26,10 +26,10 @@ class SplashActivity  : BaseMvvmActivity<ActivitySplashBinding,SplashViewModel>(
 
     private var i=0
     override fun createObserver() {
-        mViewModel.name.observe(this, Observer {
-            Log.e("SplashActivity", "it--->>$it" )
-            mViewDataBinding.tvCount.text=it
-        })
+//        mViewModel.name.observe(this, Observer {
+//            Log.e("SplashActivity", "it--->>$it" )
+//            mViewDataBinding.tvCount.text=it
+//        })
     }
 
     override fun initView(rootView: View, savedInstanceState: Bundle?) {
@@ -41,11 +41,11 @@ class SplashActivity  : BaseMvvmActivity<ActivitySplashBinding,SplashViewModel>(
     inner class ProxyClick {
 
         fun toMain() {
-            mViewModel.name.value="test toMain ${i++}"
-//            startActivity(Intent(this@SplashActivity, MainActivity::class.java))
-//            finish()
+            mViewModel.name.set("fhjsjalsfjklasdl")
+            startActivity(Intent(this@SplashActivity, MainActivity::class.java))
+            finish()
             //带点渐变动画
-//            overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out)
+            overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out)
         }
     }
 
