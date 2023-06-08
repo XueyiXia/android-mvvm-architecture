@@ -1,8 +1,6 @@
 package com.framework.mvvm.base
 
 import android.os.Bundle
-import android.os.Handler
-import android.os.Looper
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -21,13 +19,12 @@ import java.lang.reflect.ParameterizedType
  * @说明:
  */
 
-abstract class BaseFragment<VB: ViewDataBinding> :Fragment() {
+abstract class BaseMvvmFragment<VM: BaseViewModel,VB: ViewDataBinding> :Fragment() {
 
-    private val mHandler = Handler(Looper.getMainLooper())
+    private lateinit var mViewModel:VM;
 
     private lateinit var mViewDataBinding:VB;
-    private var _binding: VB? = null
-    val mDatabind: VB get() = _binding!!
+
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -43,6 +40,5 @@ abstract class BaseFragment<VB: ViewDataBinding> :Fragment() {
     override fun onDestroyView() {
         super.onDestroyView()
         mViewDataBinding.unbind()
-        mHandler.removeCallbacksAndMessages(null)
     }
 }

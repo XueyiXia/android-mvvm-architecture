@@ -7,6 +7,6 @@ package com.framework.mvvm.base
  * @说明: 持久化和远程仓库基类
  */
 
-class BaseRepository {
+internal class BaseRepository {
 
 }

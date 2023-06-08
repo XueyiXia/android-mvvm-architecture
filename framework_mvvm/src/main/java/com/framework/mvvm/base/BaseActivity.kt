@@ -8,6 +8,7 @@ import androidx.databinding.ViewDataBinding
 import androidx.lifecycle.ViewModelProvider
 import com.framework.mvvm.utils.getVmClazz
 import com.framework.mvvm.utils.inflateBindingWithGeneric
+import com.framework.mvvm.utils.notNull
 import com.framework.mvvm.viewmodel.BaseViewModel
 
 /**
@@ -17,39 +18,36 @@ import com.framework.mvvm.viewmodel.BaseViewModel
  * @说明:
  */
 
-abstract class BaseActivity <viewDataBinding: ViewDataBinding,viewMode: BaseViewModel> : AppCompatActivity(){
+abstract class BaseActivity <DB: ViewDataBinding,VM : BaseViewModel> : AppCompatActivity(){
 
     companion object{
         private const val TAG = "BaseActivity"
     }
 
-    lateinit var mViewDataBinding:viewDataBinding
+    lateinit var mViewDataBinding: DB
 
-    lateinit var mViewModel:viewMode
+    lateinit var mViewModel: VM
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-
         Log.e(TAG, "跳转界面--->>" + this.javaClass.simpleName)
 
-        mViewDataBinding = inflateBindingWithGeneric(layoutInflater)
-
         /**
-         * 绑定Ui
+         * 绑定UI
          */
-        setContentView(mViewDataBinding.root)
+        getDataBinding().notNull({
+            setContentView(it)
+        })
 
         /**
-         * 创建ViewModel
+         * 实例化创建ViewModel
          */
         mViewModel = createViewModel()
-
 
         /**
          * 函数入口
          */
-        initView(mViewDataBinding.root, savedInstanceState)
-
+        initView(window.decorView,savedInstanceState)
 
         /**
          * 创建LiveData数据观察者
@@ -58,22 +56,33 @@ abstract class BaseActivity <viewDataBinding: ViewDataBinding,viewMode: BaseView
     }
 
 
+    private fun getDataBinding(): View {
+        mViewDataBinding = inflateBindingWithGeneric(layoutInflater)
+        return mViewDataBinding.root
+    }
+
+
+
     /**
      * 创建ViewModel
      * @return VM
      */
-    private fun createViewModel(): viewMode {
+    private fun createViewModel(): VM {
+
         return ViewModelProvider(this)[getVmClazz(this)]
     }
 
+    /**
+     * 入口函数
+     * @param rootView View
+     * @param savedInstanceState Bundle?
+     */
+    abstract fun initView(rootView: View, savedInstanceState: Bundle?)
 
     /**
      * 创建LiveData数据观察者
      */
     abstract fun createObserver()
 
-    /**
-     * 入口函数
-     */
-    abstract fun initView(rootView: View, savedInstanceState: Bundle?)
+
 }

@@ -24,9 +24,10 @@ import java.lang.reflect.ParameterizedType
  * @return VB
  */
 @JvmName("inflateWithGeneric")
-fun <VB : ViewBinding> AppCompatActivity
-        .inflateBindingWithGeneric(layoutInflater: LayoutInflater): VB
-= withGenericBindingClass<VB>(this) { clazz -> clazz.getMethod("inflate", LayoutInflater::class.java).invoke(null, layoutInflater) as VB }.also { binding ->
+fun <VB : ViewBinding> AppCompatActivity.inflateBindingWithGeneric(layoutInflater: LayoutInflater): VB = withGenericBindingClass(this) { clazz -> clazz
+    .getMethod("inflate", LayoutInflater::class.java)
+        .invoke(null, layoutInflater) as VB }
+    .also { binding ->
         if (binding is ViewDataBinding) {
             binding.lifecycleOwner = this
         }
