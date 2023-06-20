@@ -23,9 +23,9 @@ open class BaseAppLoader(override val viewModelStore: ViewModelStore) : Applicat
      *
      * @return ViewModelStore
      */
-    fun getViewModelStore(): ViewModelStore {
-        return mAppViewModelStore
-    }
+//    fun getViewModelStore(): ViewModelStore {
+//        return mAppViewModelStore
+//    }
 
     override fun onCreate() {
         super.onCreate()

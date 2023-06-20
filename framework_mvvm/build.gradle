@@ -72,9 +72,14 @@ dependencies {
     api 'androidx.lifecycle:lifecycle-extensions:2.2.0'
     // viewModel
     api "androidx.lifecycle:lifecycle-viewmodel-ktx:2.6.1"
-    api "androidx.fragment:fragment-ktx:1.5.7"
+    api "androidx.fragment:fragment-ktx:1.6.0"
     // liveData
     api "androidx.lifecycle:lifecycle-livedata-ktx:2.6.1"
 //    api 'com.kunminx.archi:unpeek-livedata:4.4.1-beta1'
+
+
+    //navigation
+    api 'androidx.navigation:navigation-fragment-ktx:2.6.0'
+    api 'androidx.navigation:navigation-ui-ktx:2.6.0'
 
 }
