@@ -43,6 +43,7 @@ class HomeFragment :BaseMvvmFragment<FragmentHomeBinding, SplashViewModel>(){
 //        mViewModel.name.value="test+++++ "
 //        mViewModel.bgColor.value=Color.YELLOW
         mViewModel.name.set("dadadasd")
+
         Log.e("HomeFragment", "initView：   ViewModel--->>$mViewModel    rootView--->>$rootView    savedInstanceState--->>$savedInstanceState ")
     }
 

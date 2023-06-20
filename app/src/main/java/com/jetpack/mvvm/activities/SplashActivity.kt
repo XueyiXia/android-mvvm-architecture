@@ -10,6 +10,7 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.viewModelScope
 import com.framework.mvvm.base.BaseActivity
 import com.framework.mvvm.base.BaseMvvmActivity
+import com.framework.mvvm.base.appContext
 import com.framework.mvvm.databind.StringObservableField
 import com.framework.mvvm.viewmodel.BaseViewModel
 import com.jetpack.mvvm.databinding.ActivitySplashBinding
@@ -26,10 +27,7 @@ class SplashActivity  : BaseMvvmActivity<ActivitySplashBinding,SplashViewModel>(
 
     private var i=0
     override fun createObserver() {
-//        mViewModel.name.observe(this, Observer {
-//            Log.e("SplashActivity", "it--->>$it" )
-//            mViewDataBinding.tvCount.text=it
-//        })
+
     }
 
     override fun initView(rootView: View, savedInstanceState: Bundle?) {

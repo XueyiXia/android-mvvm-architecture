@@ -27,7 +27,7 @@
             android:gravity="center"
             android:textColor="@color/design_default_color_secondary_variant"
             android:textSize="@dimen/sp_12"
-            android:text="@{splashmodel.name}"
+            app:text="@{splashmodel.name}"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
