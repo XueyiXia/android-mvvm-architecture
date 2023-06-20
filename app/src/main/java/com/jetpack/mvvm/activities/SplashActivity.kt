@@ -7,12 +7,7 @@ import android.util.Log
 import android.view.View
 import androidx.activity.viewModels
 import androidx.lifecycle.Observer
-import androidx.lifecycle.viewModelScope
-import com.framework.mvvm.base.BaseActivity
 import com.framework.mvvm.base.BaseMvvmActivity
-import com.framework.mvvm.base.appContext
-import com.framework.mvvm.databind.StringObservableField
-import com.framework.mvvm.viewmodel.BaseViewModel
 import com.jetpack.mvvm.databinding.ActivitySplashBinding
 import com.jetpack.mvvm.viewmodel.SplashViewModel
 
@@ -25,13 +20,18 @@ import com.jetpack.mvvm.viewmodel.SplashViewModel
 @SuppressLint("CustomSplashScreen")
 class SplashActivity  : BaseMvvmActivity<ActivitySplashBinding,SplashViewModel>(){
 
-    private var i=0
-    override fun createObserver() {
+    private var index:Int=0
 
+    override fun createObserver(){
+        mViewModel.data.observe(this, Observer {
+            mViewModel.title.set(it)
+            Log.e("SplashActivity", "it--->>$it")
+
+        })
     }
-
     override fun initView(rootView: View, savedInstanceState: Bundle?) {
         mViewDataBinding.click=ProxyClick()
+
         Log.e("SplashActivity", "initView--->>" + this.javaClass.simpleName)
     }
 
@@ -39,7 +39,7 @@ class SplashActivity  : BaseMvvmActivity<ActivitySplashBinding,SplashViewModel>(
     inner class ProxyClick {
 
         fun toMain() {
-            mViewModel.name.set("fhjsjalsfjklasdl")
+            mViewModel.data.value="看得见风算啦${index++}"
             startActivity(Intent(this@SplashActivity, MainActivity::class.java))
             finish()
             //带点渐变动画

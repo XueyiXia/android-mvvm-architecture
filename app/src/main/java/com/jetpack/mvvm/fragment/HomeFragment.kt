@@ -10,6 +10,7 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.viewModelScope
 import com.framework.mvvm.base.BaseMvvmFragment
 import com.framework.mvvm.viewmodel.BaseViewModel
+import com.jetpack.mvvm.AppLoader
 import com.jetpack.mvvm.activities.MainActivity
 import com.jetpack.mvvm.databinding.FragmentHomeBinding
 import com.jetpack.mvvm.viewmodel.SplashViewModel
@@ -23,27 +24,18 @@ import com.jetpack.mvvm.viewmodel.SplashViewModel
 
 class HomeFragment :BaseMvvmFragment<FragmentHomeBinding, SplashViewModel>(){
 
-    override fun createObserver() {
-        mViewModel.name.notifyChange()
-        Log.e("HomeFragment", "createObserver--->> ViewModel--->>$mViewModel ")
-//        mViewModel.name.observe(viewLifecycleOwner, Observer {
-//            Log.e("HomeFragment", "it--->>$it" )
-//            mViewDataBinding.next.text=it
-//        })
-//
-//        mViewModel.bgColor.observe(viewLifecycleOwner, Observer {
-//            Log.e("HomeFragment", "it--->>$it" )
-//            mViewModel.bgColor.value=it
-//
-//        })
+    private var index:Int=0
+
+    override fun createObserver(){
+        mViewModel.data.observe(viewLifecycleOwner, Observer {
+            mViewModel.title.set(it)
+            Log.e("HomeFragment", "createObserver  it--->>$it")
+
+        })
     }
 
     override fun initView(rootView: View, savedInstanceState: Bundle?) {
         mViewDataBinding.onclick = ProxyClick()
-//        mViewModel.name.value="test+++++ "
-//        mViewModel.bgColor.value=Color.YELLOW
-        mViewModel.name.set("dadadasd")
-
         Log.e("HomeFragment", "initView：   ViewModel--->>$mViewModel    rootView--->>$rootView    savedInstanceState--->>$savedInstanceState ")
     }
 
@@ -51,9 +43,7 @@ class HomeFragment :BaseMvvmFragment<FragmentHomeBinding, SplashViewModel>(){
 
     inner class ProxyClick {
         fun updateUi() {
-            mViewModel.name.set("dadadasd")
-            mViewModel.name.notifyChange()
-//            mViewModel.bgColor.set(00000)
+            mViewModel.data.value="看得见风算啦${index++}"
         }
     }
 
