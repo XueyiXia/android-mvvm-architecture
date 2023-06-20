@@ -17,9 +17,11 @@ class AppLoader :BaseAppLoader(ViewModelStore()) {
 
 
     companion object {
-        lateinit var mInstance: AppLoader
+       private lateinit var mInstance: AppLoader
         lateinit var eventViewModelInstance: EventViewModel
         lateinit var appViewModelInstance: AppViewModel
+
+        fun getInstance()=mInstance
     }
 
 
