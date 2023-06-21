@@ -1,6 +1,12 @@
 package com.framework.mvvm.utils
 
-import android.app.*
+import android.app.ActivityManager
+import android.app.AlarmManager
+import android.app.DownloadManager
+import android.app.KeyguardManager
+import android.app.NotificationManager
+import android.app.SearchManager
+import android.app.UiModeManager
 import android.app.job.JobScheduler
 import android.content.ClipboardManager
 import android.content.Context

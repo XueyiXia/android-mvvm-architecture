@@ -1,12 +1,8 @@
 package com.framework.mvvm.base
 
-import android.os.Bundle
 import android.util.Log
 import android.view.View
-import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.ViewDataBinding
-import androidx.lifecycle.ViewModelProvider
-import com.framework.mvvm.utils.getVmClazz
 import com.framework.mvvm.utils.inflateBindingWithGeneric
 import com.framework.mvvm.viewmodel.BaseViewModel
 

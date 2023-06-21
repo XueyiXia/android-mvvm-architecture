@@ -5,12 +5,8 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.databinding.ViewDataBinding
-import androidx.fragment.app.Fragment
-import androidx.lifecycle.ViewModelProvider
-import com.framework.mvvm.utils.getVmClazz
 import com.framework.mvvm.utils.inflateBindingWithGeneric
 import com.framework.mvvm.viewmodel.BaseViewModel
-import java.lang.reflect.ParameterizedType
 
 /**
  * @author: xiaxueyi
