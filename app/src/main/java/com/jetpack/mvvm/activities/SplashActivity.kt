@@ -30,6 +30,7 @@ class SplashActivity  : BaseMvvmActivity<ActivitySplashBinding,SplashViewModel>(
         })
     }
     override fun initView(rootView: View, savedInstanceState: Bundle?) {
+        mViewDataBinding.splashmodel=mViewModel
         mViewDataBinding.click=ProxyClick()
 
         Log.e("SplashActivity", "initView--->>" + this.javaClass.simpleName)
