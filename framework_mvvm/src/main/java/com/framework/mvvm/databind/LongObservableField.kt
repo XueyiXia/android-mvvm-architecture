@@ -9,7 +9,7 @@ import androidx.databinding.ObservableField
  * @time: 13:50
  * @说明: 自定义的Long类型 ObservableField  提供了默认值，避免取值的时候还要判空
  */
-class LongObservableField() : ObservableField<Long>() {
+class LongObservableField(value: Long = 0L) : ObservableField<Long>(value) {
     override fun get(): Long {
         return super.get()?: 0L
     }
