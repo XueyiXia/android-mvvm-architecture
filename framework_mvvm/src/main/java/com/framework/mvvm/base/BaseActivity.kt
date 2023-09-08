@@ -5,9 +5,11 @@ import android.util.Log
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProvider
+import com.framework.mvvm.utils.ParameterizedTypeUtils
 import com.framework.mvvm.utils.getVmClazz
 import com.framework.mvvm.utils.notNull
 import com.framework.mvvm.viewmodel.BaseViewModel
+import java.lang.reflect.ParameterizedType
 
 /**
  * @author: xiaxueyi
@@ -37,7 +39,7 @@ abstract class BaseActivity <VM : BaseViewModel> : AppCompatActivity(){
         /**
          * 实例化创建ViewModel
          */
-        mViewModel = createViewModel()
+        createViewModel()
 
         /**
          * 函数入口
@@ -54,8 +56,9 @@ abstract class BaseActivity <VM : BaseViewModel> : AppCompatActivity(){
      * 创建ViewModel
      * @return VM
      */
-    private fun createViewModel(): VM {
-        return ViewModelProvider(this)[getVmClazz(this)]
+    private fun createViewModel() {
+        val modelClass :Class<VM> = getVmClazz(this)
+        mViewModel= ViewModelProvider(this)[modelClass]
     }
 
     /**

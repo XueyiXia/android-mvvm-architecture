@@ -11,4 +11,5 @@ class SplashViewModel : BaseViewModel() {
 
     var title = StringObservableField("Test Data")
 
+
 }
