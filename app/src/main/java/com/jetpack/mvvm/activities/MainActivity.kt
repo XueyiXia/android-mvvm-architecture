@@ -1,14 +1,20 @@
 package com.jetpack.mvvm.activities
 
+import android.content.Intent
 import android.os.Bundle
+import android.util.Log
+import android.view.View
 import androidx.appcompat.app.AppCompatActivity
+import com.framework.mvvm.base.BaseMvvmActivity
+import com.framework.mvvm.viewmodel.BaseViewModel
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.jetpack.mvvm.R
+import com.jetpack.mvvm.databinding.ActivityMainBinding
 import com.jetpack.mvvm.fragment.HomeFragment
 import com.jetpack.mvvm.fragment.MallsFragment
 import com.jetpack.mvvm.fragment.UserFragment
 
-class MainActivity : AppCompatActivity() {
+class MainActivity : BaseMvvmActivity<ActivityMainBinding,BaseViewModel>() {
 
 
     companion object{
@@ -34,9 +40,17 @@ class MainActivity : AppCompatActivity() {
     private lateinit var mAHBottomNavigation: BottomNavigationView
 
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
+//    override fun onCreate(savedInstanceState: Bundle?) {
+//        super.onCreate(savedInstanceState)
+//        setContentView(R.layout.activity_main)
+//
+//
+//
+//    }
+
+    override fun initView(rootView: View, savedInstanceState: Bundle?) {
+        val data=intent?.extras
+        Log.e("ActivityForResult", "get data--->>$data")
 
         mAHBottomNavigation=findViewById(R.id.bottom_navigation)
 
@@ -51,8 +65,14 @@ class MainActivity : AppCompatActivity() {
          * 实例化底部导航栏
          */
         initBottomNavigation()
-    }
 
+
+        val intent=Intent()
+        val bundle=Bundle()
+        bundle.putInt("onDestroy",10)
+        intent.putExtra("onDestroy",bundle)
+        setResult(RESULT_OK,intent)
+    }
 
 
     /**
@@ -141,5 +161,12 @@ class MainActivity : AppCompatActivity() {
 
             true
         }
+    }
+
+
+    override fun onDestroy() {
+        super.onDestroy()
+
+
     }
 }

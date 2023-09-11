@@ -5,6 +5,8 @@ import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.view.View
+import androidx.activity.result.ActivityResult
+import androidx.activity.result.ActivityResultCallback
 import androidx.activity.viewModels
 import androidx.lifecycle.Observer
 import com.framework.mvvm.base.BaseMvvmActivity
@@ -25,7 +27,7 @@ class SplashActivity  : BaseMvvmActivity<ActivitySplashBinding,SplashViewModel>(
     override fun createObserver(){
         mViewModel.data.observe(this, Observer {
             mViewModel.title.set(it)
-            Log.e("SplashActivity", "it--->>$it")
+            Log.e("SplashActivity", "it--->>$it   ,index-->>$index++")
 
         })
     }
@@ -41,9 +43,18 @@ class SplashActivity  : BaseMvvmActivity<ActivitySplashBinding,SplashViewModel>(
 
         fun toMain() {
             mViewModel.data.value="看得见风算啦${index++}"
-            startActivity(Intent(this@SplashActivity, MainActivity::class.java))
-            finish()
+//            startActivity(Intent(this@SplashActivity, MainActivity::class.java))
+//            finish()
             //带点渐变动画
+
+            val bundle=Bundle()
+            bundle.putInt("0",5)
+            startActivityForResult(MainActivity::class.java,bundle,object :ActivityResultCallback<ActivityResult>{
+                override fun onActivityResult(result: ActivityResult?) {
+                    Log.e("ActivityForResult", "result--->>111$result")
+                }
+            })
+
             overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out)
         }
     }
