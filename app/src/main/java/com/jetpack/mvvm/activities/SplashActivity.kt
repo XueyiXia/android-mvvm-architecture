@@ -32,7 +32,7 @@ class SplashActivity  : BaseMvvmActivity<ActivitySplashBinding,SplashViewModel>(
         })
     }
     override fun initView(rootView: View, savedInstanceState: Bundle?) {
-        mViewDataBinding.splashmodel=mViewModel
+//        mViewDataBinding.splashmodel=mViewModel
         mViewDataBinding.click=ProxyClick()
 
         Log.e("SplashActivity", "initView--->>" + this.javaClass.simpleName)
@@ -50,7 +50,8 @@ class SplashActivity  : BaseMvvmActivity<ActivitySplashBinding,SplashViewModel>(
             val bundle=Bundle()
             bundle.putInt("0",5)
             startActivityForResult(MainActivity::class.java,bundle,object :ActivityResultCallback<ActivityResult>{
-                override fun onActivityResult(result: ActivityResult?) {
+
+                override fun onActivityResult(result: ActivityResult) {
                     Log.e("ActivityForResult", "result--->>111$result")
                 }
             })
