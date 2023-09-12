@@ -27,8 +27,8 @@ class HomeFragment :BaseMvvmFragment<FragmentHomeBinding, SplashViewModel>(){
     private var index:Int=0
 
     override fun createObserver(){
-        mViewModel.data.observe(viewLifecycleOwner, Observer {
-            mViewModel.title.set(it)
+        mViewModel.clickData.observe(viewLifecycleOwner, Observer {
+            mViewModel.titleData.value=it
             Log.e("HomeFragment", "createObserver  it--->>$it")
 
         })
@@ -43,7 +43,7 @@ class HomeFragment :BaseMvvmFragment<FragmentHomeBinding, SplashViewModel>(){
 
     inner class ProxyClick {
         fun updateUi() {
-            mViewModel.data.value="看得见风算啦${index++}"
+            mViewModel.clickData.value="看得见风算啦${index++}"
         }
     }
 

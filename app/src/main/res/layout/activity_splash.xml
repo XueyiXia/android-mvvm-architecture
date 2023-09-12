@@ -1,5 +1,6 @@
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tool="http://schemas.android.com/tools">
 
     <data>
         <variable
@@ -21,13 +22,14 @@
         <TextView
             android:id="@+id/tv_count"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="@dimen/dp_50"
             android:layout_centerHorizontal="true"
             android:layout_centerVertical="true"
             android:gravity="center"
             android:textSize="@dimen/sp_12"
-            android:text="@{splashmodel.title}"
-            android:textColor="@color/black"
+            android:text="@{splashmodel.titleData}"
+            android:textColor="@color/white"
+            android:background="@color/cardview_dark_background"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 

@@ -38,6 +38,9 @@ class MainActivity : BaseMvvmActivity<ActivityMainBinding,BaseViewModel>() {
     private var mUserFragment: UserFragment?=null
 
     private lateinit var mAHBottomNavigation: BottomNavigationView
+    override fun createObserver() {
+
+    }
 
 
 //    override fun onCreate(savedInstanceState: Bundle?) {
