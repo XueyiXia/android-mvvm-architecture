@@ -16,7 +16,6 @@ import java.lang.reflect.ParameterizedType
 //}
 
 
-@Suppress("UNCHECKED_CAST")
 fun <VM> getVmClazz(obj: Any): Class<VM> {
     val type = obj.javaClass.genericSuperclass?.let {
         ParameterizedTypeUtils.findParameterizedType(it)
