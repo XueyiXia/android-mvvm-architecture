@@ -28,6 +28,7 @@
             android:gravity="center"
             android:textSize="@dimen/sp_12"
             android:text="@{splashmodel.titleData}"
+            app:titleBg="@{splashmodel.bgColor}"
             android:textColor="@color/white"
             android:background="@color/cardview_dark_background"
             app:layout_constraintStart_toStartOf="parent"
