@@ -1,25 +1,35 @@
 package com.framework.mvvm.base
 
+import android.annotation.SuppressLint
 import android.app.Activity
+import android.content.ContentResolver
+import android.content.Context
 import android.content.Intent
+import android.net.Uri
+import android.os.Build
 import android.os.Bundle
+import android.os.FileUtils
+import android.provider.OpenableColumns
 import android.util.Log
 import android.view.View
 import androidx.activity.result.ActivityResult
 import androidx.activity.result.ActivityResultCallback
 import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.contract.ActivityResultContracts
-import androidx.activity.result.registerForActivityResult
+import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.WindowCompat
 import androidx.core.view.WindowInsetsCompat
 import androidx.core.view.WindowInsetsControllerCompat
 import androidx.lifecycle.ViewModelProvider
-import com.framework.mvvm.utils.ParameterizedTypeUtils
 import com.framework.mvvm.utils.getVmClazz
 import com.framework.mvvm.utils.notNull
 import com.framework.mvvm.viewmodel.BaseViewModel
-import java.lang.reflect.ParameterizedType
+import java.io.File
+import java.io.FileOutputStream
+import java.io.IOException
+import kotlin.math.roundToInt
+
 
 /**
  * @author: xiaxueyi
