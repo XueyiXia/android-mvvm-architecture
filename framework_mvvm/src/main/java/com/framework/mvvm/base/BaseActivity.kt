@@ -11,6 +11,9 @@ import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.activity.result.registerForActivityResult
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.view.WindowCompat
+import androidx.core.view.WindowInsetsCompat
+import androidx.core.view.WindowInsetsControllerCompat
 import androidx.lifecycle.ViewModelProvider
 import com.framework.mvvm.utils.ParameterizedTypeUtils
 import com.framework.mvvm.utils.getVmClazz
@@ -50,6 +53,7 @@ abstract class BaseActivity <VM : BaseViewModel> : AppCompatActivity(){
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
         Log.e(TAG, "跳转界面--->>" + this.javaClass.simpleName)
 
         /**
@@ -155,6 +159,29 @@ abstract class BaseActivity <VM : BaseViewModel> : AppCompatActivity(){
      * @return View
      */
     private fun getDataBinding(): View = createDataBinding()
+
+
+
+
+    /**
+     * hide System UI
+     */
+    private fun hideSystemUI(rootView: View) {
+        WindowCompat.setDecorFitsSystemWindows(window, false)
+        WindowInsetsControllerCompat(window, rootView).let { controller ->
+            controller.hide(WindowInsetsCompat.Type.systemBars())
+            controller.systemBarsBehavior = WindowInsetsControllerCompat.BEHAVIOR_SHOW_TRANSIENT_BARS_BY_SWIPE
+        }
+    }
+
+    /**
+     * show System UI
+     */
+    private fun showSystemUI(rootView: View) {
+        WindowCompat.setDecorFitsSystemWindows(window, true)
+        WindowInsetsControllerCompat(window,  rootView).show(WindowInsetsCompat.Type.systemBars())
+    }
+
 
     /**
      * 创建DataBinding

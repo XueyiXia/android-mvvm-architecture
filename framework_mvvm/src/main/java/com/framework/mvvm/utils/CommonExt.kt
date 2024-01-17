@@ -176,3 +176,38 @@ fun View.clickNoRepeat(interval: Long = 500, action: (view: View) -> Unit) {
 }
 
 
+/**
+ * Android 10 以上适配
+ * @param context
+ * @param uri
+ * @return
+ */
+//@RequiresApi(api = Build.VERSION_CODES.Q)
+//private static String uriToFileApiQ(Context context, Uri uri) {
+//    File file = null;
+//    //android10以上转换
+//    if (uri.getScheme().equals(ContentResolver.SCHEME_FILE)) {
+//        file = new File(uri.getPath());
+//    } else if (uri.getScheme().equals(ContentResolver.SCHEME_CONTENT)) {
+//        //把文件复制到沙盒目录
+//        ContentResolver contentResolver = context.getContentResolver();
+//        Cursor cursor = contentResolver.query(uri, null, null, null, null);
+//        if (cursor.moveToFirst()) {
+//            String displayName = cursor.getString(cursor.getColumnIndex(OpenableColumns.DISPLAY_NAME));
+//            try {
+//                InputStream is = contentResolver.openInputStream(uri);
+//                File cache = new File(context.getExternalCacheDir().getAbsolutePath(), Math.round((Math.random() + 1) * 1000) + displayName);
+//                FileOutputStream fos = new FileOutputStream(cache);
+//                FileUtils.copy(is, fos);
+//                file = cache;
+//                fos.close();
+//                is.close();
+//            } catch (IOException e) {
+//                e.printStackTrace();
+//            }
+//        }
+//    }
+//    return file.getAbsolutePath();
+
+
+

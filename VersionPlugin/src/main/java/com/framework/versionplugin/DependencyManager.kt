@@ -21,7 +21,7 @@ object Versions {
 }
 
 object AndroidX {
-    const val coreKtx = "androidx.core:core-ktx:${Versions.coreKtx}"
+    const val coreKtx = "androidx.core:core-ktx:1.9.0"
     const val appcompat = "androidx.appcompat:appcompat:${Versions.appcompat}"
     const val recyclerview = "androidx.recyclerview:recyclerview:${Versions.recyclerview}"
     const val material = "com.google.android.material:material:${Versions.material}"
