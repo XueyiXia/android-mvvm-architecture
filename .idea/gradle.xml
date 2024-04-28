@@ -23,6 +23,7 @@
             <option value="$PROJECT_DIR$/VersionPlugin" />
             <option value="$PROJECT_DIR$/app" />
             <option value="$PROJECT_DIR$/framework_mvvm" />
+            <option value="$PROJECT_DIR$/module_utils" />
           </set>
         </option>
         <option name="resolveExternalAnnotations" value="false" />

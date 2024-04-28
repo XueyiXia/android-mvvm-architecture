@@ -118,10 +118,12 @@ abstract class BaseActivity <VM : BaseViewModel> : AppCompatActivity(){
         startActivity(intent)
     }
 
+
+
     /**
-     * activity结果跳转（没有参数）
-     * @param className
-     * @param requestCode
+     * activity结果跳转（没有参数），自定义回调
+     * @param className Class<out Activity>
+     * @param activityResultCallback ActivityResultCallback<ActivityResult>?
      */
     open fun startActivityForResult(className: Class<out Activity>, activityResultCallback: ActivityResultCallback<ActivityResult>?) {
         this.activityResultCallback=activityResultCallback
@@ -131,12 +133,11 @@ abstract class BaseActivity <VM : BaseViewModel> : AppCompatActivity(){
 
 
 
-
     /**
-     * activity结果跳转（有参数）
-     * @param className
-     * @param bundle
-     * @param requestCode
+     * activity结果跳转（有参数），自定义回调
+     * @param className Class<out Activity>
+     * @param bundle Bundle
+     * @param activityResultCallback ActivityResultCallback<ActivityResult>?
      */
     open fun startActivityForResult(className: Class<out Activity>, bundle: Bundle,activityResultCallback: ActivityResultCallback<ActivityResult>?) {
         this.activityResultCallback=activityResultCallback

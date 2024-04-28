@@ -18,3 +18,4 @@ rootProject.name = "android-mvvm-architecture"
 include ':app'
 include ':framework_mvvm'
 includeBuild("VersionPlugin")
+include ':module_utils'
