@@ -14,10 +14,8 @@ import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
-import com.framework.mvvm.utils.ParameterizedTypeUtils
 import com.framework.mvvm.utils.getVmClazz
 import com.framework.mvvm.viewmodel.BaseViewModel
-import java.lang.reflect.ParameterizedType
 
 /**
  * @author: xiaxueyi

@@ -1,15 +1,10 @@
 package com.jetpack.mvvm.activities
 
 import android.annotation.SuppressLint
-import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.view.View
-import androidx.activity.result.ActivityResult
-import androidx.activity.result.ActivityResultCallback
-import androidx.activity.viewModels
 import androidx.lifecycle.Observer
-import androidx.lifecycle.viewModelScope
 import com.framework.mvvm.base.BaseMvvmActivity
 import com.jetpack.mvvm.databinding.ActivitySplashBinding
 import com.jetpack.mvvm.viewmodel.SplashViewModel
@@ -38,6 +33,7 @@ class SplashActivity  : BaseMvvmActivity<ActivitySplashBinding,SplashViewModel>(
 
 
         })
+
     }
 
 

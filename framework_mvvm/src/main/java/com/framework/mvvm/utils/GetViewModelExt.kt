@@ -1,6 +1,7 @@
 package com.framework.mvvm.utils
 
 import com.framework.mvvm.viewmodel.BaseViewModel
+import com.module.utils.ParameterizedTypeUtils
 import java.lang.reflect.ParameterizedType
 
 

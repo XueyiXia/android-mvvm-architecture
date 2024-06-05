@@ -1,4 +1,4 @@
-package com.framework.mvvm.utils;
+package com.module.utils;
 
 import static java.lang.annotation.ElementType.FIELD;
 import static java.lang.annotation.ElementType.PARAMETER;

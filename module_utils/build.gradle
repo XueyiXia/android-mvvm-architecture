@@ -1,3 +1,5 @@
+import com.framework.versionplugin.AndroidX
+
 plugins {
     id 'com.android.application'
     id 'org.jetbrains.kotlin.android'
@@ -33,11 +35,19 @@ android {
 }
 
 dependencies {
+    implementation AndroidX.coreKtx
+    implementation AndroidX.appcompat
+    implementation AndroidX.recyclerview
+    implementation AndroidX.material
+    implementation AndroidX.constraintLayout
+    //lifecycle
+    implementation 'androidx.lifecycle:lifecycle-runtime-ktx:2.8.1'
+    implementation 'androidx.lifecycle:lifecycle-common-java8:2.8.1'
+    implementation 'androidx.lifecycle:lifecycle-extensions:2.2.0'
+    // viewModel
+    implementation "androidx.lifecycle:lifecycle-viewmodel-ktx:2.8.1"
+    implementation "androidx.fragment:fragment-ktx:1.7.1"
+    // liveData
+    implementation "androidx.lifecycle:lifecycle-livedata-ktx:2.8.1"
 
-    implementation 'androidx.core:core-ktx:1.13.0'
-    implementation 'androidx.appcompat:appcompat:1.6.1'
-    implementation 'com.google.android.material:material:1.11.0'
-    testImplementation 'junit:junit:4.13.2'
-    androidTestImplementation 'androidx.test.ext:junit:1.1.5'
-    androidTestImplementation 'androidx.test.espresso:espresso-core:3.5.1'
 }

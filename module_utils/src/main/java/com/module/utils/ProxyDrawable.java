@@ -1,4 +1,4 @@
-package com.framework.mvvm.utils;
+package com.module.utils;
 
 import android.graphics.drawable.Drawable;
 import android.graphics.drawable.StateListDrawable;

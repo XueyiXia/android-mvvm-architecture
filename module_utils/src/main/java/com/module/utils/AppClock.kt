@@ -1,4 +1,4 @@
-package com.framework.mvvm.components
+package com.module.utils
 
 import android.os.SystemClock
 import java.time.LocalDateTime

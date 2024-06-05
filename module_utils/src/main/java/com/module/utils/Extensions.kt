@@ -1,4 +1,5 @@
-package com.framework.mvvm.utils
+package com.module.utils
+
 
 import android.Manifest
 import android.R.attr
@@ -13,22 +14,15 @@ import android.graphics.drawable.BitmapDrawable
 import android.graphics.drawable.Drawable
 import android.net.ConnectivityManager
 import android.util.TypedValue
-import android.view.LayoutInflater
 import android.view.inputmethod.InputMethodManager
 import android.widget.EditText
 import android.widget.TextView
 import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AlertDialog
-import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
-import androidx.viewbinding.ViewBinding
-import com.framework.mvvm.R
-import com.framework.mvvm.components.AppClock
-
 import java.math.RoundingMode
 import java.text.NumberFormat
 import java.text.SimpleDateFormat
-import java.time.ZonedDateTime
 import java.util.Currency
 import java.util.Date
 import java.util.Locale
@@ -171,20 +165,21 @@ fun Context.isNetworkOnline(): Boolean {
   }
 }
 
-fun ZonedDateTime.createTimeString(): String {
-  val fetched: String
-  val fetchedDayOfWeek = dayOfWeek.value
-  val today = AppClock.AppClockImpl.todayZoned().dayOfWeek.value
-  fetched = if (today == fetchedDayOfWeek) {
-    AppPreferences.TIME_FORMATTER.format(this)
-  } else {
-    val day: String = DayOfWeek.from(this)
-        .getDisplayName(SHORT, Locale.getDefault())
-    val timeStr: String = AppPreferences.TIME_FORMATTER.format(this)
-    "$timeStr $day"
-  }
-  return fetched
-}
+//@RequiresApi(Build.VERSION_CODES.O)
+//fun ZonedDateTime.createTimeString(): String {
+//  val fetched: String
+//  val fetchedDayOfWeek = dayOfWeek.value
+//  val today = AppClock.AppClockImpl.todayZoned().dayOfWeek.value
+//  fetched = if (today == fetchedDayOfWeek) {
+//    AppPreferences.TIME_FORMATTER.format(this)
+//  } else {
+//    val day: String = DayOfWeek.from(this)
+//        .getDisplayName(SHORT, Locale.getDefault())
+//    val timeStr: String = AppPreferences.TIME_FORMATTER.format(this)
+//    "$timeStr $day"
+//  }
+//  return fetched
+//}
 
 fun Float.format(fractionDigits: Int = 2): String {
   return NumberFormat.getInstance(Locale.getDefault()).run {
@@ -227,48 +222,48 @@ fun formatNumber(price: Float, currencyCode: String): String {
   return currencyFormatter.format(price)
 }
 
-fun TickerView.formatChange(change: Float) {
-  when {
-    change > 0 -> {
-      text = context.getString(R.string.quote_change_pos, change)
-      textColor = ContextCompat.getColor(context, R.color.change_positive)
-    }
-    change < 0 -> {
-      text = context.getString(R.string.quote_change_neg, change)
-      textColor = ContextCompat.getColor(context, R.color.change_negative)
-    }
-    else -> {
-      text = context.getString(R.string.quote_change_neg, change)
-      textColor = ContextCompat.getColor(context, R.color.white)
-    }
-  }
-}
+//fun TickerView.formatChange(change: Float) {
+//  when {
+//    change > 0 -> {
+//      text = context.getString(R.string.quote_change_pos, change)
+//      textColor = ContextCompat.getColor(context, R.color.change_positive)
+//    }
+//    change < 0 -> {
+//      text = context.getString(R.string.quote_change_neg, change)
+//      textColor = ContextCompat.getColor(context, R.color.change_negative)
+//    }
+//    else -> {
+//      text = context.getString(R.string.quote_change_neg, change)
+//      textColor = ContextCompat.getColor(context, R.color.white)
+//    }
+//  }
+//}
+//
+//fun TickerView.formatChangePercent(changePercent: Float) {
+//  when {
+//    changePercent > 0 -> {
+//      text = context.getString(R.string.quote_change_percent_pos, changePercent)
+//      textColor = ContextCompat.getColor(context, R.color.change_positive)
+//    }
+//    changePercent < 0 -> {
+//      text = context.getString(R.string.quote_change_percent_neg, changePercent)
+//      textColor = ContextCompat.getColor(context, R.color.change_negative)
+//    }
+//    else -> {
+//      text = context.getString(R.string.quote_change_percent_neg, changePercent)
+//      textColor = ContextCompat.getColor(context, R.color.white)
+//    }
+//  }
+//}
 
-fun TickerView.formatChangePercent(changePercent: Float) {
-  when {
-    changePercent > 0 -> {
-      text = context.getString(R.string.quote_change_percent_pos, changePercent)
-      textColor = ContextCompat.getColor(context, R.color.change_positive)
-    }
-    changePercent < 0 -> {
-      text = context.getString(R.string.quote_change_percent_neg, changePercent)
-      textColor = ContextCompat.getColor(context, R.color.change_negative)
-    }
-    else -> {
-      text = context.getString(R.string.quote_change_percent_neg, changePercent)
-      textColor = ContextCompat.getColor(context, R.color.white)
-    }
-  }
-}
-
-inline fun <T : ViewBinding> Activity.viewBinding(
-  crossinline bindingInflater: (LayoutInflater) -> T) =
-  lazy(LazyThreadSafetyMode.NONE) {
-    bindingInflater.invoke(layoutInflater)
-  }
-
-inline fun <T : ViewBinding> Fragment.viewBinding(
-  crossinline bindingInflater: (LayoutInflater) -> T) =
-  lazy(LazyThreadSafetyMode.NONE) {
-    bindingInflater.invoke(layoutInflater)
-  }
+//inline fun <T : ViewBinding> Activity.viewBinding(
+//  crossinline bindingInflater: (LayoutInflater) -> T) =
+//  lazy(LazyThreadSafetyMode.NONE) {
+//    bindingInflater.invoke(layoutInflater)
+//  }
+//
+//inline fun <T : ViewBinding> Fragment.viewBinding(
+//  crossinline bindingInflater: (LayoutInflater) -> T) =
+//  lazy(LazyThreadSafetyMode.NONE) {
+//    bindingInflater.invoke(layoutInflater)
+//  }

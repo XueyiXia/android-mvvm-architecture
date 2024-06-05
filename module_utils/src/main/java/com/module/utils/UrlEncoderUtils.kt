@@ -1,4 +1,4 @@
-package com.framework.mvvm.utils
+package com.module.utils
 
 
 /**

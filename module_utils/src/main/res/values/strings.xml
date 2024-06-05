@@ -1,3 +1,9 @@
 <resources>
     <string name="app_name">module_utils</string>
+    <string name="number_format_thousands">%1$.2fK</string>
+    <string name="number_format_millions">%1$.2fM</string>
+    <string name="number_format_billions">%1$.2fB</string>
+    <string name="number_format_trillions">%1$.2fT</string>
+    <string name="ok">OK</string>
+    <string name="cancel">Cancel</string>
 </resources>
