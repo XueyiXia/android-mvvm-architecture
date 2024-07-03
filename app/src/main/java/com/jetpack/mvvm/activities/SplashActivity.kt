@@ -1,6 +1,7 @@
 package com.jetpack.mvvm.activities
 
 import android.annotation.SuppressLint
+import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.view.View
@@ -41,6 +42,7 @@ class SplashActivity  : BaseMvvmActivity<ActivitySplashBinding,SplashViewModel>(
 
         fun toMain() {
             mViewModel.clickData.value="这是点击的数据测试 ${index++}"
+            startActivity(Intent(this@SplashActivity, TestActivity::class.java))
 //            startActivity(Intent(this@SplashActivity, MainActivity::class.java))
 //            finish()
             //带点渐变动画

@@ -36,6 +36,13 @@
             android:windowSoftInputMode="adjustResize"
             android:screenOrientation="fullSensor" />
 
+
+        <activity
+            android:name=".activities.TestActivity"
+            android:launchMode="singleTask"
+            android:windowSoftInputMode="adjustResize"
+            android:screenOrientation="fullSensor" />
+
     </application>
 
 </manifest>

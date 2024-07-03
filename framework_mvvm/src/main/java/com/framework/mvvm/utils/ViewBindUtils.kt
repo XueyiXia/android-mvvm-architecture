@@ -1,5 +1,6 @@
 package com.framework.mvvm.utils
 
+import android.app.Activity
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.appcompat.app.AppCompatActivity
@@ -78,3 +79,16 @@ private fun <VB : ViewBinding> withGenericBindingClass(any: Any, block: (Class<V
     }
     throw IllegalArgumentException("There is no generic of ViewBinding.")
 }
+
+
+inline fun <T : ViewBinding> Activity.viewBinding(
+    crossinline bindingInflater: (LayoutInflater) -> T) =
+    lazy(LazyThreadSafetyMode.NONE) {
+        bindingInflater.invoke(layoutInflater)
+    }
+
+inline fun <T : ViewBinding> Fragment.viewBinding(
+    crossinline bindingInflater: (LayoutInflater) -> T) =
+    lazy(LazyThreadSafetyMode.NONE) {
+        bindingInflater.invoke(layoutInflater)
+    }
