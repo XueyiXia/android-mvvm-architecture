@@ -7,4 +7,11 @@
     <color name="teal_700">#FF018786</color>
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
+
+    <!--状态栏底色-->
+    <color name="colorPrimaryDark">#CC00A366</color>
+    <!--标题栏底色-->
+    <color name="colorPrimary">#ffffff</color>
+    <!--ToolBar标题字体颜色-->
+    <color name="colorAccent">#656EFE</color>
 </resources>

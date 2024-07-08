@@ -1,11 +1,9 @@
 package com.jetpack.mvvm.activities
 
-import android.annotation.SuppressLint
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.view.View
-import androidx.lifecycle.Observer
 import com.framework.mvvm.base.BaseMvvmActivity
 import com.jetpack.mvvm.databinding.ActivitySplashBinding
 import com.jetpack.mvvm.viewmodel.SplashViewModel
@@ -16,10 +14,7 @@ import com.jetpack.mvvm.viewmodel.SplashViewModel
  * @time: 16:00
  * @说明:
  */
-@SuppressLint("CustomSplashScreen")
-class SplashActivity  : BaseMvvmActivity<ActivitySplashBinding,SplashViewModel>(){
-
-    private var index:Int=0
+class SplashMvvmActivity  : BaseMvvmActivity<ActivitySplashBinding,SplashViewModel>(){
 
     override fun createObserver(){
 
@@ -35,7 +30,7 @@ class SplashActivity  : BaseMvvmActivity<ActivitySplashBinding,SplashViewModel>(
 
         fun toMain() {
 //            mViewModel.clickData.value="这是点击的数据测试 ${index++}"
-            startActivity(Intent(this@SplashActivity, TestActivity::class.java))
+            startActivity(Intent(this@SplashMvvmActivity, TestActivity::class.java))
 //            startActivity(Intent(this@SplashActivity, MainActivity::class.java))
 //            finish()
             //带点渐变动画
