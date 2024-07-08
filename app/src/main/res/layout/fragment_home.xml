@@ -37,7 +37,6 @@
             android:textColor="@color/black"
             android:gravity="center"
             android:layout_marginTop="@dimen/dp_100"
-            android:background="@color/design_default_color_secondary_variant"
             android:text="点击我"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"

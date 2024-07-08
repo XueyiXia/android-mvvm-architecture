@@ -13,24 +13,14 @@
         android:supportsRtl="true"
         android:theme="@style/AppLoaderStyle">
 
-        <provider
-            android:name="androidx.startup.InitializationProvider"
-            android:authorities="${applicationId}.androidx-startup"
-            tools:node="remove" />
-
         <activity
             android:name=".activities.SplashMvvmActivity"
             android:exported="true"
             android:theme="@style/SplashTheme">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
-
-            <meta-data
-                android:name="android.app.lib_name"
-                android:value="" />
         </activity>
 
 
@@ -38,14 +28,14 @@
             android:name=".activities.MainActivity"
             android:launchMode="singleTask"
             android:windowSoftInputMode="adjustResize"
-            android:theme="@style/AppTheme" />
+            />
 
 
         <activity
             android:name=".activities.TestActivity"
             android:launchMode="singleTask"
             android:windowSoftInputMode="adjustResize"
-            android:theme="@style/AppTheme" />
+           />
 
     </application>
 

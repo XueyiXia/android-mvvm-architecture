@@ -1,10 +1,10 @@
 package com.jetpack.mvvm
 
 import androidx.lifecycle.ViewModelStore
+import androidx.multidex.MultiDex
 import com.framework.mvvm.base.BaseAppLoader
 import com.framework.mvvm.event.AppViewModel
 import com.framework.mvvm.event.EventViewModel
-import com.framework.mvvm.viewmodel.BaseViewModel
 
 /**
  * @author: xiaxueyi
@@ -28,6 +28,7 @@ class AppLoader :BaseAppLoader(ViewModelStore()) {
     override fun onCreate() {
         super.onCreate()
         mInstance = this
+        MultiDex.install(this)
         eventViewModelInstance = getAppViewModelProvider()[EventViewModel::class.java]
         appViewModelInstance = getAppViewModelProvider()[AppViewModel::class.java]
     }

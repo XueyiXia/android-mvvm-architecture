@@ -11,11 +11,11 @@ import com.framework.versionplugin.Versions.kotlin
  * @说明:  如果数量少的话，放在一个类里面就可以，如果数量多的话，可以拆分为多个类
  */
 object Versions {
-    const val appcompat = "1.5.0"
-    const val recyclerview = "1.2.1"
-    const val coreKtx = "1.9.0"
+    const val appcompat = "1.7.0"
+    const val recyclerview = "1.3.2"
+    const val coreKtx = "1.13.1"
     const val constraintLayout="2.1.4"
-    const val material = "1.6.1"
+    const val material = "1.12.0"
     const val lifecycleViewmodel = "2.8.3"
     const val lifecycleLivedata = "2.8.3"
 
@@ -24,7 +24,7 @@ object Versions {
 }
 
 object AndroidX {
-    const val coreKtx = "androidx.core:core-ktx:1.9.0"
+    const val coreKtx = "androidx.core:core-ktx:${Versions.coreKtx}"
     const val appcompat = "androidx.appcompat:appcompat:${Versions.appcompat}"
     const val recyclerview = "androidx.recyclerview:recyclerview:${Versions.recyclerview}"
     const val material = "com.google.android.material:material:${Versions.material}"
@@ -46,7 +46,7 @@ object AndroidX {
     const val navigationUi = "androidx.navigation:navigation-ui-ktx:2.7.7"
 
     const val preferenceKtx = "androidx.preference:preference-ktx:1.2.1"
-    const val supportMultidex = "com.android.support:multidex:1.0.3"
+    const val supportMultidex = "androidx.multidex:multidex:2.0.1"
     const val startupruntime= "androidx.startup:startup-runtime:1.0.0"
 }
 
