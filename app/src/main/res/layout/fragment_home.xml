@@ -25,7 +25,6 @@
             android:layout_height="wrap_content"
             android:gravity="center"
             android:textSize="@dimen/sp_16"
-            android:text="@{viewmodel.titleData}"
             android:textColor="@color/black"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
@@ -40,7 +39,6 @@
             android:layout_marginTop="@dimen/dp_100"
             android:background="@color/design_default_color_secondary_variant"
             android:text="点击我"
-            android:onClick="@{()->onclick.updateUi()}"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent" />

@@ -1,4 +1,5 @@
 import com.framework.versionplugin.AndroidX
+import com.framework.versionplugin.BuildVersions
 
 plugins {
     id 'com.android.application'
@@ -7,15 +8,13 @@ plugins {
 
 android {
     namespace 'com.module.utils'
-    compileSdk 34
-
+    compileSdk BuildVersions.compileSdk
     defaultConfig {
         applicationId "com.module.utils"
-        minSdk 24
-        targetSdk 34
-        versionCode 1
-        versionName "1.0"
-
+        minSdk BuildVersions.minSdk
+        targetSdk BuildVersions.targetSdk
+        versionCode BuildVersions.versionCode
+        versionName BuildVersions.versionName
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
 
@@ -26,11 +25,12 @@ android {
         }
     }
     compileOptions {
-        sourceCompatibility JavaVersion.VERSION_1_8
-        targetCompatibility JavaVersion.VERSION_1_8
+        sourceCompatibility = JavaVersion.VERSION_1_8
+        targetCompatibility = JavaVersion.VERSION_1_8
     }
+
     kotlinOptions {
-        jvmTarget = '1.8'
+        jvmTarget = JavaVersion.VERSION_1_8.toString()
     }
 }
 
@@ -41,13 +41,20 @@ dependencies {
     implementation AndroidX.material
     implementation AndroidX.constraintLayout
     //lifecycle
-    implementation 'androidx.lifecycle:lifecycle-runtime-ktx:2.8.3'
-    implementation 'androidx.lifecycle:lifecycle-common-java8:2.8.3'
-    implementation 'androidx.lifecycle:lifecycle-extensions:2.2.0'
+    implementation AndroidX.lifecycleRuntimeKtx
+    implementation AndroidX.lifecycleCommonJava8
+    implementation AndroidX.lifecycleExtensions
+
     // viewModel
-    implementation "androidx.lifecycle:lifecycle-viewmodel-ktx:2.8.3"
-    implementation "androidx.fragment:fragment-ktx:1.8.1"
+    implementation AndroidX.lifecycleViewmodelKtx
     // liveData
-    implementation "androidx.lifecycle:lifecycle-livedata-ktx:2.8.3"
+    implementation AndroidX.lifecycleLiveDataKtx
+
+    //fragment
+    implementation AndroidX.androidxfragmentKtx
+
+    //navigation
+    implementation AndroidX.navigationFragment
+    implementation AndroidX.navigationUi
 
 }

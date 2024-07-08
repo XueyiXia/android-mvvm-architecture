@@ -12,9 +12,13 @@ class SplashViewModel : BaseViewModel() {
         Color.parseColor("#F5B95F")
     }
 
-    var titleData = StringLiveData()
+    var titleData = StringLiveData().apply {
+        value="测试"
+    }
 
-    var clickData= StringLiveData()
+    var clickData= StringLiveData().apply {
+        value="测试"
+    }
 
 
 }

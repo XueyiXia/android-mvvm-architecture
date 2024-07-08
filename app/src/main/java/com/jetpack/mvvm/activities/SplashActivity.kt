@@ -27,13 +27,6 @@ class SplashActivity  : BaseMvvmActivity<ActivitySplashBinding,SplashViewModel>(
     }
     override fun initView(rootView: View, savedInstanceState: Bundle?) {
         Log.e("SplashActivity", "initView--->>" + this.javaClass.simpleName)
-        mViewModel.clickData.observe(this, Observer {
-            Log.e("SplashActivity", "SplashActivity   it--->>$it   ")
-            //更新UI
-            mViewModel.titleData.postValue(it)
-
-
-        })
 
     }
 
@@ -41,7 +34,7 @@ class SplashActivity  : BaseMvvmActivity<ActivitySplashBinding,SplashViewModel>(
     inner class ProxyClick {
 
         fun toMain() {
-            mViewModel.clickData.value="这是点击的数据测试 ${index++}"
+//            mViewModel.clickData.value="这是点击的数据测试 ${index++}"
             startActivity(Intent(this@SplashActivity, TestActivity::class.java))
 //            startActivity(Intent(this@SplashActivity, MainActivity::class.java))
 //            finish()

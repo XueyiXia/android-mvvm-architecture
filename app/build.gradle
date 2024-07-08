@@ -26,11 +26,12 @@ android {
         }
     }
     compileOptions {
-        sourceCompatibility JavaVersion.VERSION_1_8
-        targetCompatibility JavaVersion.VERSION_1_8
+        sourceCompatibility = JavaVersion.VERSION_1_8
+        targetCompatibility = JavaVersion.VERSION_1_8
     }
+
     kotlinOptions {
-        jvmTarget = '1.8'
+        jvmTarget = JavaVersion.VERSION_1_8.toString()
     }
 
     buildFeatures {
@@ -40,14 +41,32 @@ android {
 }
 
 dependencies {
-
     implementation AndroidX.coreKtx
     implementation AndroidX.appcompat
     implementation AndroidX.recyclerview
     implementation AndroidX.material
     implementation AndroidX.constraintLayout
-    implementation 'androidx.preference:preference-ktx:1.2.1'
-    implementation 'com.android.support:multidex:1.0.3'
+    //lifecycle
+    implementation AndroidX.lifecycleRuntimeKtx
+    implementation AndroidX.lifecycleCommonJava8
+    implementation AndroidX.lifecycleExtensions
+
+    // viewModel
+    implementation AndroidX.lifecycleViewmodelKtx
+    // liveData
+    implementation AndroidX.lifecycleLiveDataKtx
+
+    //fragment
+    implementation AndroidX.androidxfragmentKtx
+
+    //navigation
+    implementation AndroidX.navigationFragment
+    implementation AndroidX.navigationUi
+
+    implementation AndroidX.preferenceKtx
+    implementation AndroidX.supportMultidex
+    implementation AndroidX.startupruntime
+
     //项目核心框架
     implementation project(path: ':framework_mvvm')
 }

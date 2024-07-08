@@ -9,7 +9,7 @@ package com.framework.versionplugin
 object BuildVersions {
     const val compileSdk = 34
     const val buildToolsVersion = "34.0.0"
-    const val minSdk = 21
+    const val minSdk = 25
     const val targetSdk = 34
     const val versionCode = 1
     const val versionName = "1.0.0"
