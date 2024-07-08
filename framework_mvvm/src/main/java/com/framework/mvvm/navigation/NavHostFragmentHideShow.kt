@@ -13,6 +13,7 @@ import androidx.navigation.fragment.NavHostFragment
  * @说明: Hide - Show NavHostFragment
  */
 class NavHostFragmentHideShow : NavHostFragment() {
+    @Deprecated("Use {@link #onCreateNavController(NavController)}")
     override fun createFragmentNavigator(): Navigator<out FragmentNavigator.Destination> {
         return FragmentNavigatorHideShow(requireContext(), childFragmentManager, containerId)
     }

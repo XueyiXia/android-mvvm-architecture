@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">Mvvm</string>
+    <string name="message_no_permissions">The app cannot work without permissions</string>
+    <string name="label_ok">OK</string>
 </resources>

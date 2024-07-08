@@ -1,7 +1,10 @@
 package com.framework.mvvm.base
 
+import android.Manifest
 import android.app.Activity
 import android.content.Intent
+import android.content.pm.PackageManager
+import android.os.Build
 import android.os.Bundle
 import android.util.Log
 import android.view.View
@@ -10,13 +13,17 @@ import androidx.activity.result.ActivityResultCallback
 import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.app.ActivityCompat
+import androidx.core.content.ContextCompat
 import androidx.core.view.WindowCompat
 import androidx.core.view.WindowInsetsCompat
 import androidx.core.view.WindowInsetsControllerCompat
 import androidx.lifecycle.ViewModelProvider
+import com.framework.mvvm.R
 import com.framework.mvvm.utils.getVmClazz
 import com.module.utils.notNull
 import com.framework.mvvm.viewmodel.BaseViewModel
+import com.google.android.material.snackbar.Snackbar
 
 
 /**
@@ -44,9 +51,35 @@ abstract class BaseActivity <VM : BaseViewModel> : AppCompatActivity(){
     private val launcherCallback = ActivityResultCallback<ActivityResult> { result ->
         val code = result.resultCode
         val data = result.data
-        val msgContent = "code = $code msg = $data "
+        val msgContent = "code = $code  ,  msg = $data "
+        Log.e("launcherCallback","msgContent: ->> $msgContent")
         activityResultCallback?.onActivityResult(result)
 
+    }
+
+
+
+    // The permissions we need for the app to work properly
+    private val permissions = mutableListOf(
+        Manifest.permission.CAMERA,
+        Manifest.permission.RECORD_AUDIO,
+        Manifest.permission.READ_EXTERNAL_STORAGE,
+    ).apply {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
+            add(Manifest.permission.ACCESS_MEDIA_LOCATION)
+        }
+    }
+
+    private val permissionRequest = registerForActivityResult(ActivityResultContracts.RequestMultiplePermissions()) { permissions ->
+        if (permissions.all { it.value }) {
+            onPermissionGranted()
+        } else {
+            this?.let { v ->
+//                Snackbar.make(v, R.string.message_no_permissions, Snackbar.LENGTH_INDEFINITE)
+//                    .setAction(R.string.label_ok) { ActivityCompat.finishAffinity(this) }
+//                    .show()
+            }
+        }
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -82,9 +115,13 @@ abstract class BaseActivity <VM : BaseViewModel> : AppCompatActivity(){
          */
         initRegisterForActivityResult()
 
+
+        /**
+         * 检查权限
+         */
+        checkPermissionGranted()
+
     }
-
-
 
 
     /**
@@ -181,6 +218,29 @@ abstract class BaseActivity <VM : BaseViewModel> : AppCompatActivity(){
         WindowInsetsControllerCompat(window,  rootView).show(WindowInsetsCompat.Type.systemBars())
     }
 
+    /**
+     * 检查权限
+     */
+    private fun checkPermissionGranted(){
+        if (allPermissionsGranted()) {
+            onPermissionGranted()
+        } else {
+            permissionRequest.launch(permissions.toTypedArray())
+        }
+    }
+
+
+    /**
+     * Check for the permissions
+     */
+    private fun allPermissionsGranted() = permissions.all {
+        ContextCompat.checkSelfPermission(this, it) == PackageManager.PERMISSION_GRANTED
+    }
+
+    /**
+     * A function which will be called after the permission check
+     * */
+    open fun onPermissionGranted() = Unit
 
     /**
      * 创建DataBinding

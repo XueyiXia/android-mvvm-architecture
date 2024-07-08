@@ -1,21 +1,29 @@
 package com.framework.mvvm.base
 
+import android.Manifest
 import android.app.Activity
 import android.content.Context
 import android.content.Intent
+import android.content.pm.PackageManager
+import android.os.Build
 import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
+import android.util.Log
 import android.view.View
 import androidx.activity.result.ActivityResult
 import androidx.activity.result.ActivityResultCallback
 import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.app.ActivityCompat
+import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
+import com.framework.mvvm.R
 import com.framework.mvvm.utils.getVmClazz
 import com.framework.mvvm.viewmodel.BaseViewModel
+import com.google.android.material.snackbar.Snackbar
 
 /**
  * @author: xiaxueyi
@@ -43,10 +51,12 @@ abstract class BaseFragment<VM : BaseViewModel> :Fragment() {
     private val launcherCallback = ActivityResultCallback<ActivityResult> { result ->
         val code = result.resultCode
         val data = result.data
-        val msgContent = "code = $code msg = $data "
+        val msgContent = "code = $code  ,  msg = $data "
+        Log.e("launcherCallback","msgContent: ->> $msgContent")
         activityResultCallback?.onActivityResult(result)
 
     }
+
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -96,10 +106,12 @@ abstract class BaseFragment<VM : BaseViewModel> :Fragment() {
         startActivity(intent)
     }
 
+
+
     /**
-     * activity结果跳转（没有参数）
-     * @param className
-     * @param requestCode
+     *  activity结果跳转（没有参数）
+     * @param className Class<out Activity>
+     * @param activityResultCallback ActivityResultCallback<ActivityResult>?
      */
     open fun startActivityForResult(className: Class<out Activity>, activityResultCallback: ActivityResultCallback<ActivityResult>?) {
         this.activityResultCallback=activityResultCallback
@@ -108,13 +120,11 @@ abstract class BaseFragment<VM : BaseViewModel> :Fragment() {
     }
 
 
-
-
     /**
      * activity结果跳转（有参数）
-     * @param className
-     * @param bundle
-     * @param requestCode
+     * @param className Class<out Activity>
+     * @param bundle Bundle
+     * @param activityResultCallback ActivityResultCallback<ActivityResult>?
      */
     open fun startActivityForResult(className: Class<out Activity>, bundle: Bundle, activityResultCallback: ActivityResultCallback<ActivityResult>?) {
         this.activityResultCallback=activityResultCallback
@@ -130,7 +140,6 @@ abstract class BaseFragment<VM : BaseViewModel> :Fragment() {
     private fun initRegisterForActivityResult(){
         resultLauncher = registerForActivityResult(ActivityResultContracts.StartActivityForResult(),launcherCallback)
     }
-
 
     /**
      * 创建ViewModel
@@ -155,7 +164,6 @@ abstract class BaseFragment<VM : BaseViewModel> :Fragment() {
     fun activity()=mActivity
 
 
-
     /**
      * 创建DataBinding
      * @return View
@@ -173,6 +181,7 @@ abstract class BaseFragment<VM : BaseViewModel> :Fragment() {
      * @param savedInstanceState Bundle?
      */
     abstract fun initView(rootView: View, savedInstanceState: Bundle?)
+
 
 
     override fun onAttach(context: Context) {
