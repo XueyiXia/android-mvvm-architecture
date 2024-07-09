@@ -62,11 +62,11 @@ dependencies {
     //navigation
     implementation AndroidX.navigationFragment
     implementation AndroidX.navigationUi
+    implementation (libs.coreKtx)
 
     implementation AndroidX.preferenceKtx
     implementation AndroidX.supportMultidex
     implementation AndroidX.startupruntime
-
     //项目核心框架
     implementation project(path: ':framework_mvvm')
 }
