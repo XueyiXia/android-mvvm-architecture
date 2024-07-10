@@ -1,5 +1,3 @@
-import kotlin.Suppress
-
 pluginManagement {
     repositories {
         gradlePluginPortal()

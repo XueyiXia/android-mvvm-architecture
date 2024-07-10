@@ -6,12 +6,14 @@ plugins {
 
 android {
     namespace 'com.jetpack.mvvm'
-    compileSdk 34
+    compileSdk libs.versions.compileSdk.get().toInteger()
 
     defaultConfig {
         applicationId "com.jetpack.mvvm"
-        minSdk 25
-        targetSdk 34
+        minSdk libs.versions.minSdk.get().toInteger()
+        targetSdk libs.versions.targetSdk.get().toInteger()
+
+
         versionCode 1
         versionName "1.0.0"
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
@@ -66,7 +68,10 @@ dependencies {
 
     implementation (libs.preferenceKtx)
     implementation (libs.supportMultidex)
-    implementation (libs.startupruntime)
     //项目核心框架
     implementation project(path: ':framework_mvvm')
+    implementation 'androidx.appcompat:appcompat:1.7.0'
+    implementation 'com.google.android.material:material:1.12.0'
+    implementation 'androidx.activity:activity:1.9.0'
+    implementation 'androidx.constraintlayout:constraintlayout:2.1.4'
 }

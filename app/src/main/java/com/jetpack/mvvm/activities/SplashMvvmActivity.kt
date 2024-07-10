@@ -28,24 +28,6 @@ class SplashMvvmActivity  : BaseMvvmActivity<ActivitySplashBinding,SplashViewMod
 
     inner class ProxyClick {
 
-        fun toMain() {
-//            mViewModel.clickData.value="这是点击的数据测试 ${index++}"
-            startActivity(Intent(this@SplashMvvmActivity, TestActivity::class.java))
-//            startActivity(Intent(this@SplashActivity, MainActivity::class.java))
-//            finish()
-            //带点渐变动画
-
-//            val bundle=Bundle()
-//            bundle.putInt("0",5)
-//            startActivityForResult(MainActivity::class.java,bundle,object :ActivityResultCallback<ActivityResult>{
-//
-//                override fun onActivityResult(result: ActivityResult) {
-//                    Log.e("ActivityForResult", "result--->>111$result")
-//                }
-//            })
-
-            overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out)
-        }
     }
 
 

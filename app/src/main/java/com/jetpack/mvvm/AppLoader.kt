@@ -1,10 +1,6 @@
 package com.jetpack.mvvm
 
-import androidx.lifecycle.ViewModelStore
-import androidx.multidex.MultiDex
-import com.framework.mvvm.base.BaseAppLoader
-import com.framework.mvvm.event.AppViewModel
-import com.framework.mvvm.event.EventViewModel
+import android.app.Application
 
 /**
  * @author: xiaxueyi
@@ -13,23 +9,9 @@ import com.framework.mvvm.event.EventViewModel
  * @说明:
  */
 
-class AppLoader :BaseAppLoader(ViewModelStore()) {
-
-
-    companion object {
-       private lateinit var mInstance: AppLoader
-        lateinit var eventViewModelInstance: EventViewModel
-        lateinit var appViewModelInstance: AppViewModel
-
-        fun getInstance()=mInstance
-    }
-
+class AppLoader : Application() {
 
     override fun onCreate() {
         super.onCreate()
-        mInstance = this
-        MultiDex.install(this)
-        eventViewModelInstance = getAppViewModelProvider()[EventViewModel::class.java]
-        appViewModelInstance = getAppViewModelProvider()[AppViewModel::class.java]
     }
 }
