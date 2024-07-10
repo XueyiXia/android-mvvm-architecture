@@ -15,16 +15,16 @@
     <style name="SplashTheme" parent="@style/Theme.AppCompat">
         <item name="android:windowNoTitle">true</item>
         <item name="android:windowFullscreen">true</item>
-<!--        <item name="windowActionBar">false</item>-->
-<!--        <item name="windowNoTitle">true</item>-->
-<!--        <item name="android:windowBackground">@drawable/background_splash</item>-->
-<!--        <item name="android:background">@drawable/background_splash</item>-->
-<!--        <item name="colorPrimary">@android:color/transparent</item>-->
-<!--        <item name="colorPrimaryDark">@android:color/transparent</item>-->
-<!--        <item name="colorAccent">@android:color/transparent</item>-->
-<!--        <item name="android:windowTranslucentStatus">false</item>-->
-<!--        <item name="android:windowTranslucentNavigation">true</item>-->
-<!--        <item name="android:statusBarColor">@android:color/transparent</item>-->
+        <item name="windowActionBar">false</item>
+        <item name="windowNoTitle">true</item>
+        <item name="android:windowBackground">@drawable/background_splash</item>
+        <item name="android:background">@drawable/background_splash</item>
+        <item name="colorPrimary">@android:color/transparent</item>
+        <item name="colorPrimaryDark">@android:color/transparent</item>
+        <item name="colorAccent">@android:color/transparent</item>
+        <item name="android:windowTranslucentStatus">false</item>
+        <item name="android:windowTranslucentNavigation">true</item>
+        <item name="android:statusBarColor">@android:color/transparent</item>
     </style>
 
 </resources>
