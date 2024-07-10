@@ -1,4 +1,3 @@
-import com.framework.versionplugin.*
 plugins {
     id 'com.android.application'
     id 'org.jetbrains.kotlin.android'
@@ -7,15 +6,14 @@ plugins {
 
 android {
     namespace 'com.jetpack.mvvm'
-    compileSdk BuildVersions.compileSdk
+    compileSdk 34
 
     defaultConfig {
         applicationId "com.jetpack.mvvm"
-        minSdk BuildVersions.minSdk
-        targetSdk BuildVersions.targetSdk
-        versionCode BuildVersions.versionCode
-        versionName BuildVersions.versionName
-
+        minSdk 25
+        targetSdk 34
+        versionCode 1
+        versionName "1.0.0"
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
 
@@ -41,32 +39,34 @@ android {
 }
 
 dependencies {
-    implementation AndroidX.coreKtx
-    implementation AndroidX.appcompat
-    implementation AndroidX.recyclerview
-    implementation AndroidX.material
-    implementation AndroidX.constraintLayout
+    implementation (libs.coreKtx)
+    implementation (libs.appcompat)
+    implementation (libs.recyclerview)
+    implementation (libs.material)
+    implementation (libs.constraintlayout)
     //lifecycle
-    implementation AndroidX.lifecycleRuntimeKtx
-    implementation AndroidX.lifecycleCommonJava8
-    implementation AndroidX.lifecycleExtensions
+    implementation (libs.lifecycleRuntimeKtx)
+    implementation (libs.lifecycleCommonJava8)
+    implementation (libs.lifecycleExtensions)
 
     // viewModel
-    implementation AndroidX.lifecycleViewmodelKtx
+    implementation (libs.lifecycleViewmodelKtx)
     // liveData
-    implementation AndroidX.lifecycleLiveDataKtx
+    implementation (libs.lifecycleLivedata)
+
+    implementation (libs.activityKtx)
 
     //fragment
-    implementation AndroidX.androidxfragmentKtx
+    implementation (libs.fragmentKtx)
 
     //navigation
-    implementation AndroidX.navigationFragment
-    implementation AndroidX.navigationUi
-    implementation (libs.coreKtx)
+    implementation (libs.navigationFragment)
+    implementation (libs.navigationUi)
 
-    implementation AndroidX.preferenceKtx
-    implementation AndroidX.supportMultidex
-    implementation AndroidX.startupruntime
+
+    implementation (libs.preferenceKtx)
+    implementation (libs.supportMultidex)
+    implementation (libs.startupruntime)
     //项目核心框架
     implementation project(path: ':framework_mvvm')
 }
