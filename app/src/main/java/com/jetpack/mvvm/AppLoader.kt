@@ -1,6 +1,8 @@
 package com.jetpack.mvvm
 
 import android.app.Application
+import android.content.Context
+import androidx.multidex.MultiDex
 
 /**
  * @author: xiaxueyi
@@ -10,6 +12,16 @@ import android.app.Application
  */
 
 class AppLoader : Application() {
+
+
+    /**
+     * +++++++++++++++++++++++多dex模式测试-开始+++++++++++++++++++++
+     */
+    override fun attachBaseContext(base: Context?) {
+        super.attachBaseContext(base)
+        MultiDex.install(this)
+    }
+
 
     override fun onCreate() {
         super.onCreate()
