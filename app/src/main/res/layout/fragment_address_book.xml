@@ -17,6 +17,7 @@
         <include layout="@layout/layout_title" />
 
         <TextView
+            android:id="@+id/title"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="登录后才能看到通讯录内容哦～"

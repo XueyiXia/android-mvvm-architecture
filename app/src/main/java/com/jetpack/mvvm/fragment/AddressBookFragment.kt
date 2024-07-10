@@ -21,5 +21,6 @@ class AddressBookFragment :BaseMvvmFragmentByOverrideBinding<FragmentAddressBook
 
 
     override fun initView(rootView: View, savedInstanceState: Bundle?) {
+        mViewDataBinding.title.text="asdfdfghjkllkjhgfdd"
     }
 }
