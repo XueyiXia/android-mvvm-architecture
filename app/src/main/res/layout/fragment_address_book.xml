@@ -1,0 +1,30 @@
+<layout xmlns:android="http://schemas.android.com/apk/res/android">
+    <data>
+        <variable
+            name="click"
+            type="com.jetpack.mvvm.activities.SplashMvvmActivity.ProxyClick" />
+        <variable
+            name="splashmodel"
+            type="com.jetpack.mvvm.viewmodel.SplashViewModel" />
+
+    </data>
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:background="@color/default_second_background"
+        android:layout_height="match_parent">
+
+        <include layout="@layout/layout_title" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="登录后才能看到通讯录内容哦～"
+            android:layout_marginTop="@dimen/dp_14"
+            android:textColor="#ff333333"
+            android:textSize="@dimen/sp_13"
+            />
+
+    </LinearLayout>
+</layout>
+

@@ -6,9 +6,7 @@
         <color android:color="@android:color/white" />
     </item>
 
-    <item
-        android:width="100dp"
-        android:height="50dp">
+    <item>
         <bitmap
             android:gravity="center"
             android:src="@drawable/loading_default_bg"
