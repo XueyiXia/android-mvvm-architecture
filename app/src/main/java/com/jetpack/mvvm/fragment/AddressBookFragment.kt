@@ -1,6 +1,7 @@
 package com.jetpack.mvvm.fragment
 
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import com.framework.mvvm.base.BaseMvvmFragmentByOverrideBinding
 import com.framework.mvvm.utils.viewBinding
@@ -22,5 +23,6 @@ class AddressBookFragment :BaseMvvmFragmentByOverrideBinding<FragmentAddressBook
 
     override fun initView(rootView: View, savedInstanceState: Bundle?) {
         mViewDataBinding.title.text="asdfdfghjkllkjhgfdd"
+        Log.e("AddressBookFragment","msgContent: ->> $")
     }
 }

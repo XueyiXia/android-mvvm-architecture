@@ -20,6 +20,7 @@ class TestActivity: BaseMvvmActivityByOverrideBinding<ActivitySplashBinding,Base
 
     override fun initView(rootView: View, savedInstanceState: Bundle?) {
 
+        mViewDataBinding.tvCount.text="6666666666"
     }
 
 }

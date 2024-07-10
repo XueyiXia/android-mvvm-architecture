@@ -12,6 +12,7 @@ import com.framework.mvvm.base.BaseMvvmFragment
 import com.framework.mvvm.viewmodel.BaseViewModel
 import com.jetpack.mvvm.AppLoader
 import com.jetpack.mvvm.activities.MainActivity
+import com.jetpack.mvvm.activities.TestActivity
 import com.jetpack.mvvm.databinding.FragmentHomeBinding
 import com.jetpack.mvvm.viewmodel.SplashViewModel
 
@@ -30,7 +31,7 @@ class HomeFragment :BaseMvvmFragment<FragmentHomeBinding, SplashViewModel>(){
     }
 
     override fun initView(rootView: View, savedInstanceState: Bundle?) {
-
+        startActivity(Intent(requireActivity(), TestActivity::class.java))
     }
 
 

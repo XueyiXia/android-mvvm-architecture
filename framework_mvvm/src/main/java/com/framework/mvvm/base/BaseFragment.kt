@@ -1,11 +1,8 @@
 package com.framework.mvvm.base
 
-import android.Manifest
 import android.app.Activity
 import android.content.Context
 import android.content.Intent
-import android.content.pm.PackageManager
-import android.os.Build
 import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
@@ -16,14 +13,10 @@ import androidx.activity.result.ActivityResultCallback
 import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.app.ActivityCompat
-import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
-import com.framework.mvvm.R
 import com.framework.mvvm.utils.getVmClazz
 import com.framework.mvvm.viewmodel.BaseViewModel
-import com.google.android.material.snackbar.Snackbar
 
 /**
  * @author: xiaxueyi
@@ -33,6 +26,10 @@ import com.google.android.material.snackbar.Snackbar
  */
 
 abstract class BaseFragment<VM : BaseViewModel> :Fragment() {
+
+    companion object{
+        private const val TAG: String = "BaseFragment"
+    }
 
     private lateinit var mActivity: AppCompatActivity
 
@@ -60,7 +57,7 @@ abstract class BaseFragment<VM : BaseViewModel> :Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
+        Log.e(TAG, "跳转界面--->>" + this.javaClass.simpleName)
         /**
          * 实例化创建ViewModel
          */

@@ -2,6 +2,7 @@ package com.framework.mvvm.base
 
 import android.Manifest
 import android.app.Activity
+import android.app.ActivityManager
 import android.content.Intent
 import android.content.pm.PackageManager
 import android.os.Build
@@ -13,7 +14,6 @@ import androidx.activity.result.ActivityResultCallback
 import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import androidx.core.view.WindowCompat
 import androidx.core.view.WindowInsetsCompat
@@ -21,9 +21,9 @@ import androidx.core.view.WindowInsetsControllerCompat
 import androidx.lifecycle.ViewModelProvider
 import com.framework.mvvm.R
 import com.framework.mvvm.utils.getVmClazz
-import com.module.utils.notNull
 import com.framework.mvvm.viewmodel.BaseViewModel
-import com.google.android.material.snackbar.Snackbar
+import com.module.utils.notNull
+import kotlin.system.exitProcess
 
 
 /**
@@ -36,6 +36,7 @@ import com.google.android.material.snackbar.Snackbar
 abstract class BaseActivity <VM : BaseViewModel> : AppCompatActivity(){
     companion object{
         private const val TAG = "BaseActivity"
+        var exitTime: Long = 0 //退出程序的时间
     }
 
     lateinit var mViewModel: VM
@@ -235,6 +236,23 @@ abstract class BaseActivity <VM : BaseViewModel> : AppCompatActivity(){
      */
     private fun allPermissionsGranted() = permissions.all {
         ContextCompat.checkSelfPermission(this, it) == PackageManager.PERMISSION_GRANTED
+    }
+
+    /**
+     * 退出应用
+     */
+   open fun exit() {
+        if ((System.currentTimeMillis() - exitTime) > 2000) {
+            exitTime = System.currentTimeMillis()
+        } else {
+            try {
+                finish()
+                exitProcess(0)
+                System.gc()
+            } catch (e: RuntimeException) {
+                e.printStackTrace()
+            }
+        }
     }
 
     /**

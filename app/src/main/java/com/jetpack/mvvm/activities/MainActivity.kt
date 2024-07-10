@@ -3,15 +3,16 @@ package com.jetpack.mvvm.activities
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
+import android.view.KeyEvent
 import android.view.View
 import com.framework.mvvm.base.BaseMvvmActivity
 import com.framework.mvvm.viewmodel.BaseViewModel
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.jetpack.mvvm.R
 import com.jetpack.mvvm.databinding.ActivityMainBinding
+import com.jetpack.mvvm.fragment.AddressBookFragment
 import com.jetpack.mvvm.fragment.HomeFragment
 import com.jetpack.mvvm.fragment.MallsFragment
-import com.jetpack.mvvm.fragment.AddressBookFragment
 import com.jetpack.mvvm.fragment.UserFragment
 
 class MainActivity : BaseMvvmActivity<ActivityMainBinding,BaseViewModel>() {
@@ -199,5 +200,13 @@ class MainActivity : BaseMvvmActivity<ActivityMainBinding,BaseViewModel>() {
         super.onDestroy()
 
 
+    }
+
+    override fun onKeyDown(keyCode: Int, event: KeyEvent?): Boolean {
+        if (keyCode == KeyEvent.KEYCODE_BACK) {
+            exit()
+            return false
+        }
+        return false
     }
 }
