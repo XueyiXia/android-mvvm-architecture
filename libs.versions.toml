@@ -5,7 +5,8 @@ targetSdk = "34"
 buildToolsVersion = "34.0.0"
 
 
-kotlin = "1.13.1"
+org-jetbrains-kotlin-android = "2.0.0"
+coreKtx = "1.13.1"
 activityKtx = "1.9.0"
 fragmentKtx = "1.8.1"
 appcompat = "1.7.0"
@@ -24,8 +25,10 @@ multidex = "2.0.1"
 preferenceKtx= "1.2.1"
 startupruntime= "1.1.1"
 
+androidGradlePlugin = "8.5.0"
+
 [libraries]
-coreKtx = { module = "androidx.core:core-ktx", version.ref = "kotlin" }
+coreKtx = { module = "androidx.core:core-ktx", version.ref = "coreKtx" }
 appcompat = { module = "androidx.appcompat:appcompat", version.ref = "appcompat"}
 material = { module = "com.google.android.material:material", version.ref = "material" }
 constraintlayout = { module = "androidx.constraintlayout:constraintlayout", version.ref = "constraintlayout" }
@@ -55,6 +58,7 @@ startupruntime = { module = "androidx.startup:startup-runtime", version.ref = "s
 
 
 [plugins]
-#android-application = { id = "com.android.application", version.ref = "androidGradlePlugin" }
-#android-library = { id = "com.android.library", version.ref = "androidGradlePlugin" }
+android-application = { id = "com.android.application", version.ref = "androidGradlePlugin" }
+android-library = { id = "com.android.library", version.ref = "androidGradlePlugin" }
+org-jetbrains-kotlin-android = { id = "org.jetbrains.kotlin.android", version.ref = "org-jetbrains-kotlin-android"}
 
