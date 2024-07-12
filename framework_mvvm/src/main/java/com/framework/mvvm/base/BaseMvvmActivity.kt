@@ -18,11 +18,11 @@ abstract class BaseMvvmActivity <DB: ViewDataBinding,VM: BaseViewModel> : BaseAc
         private const val TAG = "BaseMvvmActivity"
     }
 
-    lateinit var mViewDataBinding: DB
+    lateinit var mBinding: DB
 
     override fun createDataBinding(): View {
-        mViewDataBinding = inflateBindingWithGeneric(layoutInflater)
-        return mViewDataBinding.root
+        mBinding = inflateBindingWithGeneric(layoutInflater)
+        return mBinding.root
     }
     override fun createObserver() {
         Log.e(TAG, "createObserver--->>${mViewModel}" )

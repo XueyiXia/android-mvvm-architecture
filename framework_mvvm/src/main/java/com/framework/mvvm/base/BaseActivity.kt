@@ -41,22 +41,22 @@ abstract class BaseActivity <VM : BaseViewModel> : AppCompatActivity(){
 
     lateinit var mViewModel: VM
 
-    private lateinit var resultLauncher: ActivityResultLauncher<Intent>  // registerForActivityResult
-
     private var activityResultCallback: ActivityResultCallback<ActivityResult>?=null  //暴露给子页面的回调
-
 
     /**
      * 当前页面回调数据处理
      */
     private val launcherCallback = ActivityResultCallback<ActivityResult> { result ->
-        val code = result.resultCode
-        val data = result.data
-        val msgContent = "code = $code  ,  msg = $data "
-        Log.e("launcherCallback","msgContent: ->> $msgContent")
+//        val code = result.resultCode
+//        val data = result.data
+//        val msgContent = "code = $code  ,  msg = $data "
+//        Log.e("launcherCallback","msgContent: ->> $msgContent")
         activityResultCallback?.onActivityResult(result)
 
     }
+
+    private var resultLauncher: ActivityResultLauncher<Intent> =registerForActivityResult(ActivityResultContracts.StartActivityForResult(),launcherCallback)
+
 
 
 

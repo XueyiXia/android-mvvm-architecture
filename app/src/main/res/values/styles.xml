@@ -4,9 +4,9 @@
     <!--应用程序基础主题方案 Activity跳转动画效果:退出向右隐藏，进入向右弹出，启动另一个Activity时本页面不动 -->
     <style name="AppLoaderStyle" parent="@style/Theme.AppCompat.Light.NoActionBar">
         <!--标题栏底色-->
-        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
+        <item name="colorPrimaryDark">@color/color_333333</item>
         <!--状态栏底色-->
-        <item name="colorPrimary">@color/colorPrimary</item>
+        <item name="colorPrimary">@color/color_333333</item>
         <!--导航栏标题字体颜色-->
         <item name="android:textColorPrimary">@color/colorAccent</item>
         <!--窗口的背景颜色-->
@@ -40,20 +40,20 @@
 
     <!--Activity 使用的主题-->
     <style name="ActionBarTheme" parent="Theme.AppCompat.Light.NoActionBar">
-        <item name="android:windowIsTranslucent">false</item>
-        <item name="android:windowDisablePreview">true</item>
-        <!--标题栏颜色-->
-        <item name="colorPrimary">@color/colorPrimary</item>
-        <!--状态栏颜色-->
-        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
-        <!--窗口的背景颜色-->
-        <item name="android:windowBackground">@color/white</item>
-        <!-- ToolBar 子标题字体颜色 -->
-        <item name="actionMenuTextColor">@color/white</item>
-        <!-- ToolBar溢出菜单的风格 -->
-        <item name="actionOverflowMenuStyle">@style/ToolBarOverflowMenuStyle</item>
-        <item name="android:textColor">@color/tool_bar_overflow_menu_text_color</item>
-        <item name="android:textSize">@dimen/sp_15</item>
+<!--        <item name="android:windowIsTranslucent">false</item>-->
+<!--        <item name="android:windowDisablePreview">true</item>-->
+<!--        &lt;!&ndash;标题栏颜色&ndash;&gt;-->
+<!--        <item name="colorPrimary">@color/colorPrimary</item>-->
+<!--        &lt;!&ndash;状态栏颜色&ndash;&gt;-->
+<!--        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>-->
+<!--        &lt;!&ndash;窗口的背景颜色&ndash;&gt;-->
+<!--        <item name="android:windowBackground">@color/white</item>-->
+<!--        &lt;!&ndash; ToolBar 子标题字体颜色 &ndash;&gt;-->
+<!--        <item name="actionMenuTextColor">@color/white</item>-->
+<!--        &lt;!&ndash; ToolBar溢出菜单的风格 &ndash;&gt;-->
+<!--        <item name="actionOverflowMenuStyle">@style/ToolBarOverflowMenuStyle</item>-->
+<!--        <item name="android:textColor">@color/tool_bar_overflow_menu_text_color</item>-->
+<!--        <item name="android:textSize">@dimen/sp_15</item>-->
     </style>
 
 

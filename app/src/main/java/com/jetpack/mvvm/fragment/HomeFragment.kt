@@ -5,6 +5,8 @@ import android.graphics.Color
 import android.os.Bundle
 import android.util.Log
 import android.view.View
+import androidx.activity.result.ActivityResult
+import androidx.activity.result.ActivityResultCallback
 import androidx.core.graphics.ColorUtils
 import androidx.lifecycle.Observer
 import androidx.lifecycle.viewModelScope
@@ -27,11 +29,21 @@ class HomeFragment :BaseMvvmFragment<FragmentHomeBinding, SplashViewModel>(){
 
     private var index:Int=0
 
-    override fun createObserver(){
+    private val launcherCallback = ActivityResultCallback<ActivityResult> { result ->
+        val code = result.resultCode
+        val data = result.data
+        val msgContent = "code = $code  ,  msg = ${data?.data} "
+        Log.e("launcherCallback","msgContent: ->> $msgContent")
+
+
     }
 
     override fun initView(rootView: View, savedInstanceState: Bundle?) {
-        startActivity(Intent(requireActivity(), TestActivity::class.java))
+        startActivityForResult(TestActivity::class.java){
+            Log.e("launcherCallback","it: ->> ${it.data}")
+            Log.e("launcherCallback","it: ->> ${it.data?.data}")
+        }
+        Log.e("onViewCreated+++++++", "HomeFragment")
     }
 
 

@@ -9,9 +9,9 @@
     <color name="white">#FFFFFFFF</color>
 
     <!--状态栏底色-->
-    <color name="colorPrimaryDark">#ffffff</color>
+    <color name="colorPrimaryDark">#111111</color>
     <!--标题栏底色-->
-    <color name="colorPrimary">#ffffff</color>
+    <color name="colorPrimary">#111111</color>
 
     <!--自定义状态栏背景颜色-->
     <color name="status_bar_bg_color">#ffffff</color>
@@ -20,7 +20,7 @@
     <!-- 第二级，第三极默认的底色 #fafafa -->
     <color name="default_second_background">#fafafa</color>
     <!--ToolBar标题字体颜色-->
-    <color name="colorAccent">#ff111111</color>
+    <color name="colorAccent">#fafafa</color>
     <!--ToolBar标题字体颜色-->
     <color name="toolbar_title_text_color">#ff111111</color>
     <!--ToolBar底部分割线颜色-->

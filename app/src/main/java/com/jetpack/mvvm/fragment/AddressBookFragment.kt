@@ -24,5 +24,6 @@ class AddressBookFragment :BaseMvvmFragmentByOverrideBinding<FragmentAddressBook
     override fun initView(rootView: View, savedInstanceState: Bundle?) {
         mViewDataBinding.title.text="asdfdfghjkllkjhgfdd"
         Log.e("AddressBookFragment","msgContent: ->> $")
+        Log.e("onViewCreated+++++++", "AddressBookFragment")
     }
 }

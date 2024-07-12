@@ -19,6 +19,8 @@ class SplashMvvmActivity  : BaseMvvmActivity<ActivitySplashBinding,SplashViewMod
 
     override fun initView(rootView: View, savedInstanceState: Bundle?) {
         Log.e("SplashActivity", "initView--->>" + this.javaClass.simpleName)
+
+
         startActivity(Intent(this@SplashMvvmActivity, MainActivity::class.java))
         finish()
     }

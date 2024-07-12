@@ -1,5 +1,6 @@
 package com.jetpack.mvvm.bindingadapter
 
+import android.view.View
 import androidx.coordinatorlayout.widget.CoordinatorLayout
 import androidx.databinding.BindingAdapter
 
@@ -13,7 +14,7 @@ object CommonBindingAdapter {
 
     @JvmStatic
     @BindingAdapter("titleBg", requireAll = false)
-    fun CoordinatorLayout.setBgColor(headerColor : Int) {
+    fun View.setBackgroundColor(headerColor : Int) {
         this.setBackgroundColor(headerColor)
     }
 

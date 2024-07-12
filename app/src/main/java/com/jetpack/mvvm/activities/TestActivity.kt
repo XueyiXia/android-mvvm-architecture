@@ -1,5 +1,6 @@
 package com.jetpack.mvvm.activities
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.View
 import com.framework.mvvm.base.BaseMvvmActivityByOverrideBinding
@@ -21,6 +22,11 @@ class TestActivity: BaseMvvmActivityByOverrideBinding<ActivitySplashBinding,Base
     override fun initView(rootView: View, savedInstanceState: Bundle?) {
 
         mViewDataBinding.tvCount.text="6666666666"
+        val intent= Intent()
+        val bundle=Bundle()
+        bundle.putInt("onDestroy",10)
+        intent.putExtra("onDestroy",bundle)
+        setResult(RESULT_OK,intent)
     }
 
 }

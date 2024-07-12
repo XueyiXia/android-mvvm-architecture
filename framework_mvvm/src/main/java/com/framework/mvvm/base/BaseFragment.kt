@@ -37,7 +37,7 @@ abstract class BaseFragment<VM : BaseViewModel> :Fragment() {
 
     lateinit var mViewModel: VM
 
-    private lateinit var resultLauncher: ActivityResultLauncher<Intent>  // registerForActivityResult
+//    private lateinit var resultLauncher: ActivityResultLauncher<Intent>  // registerForActivityResult
 
     private var activityResultCallback: ActivityResultCallback<ActivityResult>?=null  //暴露给子页面的回调
 
@@ -46,15 +46,17 @@ abstract class BaseFragment<VM : BaseViewModel> :Fragment() {
      * 当前页面回调数据处理
      */
     private val launcherCallback = ActivityResultCallback<ActivityResult> { result ->
-        val code = result.resultCode
-        val data = result.data
-        val msgContent = "code = $code  ,  msg = $data "
-        Log.e("launcherCallback","msgContent: ->> $msgContent")
+//        val code = result.resultCode
+//        val data = result.data
+//        val msgContent = "code = $code  ,  msg = $data "
+//        Log.e("launcherCallback","msgContent: ->> $msgContent")
         activityResultCallback?.onActivityResult(result)
 
     }
 
+//    private var resultLauncher: ActivityResultLauncher<Intent> =registerForActivityResult(ActivityResultContracts.StartActivityForResult(),launcherCallback)
 
+//    private var resultLauncher: ActivityResultLauncher<Intent> =registerForActivityResult(ActivityResultContracts.StartActivityForResult())
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         Log.e(TAG, "跳转界面--->>" + this.javaClass.simpleName)
@@ -110,9 +112,11 @@ abstract class BaseFragment<VM : BaseViewModel> :Fragment() {
      * @param className Class<out Activity>
      * @param activityResultCallback ActivityResultCallback<ActivityResult>?
      */
-    open fun startActivityForResult(className: Class<out Activity>, activityResultCallback: ActivityResultCallback<ActivityResult>?) {
-        this.activityResultCallback=activityResultCallback
+    open fun startActivityForResult(className: Class<out Activity>, callback: (ActivityResult) -> Unit) {
         val intent = Intent(requireContext(), className)
+        val resultLauncher: ActivityResultLauncher<Intent> =  registerForActivityResult(ActivityResultContracts.StartActivityForResult()){
+            callback.invoke(it)
+        }
         resultLauncher.launch(intent)
     }
 
@@ -127,7 +131,7 @@ abstract class BaseFragment<VM : BaseViewModel> :Fragment() {
         this.activityResultCallback=activityResultCallback
         val intent = Intent(requireContext(), className)
         intent.putExtras(bundle)
-        resultLauncher.launch(intent)
+//        resultLauncher.launch(intent)
     }
 
 
@@ -135,7 +139,7 @@ abstract class BaseFragment<VM : BaseViewModel> :Fragment() {
      * 注册页面回调
      */
     private fun initRegisterForActivityResult(){
-        resultLauncher = registerForActivityResult(ActivityResultContracts.StartActivityForResult(),launcherCallback)
+//        resultLauncher = registerForActivityResult(ActivityResultContracts.StartActivityForResult(),launcherCallback)
     }
 
     /**
