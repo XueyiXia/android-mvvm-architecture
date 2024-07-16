@@ -1,5 +1,6 @@
 package com.jetpack.mvvm.activities
 
+import android.app.Activity
 import android.content.Intent
 import android.os.Bundle
 import android.view.View
@@ -7,6 +8,7 @@ import com.framework.mvvm.base.BaseMvvmActivityByOverrideBinding
 import com.framework.mvvm.utils.viewBinding
 import com.framework.mvvm.viewmodel.BaseViewModel
 import com.jetpack.mvvm.databinding.ActivitySplashBinding
+import com.jetpack.mvvm.utils.SC
 
 /**
  * @author: xiaxueyi
@@ -21,12 +23,17 @@ class TestActivity: BaseMvvmActivityByOverrideBinding<ActivitySplashBinding,Base
 
     override fun initView(rootView: View, savedInstanceState: Bundle?) {
 
-        mViewDataBinding.tvCount.text="6666666666"
-        val intent= Intent()
-        val bundle=Bundle()
-        bundle.putInt("onDestroy",10)
-        intent.putExtra("onDestroy",bundle)
-        setResult(RESULT_OK,intent)
+        mViewDataBinding.welcomeImage.setOnClickListener {
+            val intent= Intent()
+            val bundle=Bundle()
+            bundle.putInt("onDestroy",10)
+            bundle.putInt("onDestroy2",20)
+            bundle.putInt("onDestroy3",30)
+            intent.putExtra(SC.commonResultCode,bundle)
+            setResult(Activity.RESULT_OK,intent)
+            finish()
+        }
+
     }
 
 }

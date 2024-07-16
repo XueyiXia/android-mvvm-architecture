@@ -41,23 +41,18 @@ abstract class BaseActivity <VM : BaseViewModel> : AppCompatActivity(){
 
     lateinit var mViewModel: VM
 
-    private var activityResultCallback: ActivityResultCallback<ActivityResult>?=null  //暴露给子页面的回调
 
     /**
      * 当前页面回调数据处理
      */
-    private val launcherCallback = ActivityResultCallback<ActivityResult> { result ->
-//        val code = result.resultCode
-//        val data = result.data
-//        val msgContent = "code = $code  ,  msg = $data "
-//        Log.e("launcherCallback","msgContent: ->> $msgContent")
-        activityResultCallback?.onActivityResult(result)
-
+    private var launcherCallback: ((ActivityResult) -> Unit)? = null
+    private val resultLauncher: ActivityResultLauncher<Intent> =  registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
+        val code = result.resultCode
+        val data = result.data
+        val msgContent = "result = $result   ，  code = $code  ,  msg = $data  "
+        Log.e("launcherCallback","msgContent: ->> $msgContent")
+        launcherCallback?.invoke(result)
     }
-
-    private var resultLauncher: ActivityResultLauncher<Intent> =registerForActivityResult(ActivityResultContracts.StartActivityForResult(),launcherCallback)
-
-
 
 
     // The permissions we need for the app to work properly
@@ -112,12 +107,6 @@ abstract class BaseActivity <VM : BaseViewModel> : AppCompatActivity(){
 
 
         /**
-         * 实例化跳转页面回调
-         */
-        initRegisterForActivityResult()
-
-
-        /**
          * 检查权限
          */
         checkPermissionGranted()
@@ -151,8 +140,8 @@ abstract class BaseActivity <VM : BaseViewModel> : AppCompatActivity(){
      * @param className Class<out Activity>
      * @param activityResultCallback ActivityResultCallback<ActivityResult>?
      */
-    open fun startActivityForResult(className: Class<out Activity>, activityResultCallback: ActivityResultCallback<ActivityResult>?) {
-        this.activityResultCallback=activityResultCallback
+    open fun startActivityForResult(className: Class<out Activity>, activityResultCallback: (ActivityResult) -> Unit) {
+        this.launcherCallback=activityResultCallback
         val intent = Intent(this, className)
         resultLauncher.launch(intent)
     }
@@ -165,8 +154,8 @@ abstract class BaseActivity <VM : BaseViewModel> : AppCompatActivity(){
      * @param bundle Bundle
      * @param activityResultCallback ActivityResultCallback<ActivityResult>?
      */
-    open fun startActivityForResult(className: Class<out Activity>, bundle: Bundle,activityResultCallback: ActivityResultCallback<ActivityResult>?) {
-        this.activityResultCallback=activityResultCallback
+    open fun startActivityForResult(className: Class<out Activity>, bundle: Bundle,activityResultCallback: (ActivityResult) -> Unit) {
+        this.launcherCallback=activityResultCallback
         val intent = Intent(this, className)
         intent.putExtras(bundle)
         resultLauncher.launch(intent)
@@ -181,13 +170,6 @@ abstract class BaseActivity <VM : BaseViewModel> : AppCompatActivity(){
     private fun createViewModel() {
         val modelClass :Class<VM> = getVmClazz(this)
         mViewModel= ViewModelProvider(this)[modelClass]
-    }
-
-    /**
-     * 注册页面回调
-     */
-    private fun initRegisterForActivityResult(){
-        resultLauncher = registerForActivityResult(ActivityResultContracts.StartActivityForResult(),launcherCallback)
     }
 
 
@@ -279,6 +261,8 @@ abstract class BaseActivity <VM : BaseViewModel> : AppCompatActivity(){
     abstract fun initView(rootView: View, savedInstanceState: Bundle?)
 
 
-
-
+    override fun onDestroy() {
+        super.onDestroy()
+        resultLauncher.unregister()
+    }
 }

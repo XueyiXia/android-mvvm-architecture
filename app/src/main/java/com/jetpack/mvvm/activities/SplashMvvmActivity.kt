@@ -26,9 +26,5 @@ class SplashMvvmActivity  : BaseMvvmActivity<ActivitySplashBinding,SplashViewMod
     }
 
 
-    inner class ProxyClick {
-
-    }
-
 
 }

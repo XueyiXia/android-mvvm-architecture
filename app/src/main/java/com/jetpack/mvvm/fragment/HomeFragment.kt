@@ -27,30 +27,10 @@ import com.jetpack.mvvm.viewmodel.SplashViewModel
 
 class HomeFragment :BaseMvvmFragment<FragmentHomeBinding, SplashViewModel>(){
 
-    private var index:Int=0
-
-    private val launcherCallback = ActivityResultCallback<ActivityResult> { result ->
-        val code = result.resultCode
-        val data = result.data
-        val msgContent = "code = $code  ,  msg = ${data?.data} "
-        Log.e("launcherCallback","msgContent: ->> $msgContent")
-
-
-    }
 
     override fun initView(rootView: View, savedInstanceState: Bundle?) {
-        startActivityForResult(TestActivity::class.java){
-            Log.e("launcherCallback","it: ->> ${it.data}")
-            Log.e("launcherCallback","it: ->> ${it.data?.data}")
-        }
+
         Log.e("onViewCreated+++++++", "HomeFragment")
-    }
-
-
-
-    inner class ProxyClick {
-        fun updateUi() {
-        }
     }
 
 }

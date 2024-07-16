@@ -57,12 +57,6 @@ class MainActivity : BaseMvvmActivity<ActivityMainBinding,BaseViewModel>() {
          */
         initBottomNavigation()
 
-
-        val intent=Intent()
-        val bundle=Bundle()
-        bundle.putInt("onDestroy",10)
-        intent.putExtra("onDestroy",bundle)
-        setResult(RESULT_OK,intent)
     }
 
 
