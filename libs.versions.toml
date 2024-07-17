@@ -27,6 +27,8 @@ startupruntime= "1.1.1"
 
 androidGradlePlugin = "8.5.0"
 
+xxPermissions="18.5"
+
 [libraries]
 coreKtx = { module = "androidx.core:core-ktx", version.ref = "coreKtx" }
 appcompat = { module = "androidx.appcompat:appcompat", version.ref = "appcompat"}
@@ -55,6 +57,9 @@ navigationUi = { module = "androidx.navigation:navigation-ui-ktx", version.ref =
 preferenceKtx = { module = "androidx.preference:preference-ktx", version.ref = "preferenceKtx"}
 supportMultidex = { module = "androidx.multidex:multidex", version.ref = "multidex"}
 startupruntime = { module = "androidx.startup:startup-runtime", version.ref = "startupruntime"}
+
+
+xxPermissions= { module = "com.github.getActivity:XXPermissions", version.ref = "xxPermissions" }
 
 
 [plugins]

@@ -8,12 +8,14 @@ import android.view.View
 import com.framework.mvvm.base.BaseMvvmActivity
 import com.framework.mvvm.viewmodel.BaseViewModel
 import com.google.android.material.bottomnavigation.BottomNavigationView
+import com.hjq.permissions.Permission
 import com.jetpack.mvvm.R
 import com.jetpack.mvvm.databinding.ActivityMainBinding
 import com.jetpack.mvvm.fragment.AddressBookFragment
 import com.jetpack.mvvm.fragment.HomeFragment
 import com.jetpack.mvvm.fragment.MallsFragment
 import com.jetpack.mvvm.fragment.UserFragment
+import com.module.utils.permissions.xxPermissions
 
 class MainActivity : BaseMvvmActivity<ActivityMainBinding,BaseViewModel>() {
 
@@ -56,6 +58,31 @@ class MainActivity : BaseMvvmActivity<ActivityMainBinding,BaseViewModel>() {
          * 实例化底部导航栏
          */
         initBottomNavigation()
+
+
+        xxPermissions {
+            // 申请相机权限
+            permissions(Permission.CAMERA)
+            // 申请位置权限
+            permissions(Permission.ACCESS_FINE_LOCATION, Permission.ACCESS_COARSE_LOCATION)
+            // 如果申请权限之前需要向用户展示权限申请理由，则走此回调
+            onShouldShowRationale { shouldShowRationaleList, onUserResult ->
+                Log.e("onResult", "shouldShowRationaleList: " + shouldShowRationaleList +
+                        "\nonUserResult: " + onUserResult )
+            }
+
+            onDoNotAskAgain { doNotAskAgainList, onUserResult ->
+                Log.e("onResult", "doNotAskAgainList: " + doNotAskAgainList +
+                        "\nonUserResult: " + onUserResult )
+            }
+            // 权限申请结果
+            onResult { allGranted, grantedList, deniedList ->
+
+                Log.e("onResult", "allGranted: " + allGranted +
+                        "\ngrantedList: " + grantedList +
+                        "\ndeniedList: " + deniedList)
+            }
+        }
 
     }
 

@@ -85,6 +85,6 @@ dependencies {
     implementation (libs.preferenceKtx)
     implementation (libs.supportMultidex)
 
-    implementation project(path: ':module_utils')
+    api project(path: ':module_utils')
 
 }

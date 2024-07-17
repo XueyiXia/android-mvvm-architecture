@@ -62,4 +62,5 @@ dependencies {
     implementation (libs.preferenceKtx)
     implementation (libs.supportMultidex)
 
+    api(libs.xxPermissions)
 }
