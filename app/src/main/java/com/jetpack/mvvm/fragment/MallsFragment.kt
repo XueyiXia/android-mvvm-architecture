@@ -2,17 +2,11 @@ package com.jetpack.mvvm.fragment
 
 import android.os.Bundle
 import android.util.Log
-import android.view.LayoutInflater
 import android.view.View
-import android.view.ViewGroup
-import androidx.fragment.app.Fragment
-import com.framework.mvvm.base.BaseFragment
 import com.framework.mvvm.base.BaseMvvmFragment
-import com.jetpack.mvvm.R
 import com.jetpack.mvvm.activities.TestActivity
-import com.jetpack.mvvm.databinding.FragmentHomeBinding
 import com.jetpack.mvvm.databinding.FragmentMallsBinding
-import com.jetpack.mvvm.utils.SC
+import com.jetpack.mvvm.utils.MvvmSCUtils
 import com.jetpack.mvvm.viewmodel.SplashViewModel
 
 /**
@@ -30,14 +24,33 @@ class MallsFragment : BaseMvvmFragment<FragmentMallsBinding, SplashViewModel>(){
 
         mViewDataBinding.next.setOnClickListener {
             startActivityForResult(TestActivity::class.java){ activityResult->
-                Log.e("launcherCallback666","it: ->> ${activityResult}")
+                Log.e("launcherCallback666","activityResult: ->> $activityResult")
+                val bundleResult=activityResult.data?.getBundleExtra(MvvmSCUtils.commonResultCode)
+                val key1=bundleResult?.getInt(MvvmSCUtils.key1,-1)
+                val key2=bundleResult?.getString(MvvmSCUtils.key2,)
+                val key3=bundleResult?.getCharSequenceArrayList(MvvmSCUtils.key3)
+                Log.e("launcherCallback666","key1: ->> $key1   , key2: ->> $key2  ,  key3: ->> $key3 ")
+            }
+        }
 
-                val shareResult = activityResult.data?.getIntExtra(
-                    SC.commonResultCode,
-                    0
-                )
 
-                Log.e("launcherCallback666","shareResult: ->> $shareResult")
+
+
+        mViewDataBinding.nextHasParams.setOnClickListener {
+
+            val bundle: Bundle = Bundle()
+            bundle.putInt(MvvmSCUtils.key1,100)
+            bundle.putString(MvvmSCUtils.key2,"字符串")
+            bundle.putCharSequenceArrayList(MvvmSCUtils.key3, arrayListOf("1","2"))
+
+
+            startActivityForResult(TestActivity::class.java,bundle){ activityResult->
+                Log.e("launcherCallback666","activityResult: ->> $activityResult")
+                val bundleResult=activityResult.data?.getBundleExtra(MvvmSCUtils.commonResultCode)
+                val key1=bundleResult?.getInt(MvvmSCUtils.key1,-1)
+                val key2=bundleResult?.getString(MvvmSCUtils.key2,)
+                val key3=bundleResult?.getCharSequenceArrayList(MvvmSCUtils.key3)
+                Log.e("launcherCallback666","key1: ->> $key1   , key2: ->> $key2  ,  key3: ->> $key3 ")
             }
         }
     }

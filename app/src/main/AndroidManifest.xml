@@ -38,7 +38,7 @@
 
         <activity
             android:name=".activities.TestActivity"
-            android:launchMode="singleTask"
+            android:launchMode="standard"
             android:windowSoftInputMode="adjustResize"
             android:theme="@style/ActionBarTheme"/>
 

@@ -12,7 +12,8 @@
 
 
 
-    <androidx.constraintlayout.widget.ConstraintLayout
+    <LinearLayout
+        android:orientation="vertical"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
@@ -20,16 +21,19 @@
             android:id="@+id/next"
             android:layout_width="match_parent"
             android:layout_height="@dimen/dp_50"
-            android:textColor="@color/black"
+            android:textColor="@color/purple_500"
             android:gravity="center"
-            android:text="点击我"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent" />
+            android:text="不携带参数调整" />
 
 
+        <TextView
+            android:id="@+id/next_has_params"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/dp_50"
+            android:textColor="@color/purple_500"
+            android:gravity="center"
+            android:text="携带参数调整" />
 
-    </androidx.constraintlayout.widget.ConstraintLayout>
+    </LinearLayout>
 </layout>
 
