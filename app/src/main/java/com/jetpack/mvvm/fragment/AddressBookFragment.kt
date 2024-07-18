@@ -3,6 +3,7 @@ package com.jetpack.mvvm.fragment
 import android.os.Bundle
 import android.util.Log
 import android.view.View
+import com.framework.mvvm.base.BaseMvvmFragment
 import com.framework.mvvm.base.BaseMvvmFragmentByOverrideBinding
 import com.framework.mvvm.utils.viewBinding
 import com.framework.mvvm.viewmodel.BaseViewModel
@@ -16,14 +17,13 @@ import com.jetpack.mvvm.databinding.FragmentAddressBookBinding
  * @说明:
  */
 
-class AddressBookFragment :BaseMvvmFragmentByOverrideBinding<FragmentAddressBookBinding,BaseViewModel>(){
+class AddressBookFragment : BaseMvvmFragment<FragmentAddressBookBinding, BaseViewModel>(){
 
-    override val mViewDataBinding: (FragmentAddressBookBinding) by viewBinding(FragmentAddressBookBinding::inflate)
+//    override val mViewDataBinding: (FragmentAddressBookBinding) by viewBinding(FragmentAddressBookBinding::inflate)
 
 
     override fun initView(rootView: View, savedInstanceState: Bundle?) {
-        mViewDataBinding.title.text="asdfdfghjkllkjhgfdd"
-        Log.e("AddressBookFragment","msgContent: ->> $")
-        Log.e("onViewCreated+++++++", "AddressBookFragment")
+        mViewDataBinding.title.text="测试 WebView"
+        mViewDataBinding.webView.loadUrl("https://github.com/getActivity/XXPermissions")
     }
 }

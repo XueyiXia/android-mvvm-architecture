@@ -66,15 +66,15 @@ class MainActivity : BaseMvvmActivity<ActivityMainBinding,BaseViewModel>() {
             // 申请位置权限
             permissions(Permission.ACCESS_FINE_LOCATION, Permission.ACCESS_COARSE_LOCATION)
             // 如果申请权限之前需要向用户展示权限申请理由，则走此回调
-            onShouldShowRationale { shouldShowRationaleList, onUserResult ->
-                Log.e("onResult", "shouldShowRationaleList: " + shouldShowRationaleList +
-                        "\nonUserResult: " + onUserResult )
-            }
-
-            onDoNotAskAgain { doNotAskAgainList, onUserResult ->
-                Log.e("onResult", "doNotAskAgainList: " + doNotAskAgainList +
-                        "\nonUserResult: " + onUserResult )
-            }
+//            onShouldShowRationale { shouldShowRationaleList, onUserResult ->
+//                Log.e("onResult", "shouldShowRationaleList: " + shouldShowRationaleList +
+//                        "\nonUserResult: " + onUserResult )
+//            }
+//
+//            onDoNotAskAgain { doNotAskAgainList, onUserResult ->
+//                Log.e("onResult", "doNotAskAgainList: " + doNotAskAgainList +
+//                        "\nonUserResult: " + onUserResult )
+//            }
             // 权限申请结果
             onResult { allGranted, grantedList, deniedList ->
 

@@ -53,5 +53,11 @@ class MallsFragment : BaseMvvmFragment<FragmentMallsBinding, SplashViewModel>(){
                 Log.e("launcherCallback666","key1: ->> $key1   , key2: ->> $key2  ,  key3: ->> $key3 ")
             }
         }
+
+
+        mViewDataBinding.next1.setOnClickListener{
+            val bundle: Bundle = Bundle()
+            startActivity(TestActivity::class.java,bundle)
+        }
     }
 }
