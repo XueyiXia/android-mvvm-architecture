@@ -19,6 +19,7 @@ import com.jetpack.mvvm.viewmodel.SplashViewModel
 class MallsFragment : BaseMvvmFragment<FragmentMallsBinding, SplashViewModel>(){
 
 
+
     override fun initView(rootView: View, savedInstanceState: Bundle?) {
         Log.e("onViewCreated+++++++", "MallsFragment")
 
@@ -57,6 +58,8 @@ class MallsFragment : BaseMvvmFragment<FragmentMallsBinding, SplashViewModel>(){
 
         mViewDataBinding.next1.setOnClickListener{
             val bundle: Bundle = Bundle()
+            bundle.putInt(MvvmSCUtils.key1,100)
+            bundle.putString(MvvmSCUtils.key2,"字符串")
             startActivity(TestActivity::class.java,bundle)
         }
     }

@@ -14,6 +14,7 @@ import androidx.activity.result.ActivityResultCallback
 import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import androidx.core.view.WindowCompat
 import androidx.core.view.WindowInsetsCompat
@@ -22,6 +23,7 @@ import androidx.lifecycle.ViewModelProvider
 import com.framework.mvvm.R
 import com.framework.mvvm.utils.getVmClazz
 import com.framework.mvvm.viewmodel.BaseViewModel
+import com.google.android.material.snackbar.Snackbar
 import com.module.utils.notNull
 import kotlin.system.exitProcess
 
@@ -71,9 +73,9 @@ abstract class BaseActivity <VM : BaseViewModel> : AppCompatActivity(){
             onPermissionGranted()
         } else {
             this?.let { v ->
-//                Snackbar.make(v, R.string.message_no_permissions, Snackbar.LENGTH_INDEFINITE)
-//                    .setAction(R.string.label_ok) { ActivityCompat.finishAffinity(this) }
-//                    .show()
+                Snackbar.make(v, R.string.message_no_permissions, Snackbar.LENGTH_INDEFINITE)
+                    .setAction(R.string.label_ok) { ActivityCompat.finishAffinity(this) }
+                    .show()
             }
         }
     }

@@ -71,4 +71,5 @@ dependencies {
     //项目核心框架
 
     implementation project(path: ':framework_mvvm')
+    implementation project(':framework_mvvm')
 }

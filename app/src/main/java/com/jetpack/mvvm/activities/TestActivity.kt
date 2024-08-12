@@ -5,11 +5,13 @@ import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.view.View
-import com.framework.mvvm.base.BaseMvvmActivityByOverrideBinding
-import com.framework.mvvm.utils.viewBinding
+import com.framework.mvvm.base.BaseMvvmActivity
 import com.framework.mvvm.viewmodel.BaseViewModel
+import com.jetpack.mvvm.R
 import com.jetpack.mvvm.databinding.ActivitySplashBinding
 import com.jetpack.mvvm.utils.MvvmSCUtils
+import com.jetpack.mvvm.viewmodel.CommonViewModel
+import org.koin.androidx.viewmodel.ext.android.viewModel
 
 /**
  * @author: xiaxueyi
@@ -17,11 +19,13 @@ import com.jetpack.mvvm.utils.MvvmSCUtils
  * @time: 16:00
  * @说明:
  */
-class TestActivity: BaseMvvmActivityByOverrideBinding<ActivitySplashBinding,BaseViewModel>(){
+class TestActivity: BaseMvvmActivity<ActivitySplashBinding, BaseViewModel>(){
 
-    override val mViewDataBinding: (ActivitySplashBinding) by viewBinding(ActivitySplashBinding::inflate)
+//    override val mViewDataBinding: (ActivitySplashBinding) by viewBinding(ActivitySplashBinding::inflate)
 
+    private val viewModel by viewModel<CommonViewModel>()
 
+    private val mBundle=Bundle()
 
     override fun initView(rootView: View, savedInstanceState: Bundle?) {
         val bundle=intent.extras
@@ -30,12 +34,12 @@ class TestActivity: BaseMvvmActivityByOverrideBinding<ActivitySplashBinding,Base
             val key2=bundle.getString(MvvmSCUtils.key2,)
             val key3=bundle.getCharSequenceArrayList(MvvmSCUtils.key3)
             Log.e("TestActivity+++","key1: ->> $key1   , key2: ->> $key2  ,  key3: ->> $key3 ")
-        }else{
-            Log.e("TestActivity+++","bundle: ->> null ")
         }
 
 
-        mViewDataBinding.tvCount.setOnClickListener{
+        Log.e("TestActivity+++","initView: ->> null ")
+
+        mBinding.tvCount.setOnClickListener{
 
             val bundle2: Bundle = Bundle()
             bundle2.putInt(MvvmSCUtils.key1,9858)
@@ -52,23 +56,22 @@ class TestActivity: BaseMvvmActivityByOverrideBinding<ActivitySplashBinding,Base
             }
         }
 
-        mViewDataBinding.welcomeImage.setOnClickListener {
+        mBinding.welcomeImage.setOnClickListener {
             if (bundle!=null){
-                val bundle1=Bundle()
+
                 val intent= Intent()
-                bundle1.putInt(MvvmSCUtils.key1,10)
-                bundle1.putString(MvvmSCUtils.key2,"100")
-                bundle1.putCharSequenceArrayList(MvvmSCUtils.key3, arrayListOf("100","6000"))
-                intent.putExtra(MvvmSCUtils.commonResultCode,bundle1)
+                mBundle.putInt(MvvmSCUtils.key1,10)
+                mBundle.putString(MvvmSCUtils.key2,"100")
+                mBundle.putCharSequenceArrayList(MvvmSCUtils.key3, arrayListOf("100","6000"))
+                intent.putExtra(MvvmSCUtils.commonResultCode,bundle)
                 setResult(Activity.RESULT_OK,intent)
                 this.finish()
             }else{
-                val bundle1=Bundle()
                 val intent= Intent()
-                bundle1.putInt(MvvmSCUtils.key1,1000000)
-                bundle1.putString(MvvmSCUtils.key2,"蚕食为空跳转")
-                bundle1.putCharSequenceArrayList(MvvmSCUtils.key3, arrayListOf("100","参数为空"))
-                intent.putExtra(MvvmSCUtils.commonResultCode,bundle1)
+                mBundle.putInt(MvvmSCUtils.key1,1000000)
+                mBundle.putString(MvvmSCUtils.key2,"蚕食为空跳转")
+                mBundle.putCharSequenceArrayList(MvvmSCUtils.key3, arrayListOf("100","参数为空"))
+                intent.putExtra(MvvmSCUtils.commonResultCode,mBundle)
                 setResult(Activity.RESULT_OK,intent)
                 this.finish()
             }
@@ -77,4 +80,10 @@ class TestActivity: BaseMvvmActivityByOverrideBinding<ActivitySplashBinding,Base
 
     }
 
+
+    override fun onResume() {
+        super.onResume()
+        Log.e("TestActivity+++","onResume: ->> null ")
+        mBinding.welcomeImage.setImageResource(R.drawable.ic_wx_back_pressed)
+    }
 }

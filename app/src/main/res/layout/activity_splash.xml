@@ -4,8 +4,8 @@
     <data>
 
         <variable
-            name="splashmodel"
-            type="com.jetpack.mvvm.viewmodel.SplashViewModel" />
+            name="CommonViewModel"
+            type="com.jetpack.mvvm.viewmodel.CommonViewModel" />
 
     </data>
 
@@ -14,7 +14,8 @@
     <LinearLayout
         android:orientation="vertical"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        >
 
         <TextView
             android:id="@+id/tv_count"
