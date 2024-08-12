@@ -1,6 +1,7 @@
 package com.jetpack.mvvm.activities
 
 import android.app.Activity
+import android.app.Fragment
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
@@ -86,7 +87,17 @@ class TestActivity: BaseMvvmActivity<ActivityTestBinding, CommonViewModel>(){
 
     override fun onResume() {
         super.onResume()
-        Log.e("TestActivity+++","onResume: ->> null ")
-        mBinding.welcomeImage.setImageResource(R.drawable.ic_wx_back_pressed)
+        Log.e("TestActivity+++","onResume: ->> mBinding:${mBinding} ")
+    }
+
+    override fun onStart() {
+        super.onStart()
+        Log.e("TestActivity+++","onStart: ->> mBinding:${mBinding} ")
+        mBinding.welcomeImage.setImageResource(R.drawable.loading_default_bg)
+    }
+
+    override fun onPause() {
+        super.onPause()
+        Log.e("TestActivity+++","onPause: ->> mBinding:${mBinding} ")
     }
 }

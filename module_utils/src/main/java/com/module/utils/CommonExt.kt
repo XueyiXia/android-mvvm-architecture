@@ -228,7 +228,7 @@ fun View.clickNoRepeat(interval: Long = 500, action: (view: View) -> Unit) {
             }
         }
     }
-    return file!!.absolutePath
+    return file?.absolutePath
 }
 
 
