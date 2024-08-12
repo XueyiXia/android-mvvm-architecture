@@ -27,4 +27,9 @@ abstract class BaseMvvmActivity <DB: ViewDataBinding,VM: BaseViewModel> : BaseAc
     override fun createObserver() {
         Log.e(TAG, "createObserver--->>${mViewModel}" )
     }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        mBinding.unbind()
+    }
 }

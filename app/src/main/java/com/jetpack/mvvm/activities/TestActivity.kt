@@ -7,8 +7,10 @@ import android.util.Log
 import android.view.View
 import com.framework.mvvm.base.BaseMvvmActivity
 import com.framework.mvvm.viewmodel.BaseViewModel
+import com.jetpack.mvvm.BR
 import com.jetpack.mvvm.R
 import com.jetpack.mvvm.databinding.ActivitySplashBinding
+import com.jetpack.mvvm.databinding.ActivityTestBinding
 import com.jetpack.mvvm.utils.MvvmSCUtils
 import com.jetpack.mvvm.viewmodel.CommonViewModel
 import org.koin.androidx.viewmodel.ext.android.viewModel
@@ -19,7 +21,7 @@ import org.koin.androidx.viewmodel.ext.android.viewModel
  * @time: 16:00
  * @说明:
  */
-class TestActivity: BaseMvvmActivity<ActivitySplashBinding, BaseViewModel>(){
+class TestActivity: BaseMvvmActivity<ActivityTestBinding, CommonViewModel>(){
 
 //    override val mViewDataBinding: (ActivitySplashBinding) by viewBinding(ActivitySplashBinding::inflate)
 
@@ -28,6 +30,7 @@ class TestActivity: BaseMvvmActivity<ActivitySplashBinding, BaseViewModel>(){
     private val mBundle=Bundle()
 
     override fun initView(rootView: View, savedInstanceState: Bundle?) {
+        this.mBinding.setVariable(BR.CommonViewModel,this.mViewModel)
         val bundle=intent.extras
         if (bundle!=null){
             val key1=bundle.getInt(MvvmSCUtils.key1,-1)

@@ -1,0 +1,39 @@
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tool="http://schemas.android.com/tools">
+    <data>
+
+        <variable
+            name="CommonViewModel"
+            type="com.jetpack.mvvm.viewmodel.CommonViewModel" />
+
+    </data>
+
+
+
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:headerColor="@{CommonViewModel.bgColor}">
+
+        <TextView
+            android:id="@+id/tv_count"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/dp_50"
+            android:gravity="center"
+            android:text="跳转到测试页面"
+            android:textColor="@color/black" />
+
+        <ImageView
+            android:id="@+id/welcome_image"
+            android:layout_width="108dp"
+            android:layout_height="108dp"
+            android:src="@mipmap/ic_launcher"
+            android:layout_marginTop="@dimen/dp_50"
+           />
+
+
+    </LinearLayout>
+</layout>
+

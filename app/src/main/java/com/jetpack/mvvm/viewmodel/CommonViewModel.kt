@@ -8,9 +8,7 @@ import com.framework.mvvm.viewmodel.BaseViewModel
 
 class CommonViewModel : BaseViewModel() {
 
-    val bgColor = MutableLiveData<MutableList<Int>>().apply {
-        Color.parseColor("#F5B95F")
-    }
+    val bgColor = MutableLiveData<Int>().apply { this.value=Color.parseColor("#958ddd")}
 
 
 }

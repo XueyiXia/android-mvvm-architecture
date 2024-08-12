@@ -1,6 +1,7 @@
 package com.jetpack.mvvm.bindingadapter
 
 import android.view.View
+import android.widget.FrameLayout
 import androidx.coordinatorlayout.widget.CoordinatorLayout
 import androidx.databinding.BindingAdapter
 
@@ -12,10 +13,11 @@ import androidx.databinding.BindingAdapter
  */
 object CommonBindingAdapter {
 
+
+    //Theme Model Color Bg
     @JvmStatic
-    @BindingAdapter("titleBg", requireAll = false)
-    fun View.setBackgroundColor(headerColor : Int) {
+    @BindingAdapter("headerColor", requireAll = false)
+    fun View.setHeaderColor(headerColor : Int) {
         this.setBackgroundColor(headerColor)
     }
-
 }
