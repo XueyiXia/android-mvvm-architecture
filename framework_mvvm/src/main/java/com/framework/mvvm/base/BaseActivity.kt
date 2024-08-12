@@ -72,11 +72,9 @@ abstract class BaseActivity <VM : BaseViewModel> : AppCompatActivity(){
         if (permissions.all { it.value }) {
             onPermissionGranted()
         } else {
-            this?.let { v ->
-                Snackbar.make(v, R.string.message_no_permissions, Snackbar.LENGTH_INDEFINITE)
-                    .setAction(R.string.label_ok) { ActivityCompat.finishAffinity(this) }
-                    .show()
-            }
+            Snackbar.make(getDataBinding().rootView, R.string.message_no_permissions, Snackbar.LENGTH_INDEFINITE)
+                .setAction(R.string.label_ok) { ActivityCompat.finishAffinity(this) }
+                .show()
         }
     }
 
