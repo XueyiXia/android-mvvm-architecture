@@ -23,7 +23,8 @@
             android:layout_height="@dimen/dp_50"
             android:gravity="center"
             android:text="跳转到测试页面"
-            android:textColor="@color/black" />
+            android:textColor="@color/black"
+            android:textSize="@dimen/sp_15"/>
 
         <ImageView
             android:id="@+id/welcome_image"
