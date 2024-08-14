@@ -31,6 +31,8 @@ startupruntime= "1.1.1"
 androidGradlePlugin = "8.5.2"
 
 xxPermissions="18.5"
+androidTools = "31.5.2"
+unspecified = "1.1.0"
 
 [libraries]
 coreKtx = { module = "androidx.core:core-ktx", version.ref = "coreKtx" }
@@ -67,9 +69,12 @@ startupruntime = { module = "androidx.startup:startup-runtime", version.ref = "s
 
 xxPermissions= { module = "com.github.getActivity:XXPermissions", version.ref = "xxPermissions" }
 
+lint-checks = { group = "com.android.tools.lint", name = "lint-checks", version.ref = "androidTools" }
+lint-tests = { group = "com.android.tools.lint", name = "lint-tests", version.ref = "androidTools" }
+
+
 
 [plugins]
 android-application = { id = "com.android.application", version.ref = "androidGradlePlugin" }
 android-library = { id = "com.android.library", version.ref = "androidGradlePlugin" }
 org-jetbrains-kotlin-android = { id = "org.jetbrains.kotlin.android", version.ref = "org-jetbrains-kotlin-android"}
-
