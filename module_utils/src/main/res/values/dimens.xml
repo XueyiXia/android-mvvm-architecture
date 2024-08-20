@@ -724,7 +724,16 @@
     <dimen name="sp_48">48sp</dimen>
     <dimen name="sp_49">49sp</dimen>
     <dimen name="sp_50">50sp</dimen>
-
+    <dimen name="sp_51">51sp</dimen>
+    <dimen name="sp_52">52sp</dimen>
+    <dimen name="sp_53">53sp</dimen>
+    <dimen name="sp_54">54sp</dimen>
+    <dimen name="sp_55">55sp</dimen>
+    <dimen name="sp_56">56sp</dimen>
+    <dimen name="sp_57">57sp</dimen>
+    <dimen name="sp_58">58sp</dimen>
+    <dimen name="sp_59">59sp</dimen>
+    <dimen name="sp_60">60sp</dimen>
 
 
 </resources>
