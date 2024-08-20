@@ -9,6 +9,8 @@ import com.framework.mvvm.utils.viewBinding
 import com.framework.mvvm.viewmodel.BaseViewModel
 import com.jetpack.mvvm.databinding.ActivitySplashBinding
 import com.jetpack.mvvm.databinding.FragmentAddressBookBinding
+import com.jetpack.mvvm.viewmodel.SplashViewModel
+import org.koin.androidx.viewmodel.ext.android.activityViewModel
 
 /**
  * @author: xiaxueyi
@@ -20,6 +22,9 @@ import com.jetpack.mvvm.databinding.FragmentAddressBookBinding
 class AddressBookFragment : BaseMvvmFragment<FragmentAddressBookBinding, BaseViewModel>(){
 
 //    override val mViewDataBinding: (FragmentAddressBookBinding) by viewBinding(FragmentAddressBookBinding::inflate)
+
+
+    private val viewModel by activityViewModel<SplashViewModel>()
 
 
     override fun initView(rootView: View, savedInstanceState: Bundle?) {
