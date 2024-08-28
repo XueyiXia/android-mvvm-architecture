@@ -6,6 +6,7 @@ import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.view.View
+import androidx.compose.ui.res.stringResource
 import com.framework.mvvm.base.BaseMvvmActivity
 import com.framework.mvvm.viewmodel.BaseViewModel
 import com.jetpack.mvvm.BR
@@ -32,6 +33,7 @@ class TestActivity: BaseMvvmActivity<ActivityTestBinding, CommonViewModel>(){
 
     override fun initView(rootView: View, savedInstanceState: Bundle?) {
         this.mBinding.setVariable(BR.CommonViewModel,this.mViewModel)
+        rootView.setBackgroundColor(this.resources.getColor(R.color.purple_200,null))
         val bundle=intent.extras
         if (bundle!=null){
             val key1=bundle.getInt(MvvmSCUtils.key1,-1)
@@ -44,7 +46,6 @@ class TestActivity: BaseMvvmActivity<ActivityTestBinding, CommonViewModel>(){
         Log.e("TestActivity+++","initView: ->> null ")
 
         mBinding.tvCount.setOnClickListener{
-
             val bundle2: Bundle = Bundle()
             bundle2.putInt(MvvmSCUtils.key1,9858)
             bundle2.putString(MvvmSCUtils.key2,"跳转到测试页面")

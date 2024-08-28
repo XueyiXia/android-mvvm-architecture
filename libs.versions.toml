@@ -34,6 +34,8 @@ xxPermissions="18.5"
 androidTools = "31.5.2"
 unspecified = "1.1.0"
 
+androidComposeUi= "1.6.8"
+
 [libraries]
 coreKtx = { module = "androidx.core:core-ktx", version.ref = "coreKtx" }
 appcompat = { module = "androidx.appcompat:appcompat", version.ref = "appcompat"}
@@ -68,6 +70,8 @@ startupruntime = { module = "androidx.startup:startup-runtime", version.ref = "s
 
 
 xxPermissions= { module = "com.github.getActivity:XXPermissions", version.ref = "xxPermissions" }
+androidComposeUi = { module = "androidx.compose.ui:ui-android", version.ref = "androidComposeUi"}
+
 
 lint-checks = { group = "com.android.tools.lint", name = "lint-checks", version.ref = "androidTools" }
 lint-tests = { group = "com.android.tools.lint", name = "lint-tests", version.ref = "androidTools" }

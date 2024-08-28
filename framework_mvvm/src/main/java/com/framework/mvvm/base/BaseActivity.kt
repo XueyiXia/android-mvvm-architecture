@@ -98,7 +98,7 @@ abstract class BaseActivity <VM : BaseViewModel> : AppCompatActivity(){
         /**
          * 函数入口
          */
-        initView(window.decorView,savedInstanceState)
+        initView(getDataBinding().rootView,savedInstanceState)
 
         /**
          * 创建LiveData数据观察者

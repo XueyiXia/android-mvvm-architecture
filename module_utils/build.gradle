@@ -65,4 +65,6 @@ dependencies {
     api(libs.koinAndroid)
     api(libs.koinAndroidExt)
     api(libs.xxPermissions)
+
+    api(libs.androidComposeUi)
 }

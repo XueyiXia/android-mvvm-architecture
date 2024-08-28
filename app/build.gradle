@@ -72,4 +72,5 @@ dependencies {
 
     implementation project(path: ':framework_mvvm')
     implementation project(':framework_mvvm')
+
 }
