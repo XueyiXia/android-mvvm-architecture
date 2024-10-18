@@ -8,7 +8,7 @@ buildToolsVersion = "34.0.0"
 org-jetbrains-kotlin-android = "2.0.20"
 coreKtx = "1.13.1"
 activityKtx = "1.9.3"
-fragmentKtx = "1.8.3"
+fragmentKtx = "1.8.4"
 appcompat = "1.7.0"
 material = "1.12.0"
 constraintlayout = "2.1.4"
@@ -22,19 +22,19 @@ lifecycle-extensions="2.2.0"
 lifecycleViewmodel = "2.8.3"
 lifecycleLivedata = "2.8.3"
 
-navigation = "2.8.1"
+navigation = "2.8.3"
 unpeopleLivedata= "4.4.1-beta1"
 multidex = "2.0.1"
 preferenceKtx= "1.2.1"
 startupruntime= "1.2.0"
 
-androidGradlePlugin = "8.5.2"
+androidGradlePlugin = "8.6.1"
 
 xxPermissions="18.5"
-androidTools = "31.6.1"
+androidTools = "31.7.1"
 unspecified = "1.1.0"
 
-androidComposeUi= "1.7.2"
+androidComposeUi= "1.7.4"
 
 [libraries]
 coreKtx = { module = "androidx.core:core-ktx", version.ref = "coreKtx" }
