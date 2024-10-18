@@ -8,6 +8,7 @@ import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.contract.ActivityResultContracts
 import com.framework.mvvm.base.BaseMvvmFragment
 import com.jetpack.mvvm.activities.TestActivity
+import com.jetpack.mvvm.bean.UserInfoBean
 import com.jetpack.mvvm.databinding.FragmentUserBinding
 import com.jetpack.mvvm.utils.MvvmSCUtils
 import com.jetpack.mvvm.viewmodel.SplashViewModel
@@ -21,23 +22,12 @@ import com.jetpack.mvvm.viewmodel.SplashViewModel
 
 class UserFragment :BaseMvvmFragment<FragmentUserBinding, SplashViewModel>(){
 
-    private val resultLauncher: ActivityResultLauncher<Intent> =  registerForActivityResult(
-        ActivityResultContracts.StartActivityForResult()) { result ->
-        val code = result.resultCode
-        val data = result.data
-
-        val bundle=result.data?.extras
-       val resul= bundle?.getInt("onDestroy3",88)
-        val msgContent = "result = $result   ，bundle==$bundle   code = $code  ,data : $data   , 88 = ${result.data?.getIntExtra(MvvmSCUtils.commonResultCode,-1)}  "
-        Log.e("launcherCallback","msgContent: ->> $msgContent")
-
-    }
-
     override fun initView(rootView: View, savedInstanceState: Bundle?) {
 
         mViewDataBinding.next.setOnClickListener {
-            val intent = Intent(requireActivity(), TestActivity::class.java)
-            resultLauncher.launch(intent)
+            val bundle: Bundle = Bundle()
+//            bundle.putBinder(MvvmSCUtils.PARAM_BUNDLE,UserInfoBean)
+            startActivity(TestActivity::class.java,bundle)
         }
     }
 }

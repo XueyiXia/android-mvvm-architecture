@@ -1,17 +1,15 @@
 package com.jetpack.mvvm.activities
 
 import android.app.Activity
-import android.app.Fragment
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.view.View
-import androidx.compose.ui.res.stringResource
+import androidx.core.os.BundleCompat
 import com.framework.mvvm.base.BaseMvvmActivity
-import com.framework.mvvm.viewmodel.BaseViewModel
 import com.jetpack.mvvm.BR
 import com.jetpack.mvvm.R
-import com.jetpack.mvvm.databinding.ActivitySplashBinding
+import com.jetpack.mvvm.bean.UserInfoBean
 import com.jetpack.mvvm.databinding.ActivityTestBinding
 import com.jetpack.mvvm.utils.MvvmSCUtils
 import com.jetpack.mvvm.viewmodel.CommonViewModel
@@ -33,13 +31,15 @@ class TestActivity: BaseMvvmActivity<ActivityTestBinding, CommonViewModel>(){
 
     override fun initView(rootView: View, savedInstanceState: Bundle?) {
         this.mBinding.setVariable(BR.CommonViewModel,this.mViewModel)
+
         rootView.setBackgroundColor(this.resources.getColor(R.color.purple_200,null))
         val bundle=intent.extras
         if (bundle!=null){
+            val bundleCompat= BundleCompat.getParcelable(bundle,MvvmSCUtils.PARAM_BUNDLE, UserInfoBean::class.java)
             val key1=bundle.getInt(MvvmSCUtils.key1,-1)
             val key2=bundle.getString(MvvmSCUtils.key2,)
             val key3=bundle.getCharSequenceArrayList(MvvmSCUtils.key3)
-            Log.e("TestActivity+++","key1: ->> $key1   , key2: ->> $key2  ,  key3: ->> $key3 ")
+            Log.e("TestActivity+++","key1: ->> $key1   , key2: ->> $key2  ,  key3: ->> $key3  ,  bundleCompat: ->> $bundleCompat")
         }
 
 

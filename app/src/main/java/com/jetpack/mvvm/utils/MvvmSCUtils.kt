@@ -23,4 +23,6 @@ object MvvmSCUtils {
         const val PARAM_TITLE: String = "PARAM_TITLE" //获取标题
 
         const val PARAM_KEY: String = "PARAM_KEY" //PARAM_KEY
+
+        const val PARAM_BUNDLE: String = "PARAM_BUNDLE" //PARAM_BUNDLE
 }
