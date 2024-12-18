@@ -51,6 +51,13 @@
             android:windowSoftInputMode="adjustResize"
             android:theme="@style/ActionBarTheme"/>
 
+
+        <activity
+            android:name=".activities.CudaActivity"
+            android:launchMode="standard"
+            android:windowSoftInputMode="adjustResize"
+            android:theme="@style/ActionBarTheme"/>
+
     </application>
 
 </manifest>
