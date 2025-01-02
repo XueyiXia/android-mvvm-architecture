@@ -35,6 +35,10 @@ class LinkScrollView @JvmOverloads constructor(
 
     private val parentHelper = NestedScrollingParentHelper(this)
 
+    init {
+        orientation =VERTICAL;
+    }
+
     override fun onFinishInflate() {
         super.onFinishInflate()
         // 获取top_view和content_view
@@ -66,7 +70,7 @@ class LinkScrollView @JvmOverloads constructor(
         // 调整contentView的高度为父容器高度，使之填充布局，避免父容器滚动后出现空白
         val lp = contentView?.layoutParams;
         lp?.height = measuredHeight;
-        contentView?.setLayoutParams(lp);
+        contentView?.layoutParams = lp;
         Log.d("LinkScrollView","measuredHeight==$measuredHeight")
         super.onMeasure(widthMeasureSpec, heightMeasureSpec);
 
@@ -91,6 +95,10 @@ class LinkScrollView @JvmOverloads constructor(
         return handled
     }
 
+    override fun getNestedScrollAxes(): Int {
+        return parentHelper.nestedScrollAxes
+    }
+
     override fun onNestedScrollAccepted(child: View, target: View, axes: Int, type: Int) {
         parentHelper.onNestedScrollAccepted(child,target,axes,ViewCompat.TYPE_TOUCH)
     }
@@ -108,6 +116,12 @@ class LinkScrollView @JvmOverloads constructor(
         type: Int,
         consumed: IntArray
     ) {
+        if (dyUnconsumed>0){
+            // 由topView发起的向上滑动，继续让contentView滑动剩余的未消耗完的偏移量
+            if (target==topView){
+                scrollBy(0, dyUnconsumed)
+            }
+        }
     }
 
     override fun onNestedScroll(
@@ -137,9 +151,9 @@ class LinkScrollView @JvmOverloads constructor(
      */
     override fun onNestedPreScroll(target: View, dx: Int, dy: Int, consumed: IntArray, type: Int) {
         // 向上滑动。若当前topview可见，需要将topview滑动至不可见
-        var hideTop=dy>0&&scrollY<topHeight
+        val hideTop=dy>0&&scrollY<topHeight
         // 向下滑动。若contentView滑动至顶，已不可再滑动，且当前topview未完全可见，则将topview滑动至完全可见
-        var showTop=dy<0&&scrollY>0&&!target.canScrollVertically(-1)&&!contentView!!.canScrollVertically(-1)
+        val showTop=dy<0&&scrollY>0&&!target.canScrollVertically(-1)&&!contentView!!.canScrollVertically(-1)
 
 
         if (hideTop||showTop){
@@ -150,10 +164,10 @@ class LinkScrollView @JvmOverloads constructor(
             consumed[1] = dy;
         }
     }
-
+    var scrollViewY=0
     override fun scrollTo(x: Int, y: Int) {
         // 将ScrollLayout自身的滚动范围限制在0～topHeight（即在topview完全可见至完全不可见的范围内滑动）
-        var scrollViewY=0
+        scrollViewY=y
         if (y < 0) {
             scrollViewY=0
         }
