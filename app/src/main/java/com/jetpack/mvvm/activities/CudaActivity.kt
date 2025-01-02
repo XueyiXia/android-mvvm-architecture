@@ -38,6 +38,9 @@ class CudaActivity: BaseMvvmActivity<ActivityCudaBinding, CommonViewModel>(){
         data.add("#22dd99")
         data.add("#546e7a")
         data.add("#263238")
+        data.add("#22cd99")
+        data.add("#546e75")
+        data.add("#255fff")
         return data
     }
 }
