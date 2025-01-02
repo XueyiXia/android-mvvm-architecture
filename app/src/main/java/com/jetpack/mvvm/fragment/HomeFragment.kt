@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.View
 import com.framework.mvvm.base.BaseMvvmFragment
 import com.jetpack.mvvm.activities.CudaActivity
+import com.jetpack.mvvm.activities.TouchActivity
 import com.jetpack.mvvm.databinding.FragmentHomeBinding
 import com.jetpack.mvvm.viewmodel.SplashViewModel
 
@@ -22,6 +23,11 @@ class HomeFragment :BaseMvvmFragment<FragmentHomeBinding, SplashViewModel>(){
 
         mViewDataBinding.click.setOnClickListener {
             startActivity(CudaActivity::class.java)
+        }
+
+
+        mViewDataBinding.touchLayout.setOnClickListener {
+            startActivity(TouchActivity::class.java)
         }
     }
 

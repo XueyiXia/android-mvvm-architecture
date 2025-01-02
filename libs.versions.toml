@@ -35,7 +35,7 @@ androidTools = "31.7.1"
 unspecified = "1.1.0"
 
 androidComposeUi= "1.7.4"
-
+refresh-layout = "2.1.0"
 [libraries]
 coreKtx = { module = "androidx.core:core-ktx", version.ref = "coreKtx" }
 appcompat = { module = "androidx.appcompat:appcompat", version.ref = "appcompat"}
@@ -76,7 +76,8 @@ androidComposeUi = { module = "androidx.compose.ui:ui-android", version.ref = "a
 lint-checks = { group = "com.android.tools.lint", name = "lint-checks", version.ref = "androidTools" }
 lint-tests = { group = "com.android.tools.lint", name = "lint-tests", version.ref = "androidTools" }
 
-
+refresh-layout = { module = "io.github.scwang90:refresh-layout-kernel", version.ref = "refresh-layout" }
+refresh-header = { module = "io.github.scwang90:refresh-header-classics", version.ref = "refresh-layout" }
 
 [plugins]
 android-application = { id = "com.android.application", version.ref = "androidGradlePlugin" }

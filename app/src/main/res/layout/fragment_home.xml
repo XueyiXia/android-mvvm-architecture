@@ -20,10 +20,12 @@
         <TextView
             android:id="@+id/tv_count"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="@dimen/dp_45"
             android:gravity="center"
+            android:text="click"
             android:textSize="@dimen/sp_16"
             android:textColor="@color/black"
+            android:background="@color/teal_700"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintEnd_toEndOf="parent"/>
@@ -34,8 +36,8 @@
             android:layout_height="@dimen/dp_50"
             android:textColor="@color/black"
             android:gravity="center"
-            android:layout_marginTop="@dimen/dp_100"
             android:text="click"
+            android:layout_marginTop="@dimen/dp_20"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent" />
@@ -46,13 +48,26 @@
             android:layout_height="@dimen/dp_50"
             android:textColor="@color/black"
             android:gravity="center"
-            android:layout_marginTop="@dimen/dp_100"
             android:text="点击我"
+            android:layout_marginTop="@dimen/dp_20"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent" />
 
 
+
+        <TextView
+            android:id="@+id/touchLayout"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/dp_50"
+            android:textColor="@color/black"
+            android:gravity="center"
+            android:text="touchLayout"
+            android:background="@color/teal_700"
+            android:layout_marginTop="@dimen/dp_20"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
 
     </LinearLayout>
 </layout>
