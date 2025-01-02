@@ -25,15 +25,17 @@
 
             <LinearLayout
                 android:id="@+id/clTop"
+                android:orientation="vertical"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 >
 
-
-                <ImageView
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/topRecyclerView"
                     android:layout_width="match_parent"
-                    android:layout_height="@dimen/dp_280"
-                    android:src="@drawable/tab_bar_address_book_selector"/>
+                    android:layout_height="@dimen/dp_500"
+                    android:background="#958f"/>
+
 
             </LinearLayout>
 
