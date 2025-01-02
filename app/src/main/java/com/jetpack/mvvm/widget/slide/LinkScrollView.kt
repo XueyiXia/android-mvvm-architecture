@@ -5,6 +5,7 @@ import android.util.AndroidRuntimeException
 import android.util.AttributeSet
 import android.util.Log
 import android.view.View
+import android.webkit.WebView
 import android.widget.LinearLayout
 import androidx.core.view.NestedScrollingParent3
 import androidx.core.view.NestedScrollingParentHelper
@@ -85,6 +86,8 @@ class LinkScrollView @JvmOverloads constructor(
                     it.stopNestedScroll()
                 }else if (it is ViewPager2){
                     it.stopNestedScroll()
+                }else if (it is WebView){
+                    it.stopNestedScroll()
                 }
             }
         }
@@ -154,7 +157,11 @@ class LinkScrollView @JvmOverloads constructor(
         val hideTop=dy>0&&scrollY<topHeight
         // 向下滑动。若contentView滑动至顶，已不可再滑动，且当前topview未完全可见，则将topview滑动至完全可见
         val showTop=dy<0&&scrollY>0&&!target.canScrollVertically(-1)&&!contentView!!.canScrollVertically(-1)
+        val pullDown = dy < 0
+        val canScrollDown = topView?.canScrollVertically(1)
+        val canScrollUp = topView?.canScrollVertically(-1)
 
+        Log.d("onNestedPreScroll","dy==$dy  ,  pullDown==$pullDown , canScrollDown==$canScrollDown, canScrollUp==$canScrollUp")
 
         if (hideTop||showTop){
             // 若需要滑动topview，则滑动dy偏移量
@@ -163,6 +170,7 @@ class LinkScrollView @JvmOverloads constructor(
             // 将ScrollLayout消耗的偏移量赋值给consumed数组
             consumed[1] = dy;
         }
+
     }
     var scrollViewY=0
     override fun scrollTo(x: Int, y: Int) {

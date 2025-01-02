@@ -1,6 +1,7 @@
 package com.jetpack.mvvm.activities
 
 import android.os.Bundle
+import android.webkit.WebView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -14,6 +15,7 @@ import com.jetpack.mvvm.adapter.SimpleRecyclerAdapter
 import com.jetpack.mvvm.fragment.LinearFragment
 import com.jetpack.mvvm.fragment.RecyclerViewFragment
 import com.jetpack.mvvm.fragment.ScrollViewFragment
+import com.jetpack.mvvm.fragment.WebViewFragment
 
 
 /**
@@ -46,7 +48,7 @@ class TouchActivity: AppCompatActivity(){
         val pagerAdapter = SimplePagerAdapter(this, getPageFragments())
         viewPager.setAdapter(pagerAdapter)
 
-        val labels = arrayOf("linear", "scroll", "recycler")
+        val labels = arrayOf("linear", "scroll", "recycler", "webView")
         TabLayoutMediator(
             tabLayout,
             viewPager
@@ -83,6 +85,7 @@ class TouchActivity: AppCompatActivity(){
         data.add(LinearFragment())
         data.add(ScrollViewFragment())
         data.add(RecyclerViewFragment())
+        data.add(WebViewFragment())
         return data
     }
 }
