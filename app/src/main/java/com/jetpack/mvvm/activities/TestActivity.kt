@@ -29,6 +29,11 @@ class TestActivity: BaseMvvmActivity<ActivityTestBinding, CommonViewModel>(){
 
     private val mBundle=Bundle()
 
+
+    override fun bindDataBinding(): ActivityTestBinding {
+        return ActivityTestBinding.inflate(layoutInflater)
+    }
+
     override fun initView(rootView: View, savedInstanceState: Bundle?) {
         this.mBinding.setVariable(BR.CommonViewModel,this.mViewModel)
 

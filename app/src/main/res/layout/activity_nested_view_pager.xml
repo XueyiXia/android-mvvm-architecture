@@ -8,13 +8,14 @@
 
 
     <com.jetpack.mvvm.widget.slide.LinkScrollView
-            android:orientation="vertical"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:visibility="visible">
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:visibility="visible">
 
 
         <androidx.core.widget.NestedScrollView
+            android:id="@+id/top"
             android:layout_width="match_parent"
             android:layout_height="match_parent">
 
@@ -80,11 +81,6 @@
             </LinearLayout>
         </androidx.core.widget.NestedScrollView>
 
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/topRecyclerView"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:visibility="gone"/>
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -98,10 +94,17 @@
                 android:layout_height="@dimen/dp_50"
                 android:background="@color/purple_200"/>
 
-            <androidx.viewpager2.widget.ViewPager2
-                android:id="@+id/viewPager"
+            <com.jetpack.mvvm.widget.slide.LinkScrollViewChild3
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"/>
+                android:layout_height="match_parent">
+
+                <androidx.viewpager2.widget.ViewPager2
+                    android:id="@+id/viewPager"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"/>
+
+            </com.jetpack.mvvm.widget.slide.LinkScrollViewChild3>
+
 
         </LinearLayout>
     </com.jetpack.mvvm.widget.slide.LinkScrollView>

@@ -17,10 +17,13 @@ import com.jetpack.mvvm.viewmodel.SplashViewModel
 class SplashMvvmActivity  : BaseMvvmActivity<ActivitySplashBinding,SplashViewModel>(){
 
 
+    override fun bindDataBinding(): ActivitySplashBinding {
+        return ActivitySplashBinding.inflate(layoutInflater)
+    }
+
+
     override fun initView(rootView: View, savedInstanceState: Bundle?) {
         Log.e("SplashActivity", "initView--->>" + this.javaClass.simpleName)
-
-
         startActivity(Intent(this@SplashMvvmActivity, MainActivity::class.java))
         finish()
     }

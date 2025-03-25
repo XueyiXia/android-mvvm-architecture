@@ -6,6 +6,8 @@ import android.view.ViewGroup
 import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.ViewDataBinding
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.ViewModel
+import androidx.lifecycle.ViewModelProvider
 import androidx.viewbinding.ViewBinding
 import java.lang.reflect.InvocationTargetException
 import java.lang.reflect.ParameterizedType
@@ -92,3 +94,7 @@ inline fun <T : ViewBinding> Fragment.viewBinding(
     lazy(LazyThreadSafetyMode.NONE) {
         bindingInflater.invoke(layoutInflater)
     }
+
+fun <T : ViewModel> Fragment.createViewModel(viewModelClass: Class<T>): T {
+    return ViewModelProvider(this)[viewModelClass]
+}

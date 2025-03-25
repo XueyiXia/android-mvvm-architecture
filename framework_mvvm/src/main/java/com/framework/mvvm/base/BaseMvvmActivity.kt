@@ -1,8 +1,11 @@
 package com.framework.mvvm.base
 
+import android.os.Bundle
 import android.util.Log
 import android.view.View
 import androidx.databinding.ViewDataBinding
+import androidx.lifecycle.ViewModelProvider
+import com.framework.mvvm.utils.getVmClazz
 import com.framework.mvvm.utils.inflateBindingWithGeneric
 import com.framework.mvvm.viewmodel.BaseViewModel
 
@@ -13,23 +16,38 @@ import com.framework.mvvm.viewmodel.BaseViewModel
  * @说明:
  */
 
-abstract class BaseMvvmActivity <DB: ViewDataBinding,VM: BaseViewModel> : BaseActivity<VM>(){
+abstract class BaseMvvmActivity <DB: ViewDataBinding,VM: BaseViewModel> : BaseActivityNew<DB>(){
     companion object{
         private const val TAG = "BaseMvvmActivity"
     }
 
-    lateinit var mBinding: DB
+    lateinit var mViewModel: VM
 
-    override fun createDataBinding(): View {
-        mBinding = inflateBindingWithGeneric(layoutInflater)
-        return mBinding.root
-    }
-    override fun createObserver() {
-        Log.e(TAG, "createObserver--->>${mViewModel}" )
+
+    override fun onCreate(savedInstanceState: Bundle?){
+        super.onCreate(savedInstanceState)
+
+        /**
+         * 实例化创建ViewModel
+         */
+        createViewModel()
     }
 
-    override fun onDestroy() {
-        super.onDestroy()
-        mBinding.unbind()
+    /**
+     * 创建ViewModel
+     * @return VM
+     */
+    private fun createViewModel() {
+        val modelClass :Class<VM> = getVmClazz(this)
+//        val observer=createObserver()
+        mViewModel= ViewModelProvider(this)[modelClass]
     }
+
+    /**
+     * 创建LiveData数据观察者
+     */
+//    abstract fun createObserver():VM
+
+
+
 }

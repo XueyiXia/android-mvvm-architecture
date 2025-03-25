@@ -11,7 +11,6 @@ import androidx.databinding.ObservableField
  */
 class CharObservableField(value: Char = '0') : ObservableField<Char>(value) {
     override fun get(): Char {
-        return super.get()!!
+        return super.get()?: '"'
     }
-
 }

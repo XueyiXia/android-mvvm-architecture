@@ -41,6 +41,11 @@ class MainActivity : BaseMvvmActivity<ActivityMainBinding,BaseViewModel>() {
     private lateinit var mAHBottomNavigation: BottomNavigationView
 
 
+    override fun bindDataBinding(): ActivityMainBinding {
+        return ActivityMainBinding.inflate(layoutInflater)
+    }
+
+
     override fun initView(rootView: View, savedInstanceState: Bundle?) {
         val data=intent?.extras
         Log.e("ActivityForResult", "get data--->>$data")
@@ -216,12 +221,6 @@ class MainActivity : BaseMvvmActivity<ActivityMainBinding,BaseViewModel>() {
         }
     }
 
-
-    override fun onDestroy() {
-        super.onDestroy()
-
-
-    }
 
     override fun onKeyDown(keyCode: Int, event: KeyEvent?): Boolean {
         if (keyCode == KeyEvent.KEYCODE_BACK) {
