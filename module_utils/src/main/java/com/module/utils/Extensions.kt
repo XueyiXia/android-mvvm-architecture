@@ -3,6 +3,7 @@ package com.module.utils
 
 import android.Manifest
 import android.R.attr
+import android.annotation.SuppressLint
 import android.app.Activity
 import android.content.Context
 import android.content.DialogInterface
@@ -26,6 +27,7 @@ import java.text.SimpleDateFormat
 import java.util.Currency
 import java.util.Date
 import java.util.Locale
+import androidx.core.graphics.createBitmap
 
 fun Drawable.toBitmap(): Bitmap {
   if (this is BitmapDrawable) {
@@ -35,7 +37,7 @@ fun Drawable.toBitmap(): Bitmap {
   val width = if (bounds.isEmpty) intrinsicWidth else bounds.width()
   val height = if (bounds.isEmpty) intrinsicHeight else bounds.height()
 
-  return Bitmap.createBitmap(width.nonZero(), height.nonZero(), Bitmap.Config.ARGB_8888)
+  return createBitmap(width.nonZero(), height.nonZero())
       .also {
         val canvas = Canvas(it)
         setBounds(0, 0, canvas.width, canvas.height)
@@ -45,6 +47,7 @@ fun Drawable.toBitmap(): Bitmap {
 
 fun Int.nonZero() = if (this <= 0) 1 else this
 
+@SuppressLint("InternalInsetResource")
 fun Context.getStatusBarHeight(): Int {
   val result: Int
   val resourceId: Int = this.resources.getIdentifier("status_bar_height", "dimen", "android")
@@ -64,6 +67,7 @@ fun Context.getActionBarHeight(): Int {
   return result
 }
 
+@SuppressLint("InternalInsetResource")
 fun Context.getNavigationBarHeight(): Int {
   val resourceId: Int = resources.getIdentifier(
       "navigation_bar_height",

@@ -2,7 +2,7 @@
 compileSdk = "35"
 minSdk = "25"
 targetSdk = "35"
-buildToolsVersion = "34.0.0"
+buildToolsVersion = "35.0.0"
 
 
 org-jetbrains-kotlin-android = "2.0.21"
@@ -22,16 +22,16 @@ lifecycle-extensions="2.2.0"
 lifecycleViewmodel = "2.8.3"
 lifecycleLivedata = "2.8.3"
 
-navigation = "2.8.8"
+navigation = "2.8.9"
 unpeopleLivedata= "4.4.1-beta1"
 multidex = "2.0.1"
 preferenceKtx= "1.2.1"
 startupruntime= "1.2.0"
 
-androidGradlePlugin = "8.9.0"
+androidGradlePlugin = "8.9.1"
 
 xxPermissions="18.5"
-androidTools = "31.9.0"
+androidTools = "31.9.1"
 unspecified = "1.1.0"
 
 androidComposeUi= "1.7.8"
