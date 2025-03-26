@@ -6,7 +6,7 @@ import android.os.Bundle
 import android.util.Log
 import android.view.View
 import androidx.core.os.BundleCompat
-import com.framework.mvvm.base.BaseMvvmActivity
+import com.framework.mvvm.base.BaseActivity
 import com.jetpack.mvvm.BR
 import com.jetpack.mvvm.R
 import com.jetpack.mvvm.bean.UserInfoBean
@@ -21,16 +21,14 @@ import org.koin.androidx.viewmodel.ext.android.viewModel
  * @time: 16:00
  * @说明:
  */
-class TestActivity: BaseMvvmActivity<ActivityTestBinding, CommonViewModel>(){
+class TestActivity: BaseActivity<ActivityTestBinding>(){
     companion object{
         private const val TAG = "BaseActivity"
     }
     private val viewModel by viewModel<CommonViewModel>()
 
     private val mBundle=Bundle()
-    override fun createObserver(): CommonViewModel {
-        return CommonViewModel()
-    }
+
 
 
     override fun bindDataBinding(): ActivityTestBinding {

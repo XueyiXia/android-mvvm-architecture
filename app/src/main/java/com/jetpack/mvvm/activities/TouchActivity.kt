@@ -2,21 +2,11 @@ package com.jetpack.mvvm.activities
 
 import android.os.Bundle
 import android.view.View
-import android.webkit.WebView
-import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.PagerSnapHelper
-import androidx.recyclerview.widget.RecyclerView
-import androidx.viewpager2.widget.ViewPager2
-import com.framework.mvvm.base.BaseActivityNew
-import com.google.android.material.tabs.TabLayout
-import com.google.android.material.tabs.TabLayoutMediator
-import com.jetpack.mvvm.R
-import com.jetpack.mvvm.adapter.SimplePagerAdapter
+import com.framework.mvvm.base.BaseActivity
 import com.jetpack.mvvm.adapter.SimpleRecyclerAdapter
 import com.jetpack.mvvm.databinding.ActivityCudaBinding
-import com.jetpack.mvvm.databinding.ActivityTouchBinding
 import com.jetpack.mvvm.fragment.LinearFragment
 import com.jetpack.mvvm.fragment.RecyclerViewFragment
 import com.jetpack.mvvm.fragment.ScrollViewFragment
@@ -29,7 +19,7 @@ import com.jetpack.mvvm.fragment.WebViewFragment
  * @time: 16:00
  * @说明:
  */
-class TouchActivity: BaseActivityNew<ActivityCudaBinding>(){
+class TouchActivity: BaseActivity<ActivityCudaBinding>(){
 
     override fun bindDataBinding(): ActivityCudaBinding {
         return ActivityCudaBinding.inflate(layoutInflater)

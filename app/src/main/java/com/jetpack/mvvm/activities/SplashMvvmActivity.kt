@@ -4,7 +4,7 @@ import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.view.View
-import com.framework.mvvm.base.BaseMvvmActivity
+import com.framework.mvvm.base.BaseActivity
 import com.jetpack.mvvm.databinding.ActivitySplashBinding
 import com.jetpack.mvvm.viewmodel.SplashViewModel
 
@@ -14,11 +14,7 @@ import com.jetpack.mvvm.viewmodel.SplashViewModel
  * @time: 16:00
  * @说明:
  */
-class SplashMvvmActivity  : BaseMvvmActivity<ActivitySplashBinding,SplashViewModel>(){
-
-    override fun createObserver(): SplashViewModel {
-        return SplashViewModel()
-    }
+class SplashMvvmActivity  : BaseActivity<ActivitySplashBinding>(){
 
 
     override fun bindDataBinding(): ActivitySplashBinding {

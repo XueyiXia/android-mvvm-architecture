@@ -2,7 +2,6 @@ package com.framework.mvvm.base
 
 import android.Manifest
 import android.app.Activity
-import android.app.ActivityManager
 import android.content.Intent
 import android.content.pm.PackageManager
 import android.os.Build
@@ -10,21 +9,16 @@ import android.os.Bundle
 import android.util.Log
 import android.view.View
 import androidx.activity.result.ActivityResult
-import androidx.activity.result.ActivityResultCallback
 import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import androidx.core.view.WindowCompat
 import androidx.core.view.WindowInsetsCompat
 import androidx.core.view.WindowInsetsControllerCompat
-import androidx.lifecycle.ViewModelProvider
+import androidx.databinding.ViewDataBinding
 import com.framework.mvvm.R
-import com.framework.mvvm.utils.getVmClazz
-import com.framework.mvvm.viewmodel.BaseViewModel
 import com.google.android.material.snackbar.Snackbar
-import com.module.utils.notNull
 import kotlin.system.exitProcess
 
 
@@ -35,13 +29,14 @@ import kotlin.system.exitProcess
  * @说明:
  */
 
-abstract class BaseActivity <VM : BaseViewModel> : AppCompatActivity(){
+abstract class BaseActivity <VB : ViewDataBinding> : AppCompatActivity(){
     companion object{
         private const val TAG = "BaseActivity"
         var exitTime: Long = 0 //退出程序的时间
     }
 
-    lateinit var mViewModel: VM
+    private var _binding: VB? = null
+    val mBinding: VB get() = _binding ?: throw IllegalStateException("it is not initialized or null.")
 
 
     /**
@@ -72,44 +67,30 @@ abstract class BaseActivity <VM : BaseViewModel> : AppCompatActivity(){
         if (permissions.all { it.value }) {
             onPermissionGranted()
         } else {
-//            Snackbar.make(view, R.string.message_no_permissions, Snackbar.LENGTH_INDEFINITE)
-//                .setAction(R.string.label_ok) { ActivityCompat.finishAffinity(this) }
-//                .show()
+            Snackbar.make(findViewById(android.R.id.content), R.string.message_no_permissions, Snackbar.LENGTH_INDEFINITE)
+                .setAction(R.string.label_ok) {
+//                    ActivityCompat.finishAffinity(this)
+                }
+                .show()
         }
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-
-        Log.e(TAG, "跳转界面--->>" + this.javaClass.simpleName)
-
+        Log.e(TAG, "跳转界面（BaseActivityNew）--->>" + this.javaClass.simpleName)
         /**
          * 绑定UI
          */
-        getDataBinding().notNull({
-            setContentView(it)
-        })
+        _binding = bindDataBinding()
+        mBinding.lifecycleOwner = this
+        setContentView(mBinding.root)
 
-        /**
-         * 实例化创建ViewModel
-         */
-        createViewModel()
 
         /**
          * 函数入口
          */
-        initView(getDataBinding().rootView,savedInstanceState)
+        initView(mBinding.root,savedInstanceState)
 
-        /**
-         * 创建LiveData数据观察者
-         */
-        createObserver()
-
-
-        /**
-         * 检查权限
-         */
-        checkPermissionGranted()
 
     }
 
@@ -161,27 +142,6 @@ abstract class BaseActivity <VM : BaseViewModel> : AppCompatActivity(){
         resultLauncher.launch(intent)
     }
 
-
-
-    /**
-     * 创建ViewModel
-     * @return VM
-     */
-    private fun createViewModel() {
-        val modelClass :Class<VM> = getVmClazz(this)
-        mViewModel= ViewModelProvider(this)[modelClass]
-    }
-
-
-    /**
-     * 获取绑定的View
-     * @return View
-     */
-    private fun getDataBinding(): View = createDataBinding()
-
-
-
-
     /**
      * hide System UI
      */
@@ -228,9 +188,9 @@ abstract class BaseActivity <VM : BaseViewModel> : AppCompatActivity(){
             exitTime = System.currentTimeMillis()
         } else {
             try {
+                System.gc()
                 finish()
                 exitProcess(0)
-                System.gc()
             } catch (e: RuntimeException) {
                 e.printStackTrace()
             }
@@ -242,27 +202,32 @@ abstract class BaseActivity <VM : BaseViewModel> : AppCompatActivity(){
      * */
     open fun onPermissionGranted() = Unit
 
-    /**
-     * 创建DataBinding
-     * @return View
-     */
-    abstract fun createDataBinding(): View
 
-    /**
-     * 创建LiveData数据观察者
-     */
-    abstract fun createObserver()
+    // 显示 Snackbar 的方法
+    protected fun showSnackbar(message: String, anchorView: View? = null) {
+        val view = anchorView ?: findViewById(android.R.id.content)
+        Snackbar.make(view, message, Snackbar.LENGTH_SHORT).show()
+    }
+
+
+    /*****************************************************************华丽的分割线***************************************************************************/
+
+    protected abstract fun bindDataBinding(): VB
 
     /**
      * 入口函数
      * @param rootView View
      * @param savedInstanceState Bundle?
      */
-    abstract fun initView(rootView: View, savedInstanceState: Bundle?)
+    protected abstract fun initView(rootView: View, savedInstanceState: Bundle?)
 
 
     override fun onDestroy() {
         super.onDestroy()
         resultLauncher.unregister()
+        mBinding.unbind()
+        _binding?.unbind()
+        System.gc()
     }
+
 }

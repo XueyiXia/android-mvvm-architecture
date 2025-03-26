@@ -4,7 +4,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import com.framework.mvvm.base.BaseFragmentNew
+import com.framework.mvvm.base.BaseFragment
 import com.jetpack.mvvm.databinding.FragmentAddressBookBinding
 import com.jetpack.mvvm.viewmodel.SplashViewModel
 import org.koin.androidx.viewmodel.ext.android.activityViewModel
@@ -16,7 +16,7 @@ import org.koin.androidx.viewmodel.ext.android.activityViewModel
  * @说明:
  */
 
-class AddressBookFragment : BaseFragmentNew<FragmentAddressBookBinding>(){
+class AddressBookFragment : BaseFragment<FragmentAddressBookBinding>(){
 
 
     private val viewModel by activityViewModel<SplashViewModel>()

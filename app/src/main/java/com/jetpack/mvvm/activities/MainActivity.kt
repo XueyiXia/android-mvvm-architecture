@@ -5,7 +5,7 @@ import android.os.Bundle
 import android.util.Log
 import android.view.KeyEvent
 import android.view.View
-import com.framework.mvvm.base.BaseMvvmActivity
+import com.framework.mvvm.base.BaseActivity
 import com.framework.mvvm.viewmodel.BaseViewModel
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.hjq.permissions.Permission
@@ -17,7 +17,7 @@ import com.jetpack.mvvm.fragment.MallsFragment
 import com.jetpack.mvvm.fragment.UserFragment
 import com.module.utils.permissions.xxPermissions
 
-class MainActivity : BaseMvvmActivity<ActivityMainBinding,BaseViewModel>() {
+class MainActivity : BaseActivity<ActivityMainBinding>() {
 
 
     companion object{
@@ -39,11 +39,6 @@ class MainActivity : BaseMvvmActivity<ActivityMainBinding,BaseViewModel>() {
     private var mAddressBookFragment: AddressBookFragment?=null
 
     private lateinit var mAHBottomNavigation: BottomNavigationView
-
-
-    override fun createObserver(): BaseViewModel {
-        return BaseViewModel()
-    }
 
 
     override fun bindDataBinding(): ActivityMainBinding {

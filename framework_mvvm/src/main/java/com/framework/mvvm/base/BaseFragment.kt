@@ -7,16 +7,15 @@ import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
 import android.util.Log
+import android.view.LayoutInflater
 import android.view.View
+import android.view.ViewGroup
 import androidx.activity.result.ActivityResult
-import androidx.activity.result.ActivityResultCallback
 import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
+import androidx.databinding.ViewDataBinding
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.ViewModelProvider
-import com.framework.mvvm.utils.getVmClazz
-import com.framework.mvvm.viewmodel.BaseViewModel
 
 /**
  * @author: xiaxueyi
@@ -25,17 +24,19 @@ import com.framework.mvvm.viewmodel.BaseViewModel
  * @说明:
  */
 
-abstract class BaseFragment<VM : BaseViewModel> :Fragment() {
+abstract class BaseFragment<VB : ViewDataBinding> :Fragment() {
 
     companion object{
-        private const val TAG: String = "BaseFragment"
+        private const val TAG: String = "BaseFragmentNew"
     }
 
     private lateinit var mActivity: AppCompatActivity
 
     private val mHandler = Handler(Looper.getMainLooper())
 
-    lateinit var mViewModel: VM
+    private var _binding: VB? = null
+
+    val mBinding: VB get() = _binding ?: throw IllegalStateException("it is not initialized or null.")
 
     /**
      * 当前页面回调数据处理
@@ -52,25 +53,21 @@ abstract class BaseFragment<VM : BaseViewModel> :Fragment() {
 
 
 
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
+        _binding = bindDataBinding(inflater, container,false)
+        mBinding.lifecycleOwner = viewLifecycleOwner
+        return mBinding.root
+    }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         Log.e(TAG, "跳转界面--->>" + this.javaClass.simpleName)
-        /**
-         * 实例化创建ViewModel
-         */
-        createViewModel()
 
         /**
          * 函数入口
          */
         initView(view,savedInstanceState)
 
-
-        /**
-         * 创建LiveData数据观察者
-         */
-        createObserver()
 
     }
 
@@ -123,21 +120,6 @@ abstract class BaseFragment<VM : BaseViewModel> :Fragment() {
     }
 
 
-    /**
-     * 创建ViewModel
-     * @return VM
-     */
-    private fun createViewModel() {
-        val modelClass :Class<VM> = getVmClazz(this)
-        mViewModel= ViewModelProvider(this)[modelClass]
-    }
-
-    /**
-     * 获取绑定的View
-     * @return View
-     */
-    private fun getDataBinding(): View = createDataBinding()
-
 
     /**
      * 上下文对象
@@ -147,22 +129,16 @@ abstract class BaseFragment<VM : BaseViewModel> :Fragment() {
 
 
     /**
-     * 创建DataBinding
-     * @return View
+     * 绑定xml
      */
-    abstract fun createDataBinding(): View
-
-    /**
-     * 创建LiveData数据观察者
-     */
-    abstract fun createObserver()
+    protected abstract fun bindDataBinding(inflater: LayoutInflater, container: ViewGroup?, attachToParent: Boolean = false): VB
 
     /**
      * 入口函数
      * @param rootView View
      * @param savedInstanceState Bundle?
      */
-    abstract fun initView(rootView: View, savedInstanceState: Bundle?)
+    protected abstract fun initView(rootView: View, savedInstanceState: Bundle?)
 
 
 
@@ -175,5 +151,8 @@ abstract class BaseFragment<VM : BaseViewModel> :Fragment() {
         super.onDestroy()
         mHandler.removeCallbacksAndMessages(null)
         resultLauncher.unregister()
+        mBinding.unbind()
+        _binding?.unbind()
+        System.gc()
     }
 }

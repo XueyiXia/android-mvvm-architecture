@@ -1,4 +1,4 @@
-package com.framework.mvvm.base
+package com.framework.mvvm.baseadapter
 
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
