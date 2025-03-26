@@ -12,9 +12,9 @@ import com.hjq.permissions.Permission
 import com.jetpack.mvvm.R
 import com.jetpack.mvvm.databinding.ActivityMainBinding
 import com.jetpack.mvvm.fragment.AddressBookFragment
-import com.jetpack.mvvm.fragment.HomeFragment
 import com.jetpack.mvvm.fragment.MallsFragment
 import com.jetpack.mvvm.fragment.UserFragment
+import com.jetpack.mvvm.ui.home.HomeFragment
 import com.module.utils.permissions.xxPermissions
 
 class MainActivity : BaseActivity<ActivityMainBinding>() {

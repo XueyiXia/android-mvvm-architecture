@@ -5,8 +5,7 @@
     <color name="purple_700">#FF3700B3</color>
     <color name="teal_200">#FF03DAC5</color>
     <color name="teal_700">#FF018786</color>
-    <color name="black">#FF000000</color>
-    <color name="white">#FFFFFFFF</color>
+
 
     <!--状态栏底色-->
     <color name="colorPrimaryDark">#111111</color>
@@ -33,4 +32,24 @@
     <color name="tool_bar_overflow_menu_back_ground_color">#eeeeee</color>
     <!--溢出菜单字体颜色-->
     <color name="tool_bar_overflow_menu_text_color">#212121</color>
+
+
+    <color name="black">#FF000000</color>
+    <color name="white">#FFFFFFFF</color>
+    <color name="blue">#429BED</color>
+    <color name="brown">#B1736C</color>
+    <color name="grey">#303943</color>
+    <color name="indigo">#6C79DB</color>
+    <color name="lightBlue">#58ABF6</color>
+    <color name="lightBrown">#CA8179</color>
+    <color name="lighterGrey">#F4F5F4</color>
+    <color name="lightGrey">#F5F5F5</color>
+    <color name="lightPurple">#9F5BBA</color>
+    <color name="lightRed">#F7786B</color>
+    <color name="lightTeal">#2CDAB1</color>
+    <color name="lightYellow">#FFCE4B</color>
+    <color name="purple">#7C538C</color>
+    <color name="red">#FA6555</color>
+    <color name="teal">#4FC1A6</color>
+    <color name="yellow">#F6C747</color>
 </resources>

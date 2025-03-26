@@ -6,4 +6,12 @@
     <string name="user">我的</string>
 
     <string name="get_back">返回</string>
+
+
+    <string name="menu_item_1">Pokedex</string>
+    <string name="menu_item_2">电影</string>
+    <string name="menu_item_3">Abilities</string>
+    <string name="menu_item_4">Items</string>
+    <string name="menu_item_5">Locations</string>
+    <string name="menu_item_6">Type Charts</string>
 </resources>

@@ -26,3 +26,4 @@ rootProject.name = "android-mvvm-architecture"
 include ':app'
 include ':framework_mvvm'
 include ':module_utils'
+include(":autosize")
