@@ -19,9 +19,9 @@ import com.jetpack.mvvm.viewmodel.CommonViewModel
  */
 class CudaActivity: BaseMvvmActivity<ActivityCudaBinding, CommonViewModel>(){
 
-//    override fun createObserver(): CommonViewModel {
-//        return CommonViewModel()
-//    }
+    override fun createObserver(): CommonViewModel {
+        return CommonViewModel()
+    }
 
     override fun bindDataBinding(): ActivityCudaBinding {
         return ActivityCudaBinding.inflate(layoutInflater)

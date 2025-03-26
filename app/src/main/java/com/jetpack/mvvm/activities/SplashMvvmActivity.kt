@@ -16,6 +16,10 @@ import com.jetpack.mvvm.viewmodel.SplashViewModel
  */
 class SplashMvvmActivity  : BaseMvvmActivity<ActivitySplashBinding,SplashViewModel>(){
 
+    override fun createObserver(): SplashViewModel {
+        return SplashViewModel()
+    }
+
 
     override fun bindDataBinding(): ActivitySplashBinding {
         return ActivitySplashBinding.inflate(layoutInflater)

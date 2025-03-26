@@ -5,6 +5,7 @@ import android.util.Log
 import android.view.View
 import androidx.databinding.ViewDataBinding
 import androidx.lifecycle.ViewModelProvider
+import com.framework.mvvm.base.BaseActivityNew.Companion
 import com.framework.mvvm.utils.getVmClazz
 import com.framework.mvvm.utils.inflateBindingWithGeneric
 import com.framework.mvvm.viewmodel.BaseViewModel
@@ -18,15 +19,19 @@ import com.framework.mvvm.viewmodel.BaseViewModel
 
 abstract class BaseMvvmActivity <DB: ViewDataBinding,VM: BaseViewModel> : BaseActivityNew<DB>(){
     companion object{
-        private const val TAG = "BaseMvvmActivity"
+        private const val TAG = "BaseActivity"
     }
 
     lateinit var mViewModel: VM
 
 
+    override fun initView(rootView: View, savedInstanceState: Bundle?) {
+        Log.e(TAG, "跳转界面（initView BaseMvvmActivity）--->>" + this.javaClass.simpleName)
+    }
+
     override fun onCreate(savedInstanceState: Bundle?){
         super.onCreate(savedInstanceState)
-
+        Log.e(TAG, "跳转界面（onCreate BaseMvvmActivity）--->>" + this.javaClass.simpleName)
         /**
          * 实例化创建ViewModel
          */
@@ -40,13 +45,14 @@ abstract class BaseMvvmActivity <DB: ViewDataBinding,VM: BaseViewModel> : BaseAc
     private fun createViewModel() {
         val modelClass :Class<VM> = getVmClazz(this)
 //        val observer=createObserver()
-        mViewModel= ViewModelProvider(this)[modelClass]
+//        mViewModel= ViewModelProvider(this)[modelClass]
+        mViewModel=createObserver()
     }
 
     /**
      * 创建LiveData数据观察者
      */
-//    abstract fun createObserver():VM
+    abstract fun createObserver():VM
 
 
 

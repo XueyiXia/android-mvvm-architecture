@@ -45,7 +45,7 @@ abstract class BaseActivityNew <VB : ViewDataBinding> : AppCompatActivity(){
     }
 
     private var _binding: VB? = null
-    val mBinding: VB get() = _binding ?: throw IllegalStateException("it is not initialized or has been cleared.")
+    val mBinding: VB get() = _binding ?: throw IllegalStateException("it is not initialized or null.")
 
 
     /**
@@ -77,14 +77,16 @@ abstract class BaseActivityNew <VB : ViewDataBinding> : AppCompatActivity(){
             onPermissionGranted()
         } else {
             Snackbar.make(findViewById(android.R.id.content), R.string.message_no_permissions, Snackbar.LENGTH_INDEFINITE)
-                .setAction(R.string.label_ok) { ActivityCompat.finishAffinity(this) }
+                .setAction(R.string.label_ok) {
+//                    ActivityCompat.finishAffinity(this)
+                }
                 .show()
         }
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        Log.e(TAG, "跳转界面--->>" + this.javaClass.simpleName)
+        Log.e(TAG, "跳转界面（BaseActivityNew）--->>" + this.javaClass.simpleName)
         /**
          * 绑定UI
          */
@@ -237,6 +239,8 @@ abstract class BaseActivityNew <VB : ViewDataBinding> : AppCompatActivity(){
         super.onDestroy()
         resultLauncher.unregister()
         mBinding.unbind()
+        _binding?.unbind()
+        System.gc()
     }
 
 }

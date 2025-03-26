@@ -22,12 +22,15 @@ import org.koin.androidx.viewmodel.ext.android.viewModel
  * @说明:
  */
 class TestActivity: BaseMvvmActivity<ActivityTestBinding, CommonViewModel>(){
-
-//    override val mViewDataBinding: (ActivitySplashBinding) by viewBinding(ActivitySplashBinding::inflate)
-
+    companion object{
+        private const val TAG = "BaseActivity"
+    }
     private val viewModel by viewModel<CommonViewModel>()
 
     private val mBundle=Bundle()
+    override fun createObserver(): CommonViewModel {
+        return CommonViewModel()
+    }
 
 
     override fun bindDataBinding(): ActivityTestBinding {
@@ -35,8 +38,8 @@ class TestActivity: BaseMvvmActivity<ActivityTestBinding, CommonViewModel>(){
     }
 
     override fun initView(rootView: View, savedInstanceState: Bundle?) {
-        this.mBinding.setVariable(BR.CommonViewModel,this.mViewModel)
-
+//        this.mBinding.setVariable(BR.CommonViewModel,this.mViewModel)、
+        Log.e(TAG, "跳转界面（initView TestActivity）--->>" + this.javaClass.simpleName)
         rootView.setBackgroundColor(this.resources.getColor(R.color.purple_200,null))
         val bundle=intent.extras
         if (bundle!=null){

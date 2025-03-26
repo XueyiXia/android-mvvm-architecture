@@ -4,12 +4,13 @@ import android.graphics.Color
 import androidx.lifecycle.MutableLiveData
 import com.framework.mvvm.livedata.StringLiveData
 import com.framework.mvvm.viewmodel.BaseViewModel
+import androidx.core.graphics.toColorInt
 
 
 class SplashViewModel : BaseViewModel() {
 
     val bgColor = MutableLiveData<MutableList<Int>>().apply {
-        Color.parseColor("#F5B95F")
+        "#F5B95F".toColorInt()
     }
 
     var titleData = StringLiveData().apply {

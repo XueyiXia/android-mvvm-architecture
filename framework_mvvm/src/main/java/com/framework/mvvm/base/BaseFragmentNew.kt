@@ -40,7 +40,7 @@ abstract class BaseFragmentNew<VB : ViewDataBinding> :Fragment() {
 
     private var _binding: VB? = null
 
-    val mBinding: VB get() = _binding ?: throw IllegalStateException("it is not initialized or has been cleared.")
+    val mBinding: VB get() = _binding ?: throw IllegalStateException("it is not initialized or null.")
 
     /**
      * 当前页面回调数据处理
@@ -155,5 +155,8 @@ abstract class BaseFragmentNew<VB : ViewDataBinding> :Fragment() {
         super.onDestroy()
         mHandler.removeCallbacksAndMessages(null)
         resultLauncher.unregister()
+        mBinding.unbind()
+        _binding?.unbind()
+        System.gc()
     }
 }

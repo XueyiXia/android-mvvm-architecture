@@ -41,6 +41,11 @@ class MainActivity : BaseMvvmActivity<ActivityMainBinding,BaseViewModel>() {
     private lateinit var mAHBottomNavigation: BottomNavigationView
 
 
+    override fun createObserver(): BaseViewModel {
+        return BaseViewModel()
+    }
+
+
     override fun bindDataBinding(): ActivityMainBinding {
         return ActivityMainBinding.inflate(layoutInflater)
     }
