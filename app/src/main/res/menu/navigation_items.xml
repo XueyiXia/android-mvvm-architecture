@@ -4,6 +4,10 @@
         android:title="@string/home"
         android:icon="@drawable/tab_bar_home_selector" />
 
+    <item android:id="@+id/action_news"
+        android:title="@string/navigation_news"
+        android:icon="@drawable/tab_bar_malls_selector" />
+
     <item android:id="@+id/action_settings"
         android:title="@string/navigation_malls"
         android:icon="@drawable/tab_bar_malls_selector" />

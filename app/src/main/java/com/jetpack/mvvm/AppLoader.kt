@@ -4,16 +4,18 @@ import android.app.Activity
 import android.app.Application
 import android.content.Context
 import androidx.multidex.MultiDex
+import com.framework.http.config.RxHttpConfigure
+import com.framework.http.utils.HttpConstants
 import com.jetpack.mvvm.di.appComponent
+import com.rxjava_retrofit.HttpApi
 import me.jessyan.autosize.AutoSize
 import me.jessyan.autosize.AutoSizeConfig
 import me.jessyan.autosize.onAdaptListener
 import me.jessyan.autosize.utils.AutoSizeLog
 import org.koin.android.ext.koin.androidContext
 import org.koin.core.context.startKoin
-import java.lang.String
 import java.util.Locale
-import kotlin.Any
+import java.util.concurrent.TimeUnit
 
 
 /**
@@ -40,8 +42,9 @@ class AppLoader : Application() {
 
         configureDI()
 
-
         initAutoSizeConfig()
+
+        initRHttp()
     }
 
 
@@ -88,5 +91,27 @@ class AppLoader : Application() {
                 }
             }) //是否打印 AutoSize 的内部日志, 默认为 true, 如果您不想 AutoSize 打印日志, 则请设置为 false
             .setLog(true)
+    }
+
+
+
+    /**
+     * 初始化网络请求
+     */
+    private fun initRHttp() {
+        val headerMap :MutableMap<kotlin.String, Any> = mutableMapOf()
+        headerMap["Content-Type"] = "application/x-www-form-urlencoded" //默认的编码方式
+        headerMap["Connection"] = "Keep-Alive"
+        headerMap["Accept-Language"] = "zh-cn"
+        headerMap["Accept"] = "Application/Json"
+
+        //必须初始化
+        RxHttpConfigure.getInstance()
+            .setBaseUrl(HttpApi.BASE_URL)
+            .setBaseHeader(headerMap)
+            .setTimeout(HttpConstants.TIME_OUT)
+            .setTimeUnit(TimeUnit.MILLISECONDS)
+            .showLog(true)
+            .init(this)
     }
 }
