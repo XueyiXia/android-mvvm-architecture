@@ -32,37 +32,9 @@ android {
 }
 
 dependencies {
-    implementation (libs.coreKtx)
-    implementation (libs.appcompat)
-    implementation (libs.recyclerview)
-    implementation (libs.material)
     implementation (libs.constraintlayout)
-    //lifecycle
-    implementation (libs.lifecycleRuntimeKtx)
-    implementation (libs.lifecycleCommonJava8)
-    implementation (libs.lifecycleExtensions)
-
-    // viewModel
-    implementation (libs.lifecycleViewmodelKtx)
-    // liveData
-    implementation (libs.lifecycleLivedata)
-
-    implementation (libs.activityKtx)
-
-    //fragment
-    implementation (libs.fragmentKtx)
-
-    //navigation
-    implementation (libs.navigationFragment)
-    implementation (libs.navigationUi)
-
-
     implementation (libs.preferenceKtx)
-    implementation (libs.supportMultidex)
-
-    api(libs.koinAndroid)
-    api(libs.koinAndroidExt)
+    implementation(libs.koinAndroidExt)
     api(libs.xxPermissions)
 
-    api(libs.androidComposeUi)
 }

@@ -66,9 +66,9 @@ dependencies {
     implementation (libs.lifecycleExtensions)
 
     // viewModel
-    implementation (libs.lifecycleViewmodelKtx)
+    api (libs.lifecycleViewmodelKtx)
     // liveData
-    implementation (libs.lifecycleLivedata)
+    api (libs.lifecycleLivedata)
 
     implementation (libs.activityKtx)
 

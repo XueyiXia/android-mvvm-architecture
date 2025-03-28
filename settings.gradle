@@ -27,3 +27,4 @@ include ':app'
 include ':framework_mvvm'
 include ':module_utils'
 include(":autosize")
+include ':framework_http'

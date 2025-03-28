@@ -22,10 +22,10 @@
         android:layout_toStartOf="@+id/imageView"
         android:fontFamily="@font/circularstd_medium"
         android:layout_marginEnd="8dp"
-        android:lines="2"
-        android:text="克拉木工"
+        android:lines="3"
+        android:text="克拉木工 AND HAPPY EVERY DAY ,SO WE SHOULD BECOME WELL"
         android:textColor="@color/black"
-        android:textSize="18sp"
+        android:textSize="@dimen/sp_18"
         android:textStyle="bold"
         app:fontFamily="@font/circularstd_medium" />
 

@@ -41,6 +41,7 @@ android {
 
 dependencies {
     implementation fileTree(dir: "libs", include: ["*.jar"])
+    implementation (libs.supportMultidex)
     implementation (libs.coreKtx)
     implementation (libs.appcompat)
     implementation (libs.recyclerview)
@@ -72,10 +73,19 @@ dependencies {
     implementation(libs.refresh.layout)    // 核心必须依赖
     implementation(libs.refresh.header)    // 经典刷新头
 
-    //项目核心框架
+    //圖片加載
+    implementation(libs.glide)
+    kapt(libs.glideCompiler)
+    implementation (libs.okio)
+    implementation(libs.koinAndroidExt)
+    implementation(libs.koinAndroid)
 
-    implementation project(path: ':framework_mvvm')
+    //图片选择的框架
+    implementation 'io.github.lucksiege:pictureselector:v2.7.3-rc10'
+
+    //项目核心框架
     implementation project(':framework_mvvm')
-    api(project(":autosize"))
+    implementation project(':framework_http')//http框架
+    implementation(project(":autosize"))
 
 }
