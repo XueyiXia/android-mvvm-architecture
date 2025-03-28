@@ -1,7 +1,7 @@
 package com.framework.http.manager
 
 import io.reactivex.rxjava3.disposables.Disposable
-import java.util.*
+import java.util.UUID
 import java.util.concurrent.ConcurrentHashMap
 
 class RxHttpTagManager private constructor(){

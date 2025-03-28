@@ -6,7 +6,6 @@ import android.widget.FrameLayout
 import androidx.annotation.Px
 import androidx.core.view.updatePadding
 import com.jetpack.mvvm.R
-import com.jetpack.mvvm.widget.slide.useAttrs
 
 class LinkPagerVerticalMarginFrameLayout @JvmOverloads constructor(
     context: Context,

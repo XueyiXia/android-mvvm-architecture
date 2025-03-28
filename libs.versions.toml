@@ -55,6 +55,10 @@ glideCompiler = "4.16.0"
 
 gosn="2.10.1"
 
+
+roomRuntime="2.6.1"
+roomCompiler="2.6.1"
+
 [libraries]
 coreKtx = { module = "androidx.core:core-ktx", version.ref = "coreKtx" }
 appcompat = { module = "androidx.appcompat:appcompat", version.ref = "appcompat"}
@@ -124,6 +128,9 @@ logging_interceptor = { module = "com.squareup.okhttp3:logging-interceptor", ver
 glide = { module = "com.github.bumptech.glide:glide", version.ref = "glide" }
 glideCompiler = { module = "com.github.bumptech.glide:compiler", version.ref = "glideCompiler" }
 
+#room
+roomRuntime = { module = "androidx.room:room-runtime", version.ref = "roomRuntime" }
+roomCompiler = { module = "androidx.room:room-compiler", version.ref = "roomCompiler" }
 
 
 [plugins]

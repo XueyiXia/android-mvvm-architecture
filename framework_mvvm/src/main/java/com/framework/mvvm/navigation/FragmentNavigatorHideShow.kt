@@ -11,7 +11,7 @@ import androidx.navigation.NavDestination
 import androidx.navigation.NavOptions
 import androidx.navigation.Navigator
 import androidx.navigation.fragment.FragmentNavigator
-import java.util.*
+import java.util.ArrayDeque
 
 /**
  * 作者　: hegaojian

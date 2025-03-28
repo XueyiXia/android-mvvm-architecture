@@ -5,7 +5,8 @@ import androidx.lifecycle.LifecycleOwner
 import com.framework.http.enum.HttpMethod
 import com.framework.http.http.RxHttp
 import java.io.File
-import java.util.*
+import java.util.IdentityHashMap
+import java.util.TreeMap
 import java.util.concurrent.TimeUnit
 
 /**

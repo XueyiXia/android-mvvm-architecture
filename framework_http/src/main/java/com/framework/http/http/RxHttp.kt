@@ -3,7 +3,6 @@ package com.framework.http.http
 import android.annotation.SuppressLint
 import android.content.Context
 import android.text.TextUtils
-import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.LifecycleOwner
 import com.framework.http.api.APIService
 import com.framework.http.bean.DownloadInfo
@@ -28,7 +27,6 @@ import com.framework.http.utils.Md5Utils
 import com.framework.http.utils.RequestUtils
 import com.google.gson.JsonElement
 import io.reactivex.rxjava3.core.Observable
-import io.reactivex.rxjava3.core.Scheduler
 import io.reactivex.rxjava3.schedulers.Schedulers
 import okhttp3.MediaType.Companion.toMediaType
 import okhttp3.MultipartBody

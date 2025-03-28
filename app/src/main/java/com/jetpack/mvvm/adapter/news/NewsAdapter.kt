@@ -14,7 +14,10 @@ import com.jetpack.mvvm.bean.news.NewsListBean
 
 
 
-class NewsAdapter(var context : Context, private val dataList: MutableList<NewsListBean.Issue.Item>) : RecyclerView.Adapter<NewsAdapter.ItemViewHolder>() {
+class NewsAdapter(
+    var context : Context,
+    private var dataList: MutableList<NewsListBean.Issue.Item>?
+) : RecyclerView.Adapter<NewsAdapter.ItemViewHolder>() {
 
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ItemViewHolder {
@@ -24,54 +27,60 @@ class NewsAdapter(var context : Context, private val dataList: MutableList<NewsL
     }
 
     override fun onBindViewHolder(holder: ItemViewHolder, position: Int) {
-        var bean: NewsListBean.Issue.Item=dataList[position]
-        //这里给子条目控件设置图片跟文字
-        val defAvatar = R.mipmap.ic_launcher
-        val cover = bean.data?.cover?.feed
-        var avatar = bean.data?.author?.icon
-        var tagText: String? = "#"
+        if (dataList==null){
+            return
+        }
+        dataList?.let {
+            var bean: NewsListBean.Issue.Item=it[position]
+            //这里给子条目控件设置图片跟文字
+            val defAvatar = R.mipmap.ic_launcher
+            val cover = bean.data?.cover?.feed
+            var avatar = bean.data?.author?.icon
+            var tagText: String? = "#"
 
-        // 加载封页图
-        Glide.with(context)
-            .load(cover)
-            .placeholder(R.drawable.placeholder_banner)
-            .transition(DrawableTransitionOptions().crossFade())
-            .into(holder.iv_cover_feed)
-
-
-        if (avatar.isNullOrEmpty()) {
+            // 加载封页图
             Glide.with(context)
-                .load(defAvatar)
-                .placeholder(R.mipmap.ic_launcher).circleCrop()
+                .load(cover)
+                .placeholder(R.drawable.placeholder_banner)
                 .transition(DrawableTransitionOptions().crossFade())
-                .into(holder.iv_avatar)
+                .into(holder.iv_cover_feed)
 
-        } else {
-            Glide.with(context)
-                .load(avatar)
-                .placeholder(R.mipmap.ic_launcher).circleCrop()
-                .transition(DrawableTransitionOptions().crossFade())
-                .into(holder.iv_avatar)
+
+            if (avatar.isNullOrEmpty()) {
+                Glide.with(context)
+                    .load(defAvatar)
+                    .placeholder(R.mipmap.ic_launcher).circleCrop()
+                    .transition(DrawableTransitionOptions().crossFade())
+                    .into(holder.iv_avatar)
+
+            } else {
+                Glide.with(context)
+                    .load(avatar)
+                    .placeholder(R.mipmap.ic_launcher).circleCrop()
+                    .transition(DrawableTransitionOptions().crossFade())
+                    .into(holder.iv_avatar)
+            }
+
+            holder.tv_title.text = bean.data?.title ?: ""
+
+            //遍历标签
+            bean.data?.tags?.take(4)?.forEach {
+                tagText += (it.name + "/")
+            }
+            // 格式化时间
+            val timeFormat = durationFormat( bean.data?.duration)
+
+            tagText += timeFormat
+
+            holder.tv_tag.text = tagText!!
+
+            holder.tv_category.text="#${bean.data?.category}"
         }
 
-        holder.tv_title.text = bean.data?.title ?: ""
-
-        //遍历标签
-        bean.data?.tags?.take(4)?.forEach {
-            tagText += (it.name + "/")
-        }
-        // 格式化时间
-        val timeFormat = durationFormat( bean.data?.duration)
-
-        tagText += timeFormat
-
-        holder.tv_tag.text = tagText!!
-
-        holder.tv_category.text="#${bean.data?.category}"
     }
 
     override fun getItemCount(): Int {
-        return dataList.size
+        return dataList?.size?:0
     }
 
 
@@ -92,6 +101,12 @@ class NewsAdapter(var context : Context, private val dataList: MutableList<NewsL
                 "$minute' $second''"
             }
         }
+    }
+
+
+    fun submitData( dataList:MutableList<NewsListBean.Issue.Item>){
+        this.dataList=dataList
+        notifyItemChanged(0,dataList.size)
     }
 
     fun setItemClickListener(l: ItemClickListener) {

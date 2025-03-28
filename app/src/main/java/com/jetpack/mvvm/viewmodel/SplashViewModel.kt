@@ -1,10 +1,9 @@
 package com.jetpack.mvvm.viewmodel
 
-import android.graphics.Color
+import androidx.core.graphics.toColorInt
 import androidx.lifecycle.MutableLiveData
 import com.framework.mvvm.livedata.StringLiveData
 import com.framework.mvvm.viewmodel.BaseViewModel
-import androidx.core.graphics.toColorInt
 
 
 class SplashViewModel : BaseViewModel() {

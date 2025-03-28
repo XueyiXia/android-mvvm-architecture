@@ -6,7 +6,6 @@ import android.util.Log
 import android.view.View
 import com.framework.mvvm.base.BaseActivity
 import com.jetpack.mvvm.databinding.ActivitySplashBinding
-import com.jetpack.mvvm.viewmodel.SplashViewModel
 
 /**
  * @author: xiaxueyi

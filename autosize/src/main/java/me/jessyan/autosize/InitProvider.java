@@ -15,10 +15,10 @@
  */
 package me.jessyan.autosize;
 
-import android.content.Context;
 import android.app.Application;
 import android.content.ContentProvider;
 import android.content.ContentValues;
+import android.content.Context;
 import android.database.Cursor;
 import android.net.Uri;
 

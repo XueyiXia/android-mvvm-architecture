@@ -7,7 +7,6 @@ import android.util.Log
 import android.view.View
 import androidx.core.os.BundleCompat
 import com.framework.mvvm.base.BaseActivity
-import com.jetpack.mvvm.BR
 import com.jetpack.mvvm.R
 import com.jetpack.mvvm.bean.UserInfoBean
 import com.jetpack.mvvm.databinding.ActivityTestBinding

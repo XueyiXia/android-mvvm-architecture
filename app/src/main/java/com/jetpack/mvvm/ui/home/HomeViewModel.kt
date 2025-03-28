@@ -1,7 +1,6 @@
 package com.jetpack.mvvm.ui.home
 
 import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.framework.mvvm.livedata.ListLiveData
 import com.jetpack.mvvm.R

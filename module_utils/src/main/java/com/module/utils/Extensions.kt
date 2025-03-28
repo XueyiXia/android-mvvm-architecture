@@ -20,6 +20,7 @@ import android.widget.EditText
 import android.widget.TextView
 import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AlertDialog
+import androidx.core.graphics.createBitmap
 import androidx.fragment.app.Fragment
 import java.math.RoundingMode
 import java.text.NumberFormat
@@ -27,7 +28,6 @@ import java.text.SimpleDateFormat
 import java.util.Currency
 import java.util.Date
 import java.util.Locale
-import androidx.core.graphics.createBitmap
 
 fun Drawable.toBitmap(): Bitmap {
   if (this is BitmapDrawable) {

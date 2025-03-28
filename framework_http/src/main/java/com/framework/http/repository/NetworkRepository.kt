@@ -1,7 +1,6 @@
 package com.framework.http.repository
 
 import android.content.Context
-import androidx.lifecycle.MutableLiveData
 import com.framework.http.api.BaseResponse
 import com.framework.http.bean.DownloadInfo
 import com.framework.http.callback.DownloadCallback
@@ -10,7 +9,7 @@ import com.framework.http.http.RxHttp
 import com.framework.http.interfac.OnUpLoadFileListener
 import com.framework.http.utils.HttpConstants
 import java.io.File
-import java.util.*
+import java.util.TreeMap
 
 /**
  * @author: xiaxueyi

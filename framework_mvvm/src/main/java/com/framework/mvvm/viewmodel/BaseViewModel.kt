@@ -1,7 +1,5 @@
 package com.framework.mvvm.viewmodel
 
-import android.annotation.SuppressLint
-import android.content.Context
 import androidx.lifecycle.ViewModel
 
 /**
@@ -12,7 +10,6 @@ import androidx.lifecycle.ViewModel
  */
 
 open class BaseViewModel :ViewModel() {
-    @SuppressLint("StaticFieldLeak")
-    protected var context: Context?=null
+
 
 }

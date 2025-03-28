@@ -4,14 +4,13 @@ package com.module.utils.permissions
 import android.app.Activity
 import androidx.core.app.ActivityCompat
 import androidx.fragment.app.Fragment
-import com.module.utils.permissions.interfac.OnPermissionResult
 import com.hjq.permissions.IPermissionInterceptor
 import com.hjq.permissions.OnPermissionCallback
+import com.hjq.permissions.OnPermissionPageCallback
 import com.hjq.permissions.XXPermissions
+import com.module.utils.permissions.interfac.OnPermissionResult
 import com.module.utils.permissions.interfac.OnPermissionsDoNotAskAgain
 import com.module.utils.permissions.interfac.OnPermissionsShouldShowRationale
-import com.hjq.permissions.OnPermissionPageCallback
-import com.module.utils.permissions.interfac.OnUserResultCallback
 
 /**
  *

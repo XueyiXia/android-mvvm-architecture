@@ -1,10 +1,20 @@
 package com.framework.http.service
 
 import android.annotation.SuppressLint
-import android.app.*
+import android.app.Notification
+import android.app.NotificationChannel
+import android.app.NotificationManager
+import android.app.PendingIntent
+import android.app.Service
 import android.content.Context
 import android.content.Intent
-import android.os.*
+import android.os.Build
+import android.os.Environment
+import android.os.Handler
+import android.os.HandlerThread
+import android.os.IBinder
+import android.os.Looper
+import android.os.Message
 import android.text.TextUtils
 import android.util.Log
 import android.widget.Toast
@@ -22,7 +32,7 @@ import com.framework.http.utils.StorageHelper
 import com.framework.http.utils.StringUtils
 import java.io.File
 import java.text.DecimalFormat
-import java.util.*
+import java.util.UUID
 
 
 /**

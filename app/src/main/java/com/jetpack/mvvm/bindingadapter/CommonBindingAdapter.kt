@@ -1,8 +1,6 @@
 package com.jetpack.mvvm.bindingadapter
 
 import android.view.View
-import android.widget.FrameLayout
-import androidx.coordinatorlayout.widget.CoordinatorLayout
 import androidx.databinding.BindingAdapter
 
 /**
