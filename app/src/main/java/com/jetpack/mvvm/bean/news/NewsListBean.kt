@@ -3,11 +3,28 @@ package com.jetpack.mvvm.bean.news
 import java.io.Serializable
 
 
-data class NewsListBean(val issueList: ArrayList<Issue>, val nextPageUrl: String, val nextPublishTime: Long, val newestIssueType: String, val dialog: Any){
+data class NewsListBean(
+    val issueList: ArrayList<Issue>,
+    val nextPageUrl: String,
+    val nextPublishTime: Long,
+    val newestIssueType:
+    String, val dialog: Any){
 
-    data class Issue(val releaseTime:Long, val type:String, val date:Long, val total:Int, val publishTime:Long, val itemList:ArrayList<Item>, var count:Int, val nextPageUrl:String){
+    data class Issue(
+        val releaseTime:Long,
+        val type:String,
+        val date:Long,
+        val total:Int,
+        val publishTime:Long,
+        val itemList:ArrayList<Item>,
+        var count:Int,
+        val nextPageUrl:String
+    ){
 
-        data class Item(val type: String, val data: Data?, val tag: String) : Serializable {
+        data class Item(
+            val type: String,
+             val data: Data?,
+            val tag: String) : Serializable {
 
             data class Data(val dataType: String,
                             val text: String,

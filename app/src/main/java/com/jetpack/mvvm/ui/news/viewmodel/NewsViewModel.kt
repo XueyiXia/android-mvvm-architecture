@@ -20,7 +20,7 @@ class NewsViewModel() : BaseViewModel(){
 
     private var current=1
 
-    val newsList = MutableLiveData<MutableList<NewsListBean.Issue.Item>?>()
+    val newsList = MutableLiveData<MutableList<NewsListBean.Issue.Item>>()
 
     private var parameter = TreeMap<String,Any>().apply {
         this["num"] = current.toString()

@@ -5,6 +5,7 @@ import android.util.AttributeSet
 import android.widget.FrameLayout
 import androidx.annotation.Px
 import androidx.core.view.updatePadding
+import androidx.lifecycle.findViewTreeLifecycleOwner
 import com.jetpack.mvvm.R
 
 class LinkPagerVerticalMarginFrameLayout @JvmOverloads constructor(
@@ -22,6 +23,7 @@ class LinkPagerVerticalMarginFrameLayout @JvmOverloads constructor(
         useAttrs(attrs, R.styleable.LinkPagerVerticalMarginFrameLayout) {
             minVerticalMargin = getDimensionPixelSize(R.styleable.LinkPagerVerticalMarginFrameLayout_min_vertical_margin, 0)
         }
+        val scope = findViewTreeLifecycleOwner()?.lifecycle
     }
 
     override fun onMeasure(widthMeasureSpec: Int, heightMeasureSpec: Int) {

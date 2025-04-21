@@ -5,6 +5,7 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.view.doOnAttach
 import androidx.recyclerview.widget.DefaultItemAnimator
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.framework.http.http.RxHttp
@@ -17,7 +18,7 @@ import com.jetpack.mvvm.ui.news.viewmodel.NewsViewModel
 import com.rxjava_retrofit.HttpApi
 import org.koin.androidx.viewmodel.ext.android.viewModel
 import java.util.TreeMap
-
+import androidx.lifecycle.findViewTreeLifecycleOwner
 class NewsListFragment : BaseFragment<FragmentNewsListBinding>() {
 
     companion object{
@@ -53,6 +54,7 @@ class NewsListFragment : BaseFragment<FragmentNewsListBinding>() {
         initAdapter()
 
 
+
         viewModel.refreshData(requireActivity())
 
 //        initRequestHttp()
@@ -83,7 +85,7 @@ class NewsListFragment : BaseFragment<FragmentNewsListBinding>() {
                     super.onSucceed(data, method)
                     Log.e(TAG,"输出的数据(onSuccess)${data}")
                     data?.let {
-                        dataList?.addAll( it.issueList[0].itemList.filterNotNull())
+                        dataList?.addAll(it.issueList[0].itemList.toList())
                         mNewsAdapter?.notifyItemRangeChanged(0,it.issueList[0].itemList.size)
                     }
 

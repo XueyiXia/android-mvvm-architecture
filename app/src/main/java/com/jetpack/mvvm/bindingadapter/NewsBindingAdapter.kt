@@ -1,5 +1,6 @@
 package com.jetpack.mvvm.bindingadapter
 
+import android.util.Log
 import android.view.View
 import androidx.databinding.BindingAdapter
 import androidx.lifecycle.MutableLiveData
@@ -26,10 +27,11 @@ object NewsBindingAdapter {
     @JvmStatic
     @BindingAdapter("newsListData", requireAll = false)
     fun RecyclerView.setData(dataList: MutableLiveData<MutableList<NewsListBean.Issue.Item>?>) {
+        Log.e("RecyclerView++","$dataList")
         dataList.value?.let {
             if (this.adapter is NewsAdapter){
                 val newsAdapter =adapter as NewsAdapter
-                newsAdapter.submitData(it.filterNotNull().toMutableList())
+                newsAdapter.submitData(it.toList().toMutableList())
             }
         }
 
