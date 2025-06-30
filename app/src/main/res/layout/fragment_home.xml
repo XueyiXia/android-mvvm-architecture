@@ -127,63 +127,19 @@
             android:overScrollMode="never"
             app:layout_behavior="@string/appbar_scrolling_view_behavior">
 
-            <LinearLayout
-                android:paddingTop="8dp"
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/recyclerViewNews"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="vertical">
+                android:layout_height="match_parent"
+                android:background="@color/lightGrey"
+                android:overScrollMode="never"
 
-                <androidx.recyclerview.widget.RecyclerView
-                    android:id="@+id/recyclerViewMenu"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:background="@drawable/rounded_bottom_border"
-                    android:overScrollMode="never"
-                    android:paddingStart="8dp"
-                    android:paddingEnd="8dp"
-                    android:paddingBottom="8dp"
-                    app:layoutManager="GridLayoutManager"
-                    app:layout_behavior="@string/appbar_scrolling_view_behavior"
-                    tools:itemCount="6"
-                    tools:listitem="@layout/item_menu"
-                    tools:spanCount="2" />
+                app:layoutManager="GridLayoutManager"
+                app:layout_behavior="@string/appbar_scrolling_view_behavior"
+                tools:itemCount="20"
+                tools:listitem="@layout/item_news"
+                tools:spanCount="1" />
 
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:background="@color/lightGrey"
-                    android:padding="16dp">
-
-                    <TextView
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:text="国际新闻"
-                        android:textColor="@color/black"
-                        android:textSize="18sp"
-                        android:textStyle="bold" />
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="浏览所有"
-                        android:textColor="@color/indigo"
-                        android:textSize="@dimen/sp_18" />
-                </LinearLayout>
-
-                <androidx.recyclerview.widget.RecyclerView
-                    android:id="@+id/recyclerViewNews"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:background="@color/lightGrey"
-                    android:overScrollMode="never"
-                    app:layoutManager="GridLayoutManager"
-                    app:layout_behavior="@string/appbar_scrolling_view_behavior"
-                    tools:itemCount="20"
-                    tools:listitem="@layout/item_news"
-                    tools:spanCount="1" />
-
-            </LinearLayout>
         </androidx.core.widget.NestedScrollView>
     </androidx.coordinatorlayout.widget.CoordinatorLayout>
 

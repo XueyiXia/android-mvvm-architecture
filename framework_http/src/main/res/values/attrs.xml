@@ -206,4 +206,5 @@
         <attr name="coloredActive" format="color" />
         <attr name="coloredInactive" format="color" />
     </declare-styleable>
+
 </resources>

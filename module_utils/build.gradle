@@ -37,4 +37,6 @@ dependencies {
     implementation(libs.koinAndroidExt)
     api(libs.xxPermissions)
 
+    implementation "com.jakewharton.threetenabp:threetenabp:1.4.6"
+
 }

@@ -22,12 +22,17 @@ import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AlertDialog
 import androidx.core.graphics.createBitmap
 import androidx.fragment.app.Fragment
+import com.module.utils.AppClock.AppClockImpl
+import org.threeten.bp.DayOfWeek
+import org.threeten.bp.ZonedDateTime
+import org.threeten.bp.format.TextStyle.SHORT
 import java.math.RoundingMode
 import java.text.NumberFormat
 import java.text.SimpleDateFormat
 import java.util.Currency
 import java.util.Date
 import java.util.Locale
+import kotlin.text.format
 
 fun Drawable.toBitmap(): Bitmap {
   if (this is BitmapDrawable) {
@@ -271,3 +276,5 @@ fun formatNumber(price: Float, currencyCode: String): String {
 //  lazy(LazyThreadSafetyMode.NONE) {
 //    bindingInflater.invoke(layoutInflater)
 //  }
+
+

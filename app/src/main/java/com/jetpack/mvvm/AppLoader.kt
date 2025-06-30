@@ -3,6 +3,7 @@ package com.jetpack.mvvm
 import android.app.Activity
 import android.app.Application
 import android.content.Context
+import androidx.appcompat.app.AppCompatDelegate
 import androidx.multidex.MultiDex
 import com.framework.http.config.RxHttpConfigure
 import com.framework.http.utils.HttpConstants
@@ -16,6 +17,7 @@ import org.koin.android.ext.koin.androidContext
 import org.koin.core.context.startKoin
 import java.util.Locale
 import java.util.concurrent.TimeUnit
+import javax.inject.Inject
 
 
 /**
@@ -27,6 +29,7 @@ import java.util.concurrent.TimeUnit
 
 class AppLoader : Application() {
 
+    @Inject lateinit var appPreferences: AppPreferences
 
     /**
      * +++++++++++++++++++++++多dex模式测试-开始+++++++++++++++++++++
@@ -38,8 +41,9 @@ class AppLoader : Application() {
 
 
     override fun onCreate() {
+        Injector.init(this)
         super.onCreate()
-
+//        AppCompatDelegate.setDefaultNightMode(appPreferences.nightMode)
         configureDI()
 
         initAutoSizeConfig()

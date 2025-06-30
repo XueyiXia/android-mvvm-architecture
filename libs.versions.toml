@@ -22,6 +22,9 @@ lifecycle-extensions="2.2.0"
 lifecycleViewmodel = "2.8.3"
 lifecycleLivedata = "2.8.3"
 
+workRuntime="2.10.0"
+workRuntimeKtx="2.10.0"
+
 navigation = "2.8.9"
 unpeopleLivedata= "4.4.1-beta1"
 multidex = "2.0.1"
@@ -41,6 +44,8 @@ retrofit = "2.11.0"
 converter_gson = "2.11.0"
 adapter_rxjava3 = "2.9.0"
 converter_scalars = "2.9.0"
+converter-simplexml = "2.9.0"
+jsoup="1.15.1"
 
 rxjava = "3.0.0"
 rxAndroid = "3.0.0"
@@ -71,20 +76,21 @@ fragmentKtx = { module = "androidx.fragment:fragment-ktx", version.ref = "fragme
 appcompatV7 = { module = "com.android.support:appcompat-v7", version.ref = "appcompatV7"}
 
 
-#viewModel
+#viewModel ,#lifecycle
 lifecycleViewmodelKtx = { module = "androidx.lifecycle:lifecycle-viewmodel-ktx", version.ref = "lifecycle"}
 lifecycleLivedata = { module = "androidx.lifecycle:lifecycle-livedata-ktx", version.ref = "lifecycle"}
 koinAndroidExt = { module = "io.insert-koin:koin-android-ext", version.ref = "koinAndroidExt" }
 koinAndroid = { module = "io.insert-koin:koin-android", version.ref = "koin" }
-
+lifecycleRuntimeKtx = { module = "androidx.lifecycle:lifecycle-runtime-ktx", version.ref = "lifecycle"}
+lifecycleCommonJava8 = { module = "androidx.lifecycle:lifecycle-common-java8", version.ref = "lifecycle"}
+lifecycleExtensions = { module = "androidx.lifecycle:lifecycle-extensions", version.ref = "lifecycle-extensions"}
+workRuntime = { module = "androidx.work:work-runtime", version.ref = "workRuntime"}
+workRuntimeKtx = { module = "androidx.work:work-runtime-ktx", version.ref = "workRuntimeKtx"}
 
 # unpeopleLivedata
 unpeopleLivedata = { module = "com.kunminx.archi:unpeople-livedata", version.ref = "unpeopleLivedata"}
 
-#lifecycle
-lifecycleRuntimeKtx = { module = "androidx.lifecycle:lifecycle-runtime-ktx", version.ref = "lifecycle"}
-lifecycleCommonJava8 = { module = "androidx.lifecycle:lifecycle-common-java8", version.ref = "lifecycle"}
-lifecycleExtensions = { module = "androidx.lifecycle:lifecycle-extensions", version.ref = "lifecycle-extensions"}
+
 
 #navigation
 navigationFragment = { module = "androidx.navigation:navigation-fragment-ktx", version.ref = "navigation"}
@@ -110,6 +116,9 @@ retrofit = { module = "com.squareup.retrofit2:retrofit", version.ref = "retrofit
 converterGson = { module = "com.squareup.retrofit2:converter-gson", version.ref = "converter_gson" }
 adapter_rxjava3 = { module = "com.squareup.retrofit2:adapter-rxjava3", version.ref = "adapter_rxjava3" }
 converter_scalars = { module = "com.squareup.retrofit2:converter-scalars", version.ref = "converter_scalars" }
+converter-simplexml = { module = "com.squareup.retrofit2:converter-simplexml", version.ref = "converter-simplexml" }
+jsoup = { module = "org.jsoup:jsoup", version.ref = "jsoup" }
+
 
 #Rxjava3
 rxjava = { module = "io.reactivex.rxjava3:rxjava", version.ref = "rxjava" }

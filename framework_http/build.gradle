@@ -46,6 +46,8 @@ dependencies {
     implementation (libs.converterGson)
     implementation (libs.adapter.rxjava3)
     implementation (libs.converter.scalars)
+    implementation (libs.converter.simplexml)
+    implementation (libs.jsoup)
 
 
     implementation (libs.rxjava)
@@ -54,7 +56,7 @@ dependencies {
     implementation (libs.rxLifecycle)
 
     //OKHttp3
-    implementation (libs.okhttp3)
-    implementation (libs.okio)
-    implementation (libs.logging.interceptor)
+    api (libs.okhttp3)
+    api (libs.okio)
+    api (libs.logging.interceptor)
 }
