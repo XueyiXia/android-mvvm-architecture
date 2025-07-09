@@ -8,10 +8,7 @@ import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.framework.mvvm.base.BaseFragment
 import com.jetpack.mvvm.databinding.FragmentHomeBinding
-import com.jetpack.mvvm.ui.home.HomeViewModel.SettingsUiState.Loading
-import com.jetpack.mvvm.ui.home.HomeViewModel.SettingsUiState.Success
 import com.jetpack.mvvm.ui.watchlist.StocksAdapter
-import com.jetpack.mvvm.viewmodel.CommonViewModel.SettingsUiState.Success
 import org.koin.androidx.viewmodel.ext.android.viewModel
 import timber.log.Timber
 
@@ -22,7 +19,7 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(){
     private val stocksAdapter by lazy { StocksAdapter( ) }
 
 
-    val settingsUiState by viewModel.settingsUiState.collectAsStateWithLifecycle()
+//    val settingsUiState by viewModel.settingsUiState.collectAsStateWithLifecycle()
 
 
     override fun bindDataBinding(
@@ -39,18 +36,17 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(){
 
         initAdapter()
 
-        callApi()
 
 
-        when (settingsUiState) {
-            Loading -> { //失败 do some things
-
-            }
-
-            is Success -> { //成功 do some things
-               TODO()
-            }
-        }
+//        when (settingsUiState) {
+//            Loading -> { //失败 do some things
+//
+//            }
+//
+//            is Success -> { //成功 do some things
+//               TODO()
+//            }
+//        }
     }
 
 

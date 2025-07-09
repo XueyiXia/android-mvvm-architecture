@@ -2,7 +2,7 @@
 compileSdk = "36"
 minSdk = "25"
 #noinspection OldTargetApi
-targetSdk = "35"
+targetSdk = "36"
 buildToolsVersion = "35.0.0"
 
 

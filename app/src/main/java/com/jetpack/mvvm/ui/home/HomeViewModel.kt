@@ -36,17 +36,17 @@ class HomeViewModel @Inject constructor(  private val stocksProvider: StocksProv
 
 
 
-    val settingsUiState: StateFlow<SettingsUiState> =
-        listMenu.map { userData ->
-                Success(
-                    "Success"
-                )
-            }
-            .stateIn(
-                scope = viewModelScope,
-                started = WhileSubscribed(5.seconds.inWholeMilliseconds),
-                initialValue = Loading,
-            )
+//    val settingsUiState: StateFlow<SettingsUiState> =
+//        listMenu.map { userData ->
+//                Success(
+//                    "Success"
+//                )
+//            }
+//            .stateIn(
+//                scope = viewModelScope,
+//                started = WhileSubscribed(5.seconds.inWholeMilliseconds),
+//                initialValue = Loading,
+//            )
 
     sealed interface SettingsUiState {
         data object Loading : SettingsUiState
