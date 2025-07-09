@@ -5,64 +5,64 @@ targetSdk = "35"
 buildToolsVersion = "35.0.0"
 
 
-org-jetbrains-kotlin-android = "2.0.21"
+org-jetbrains-kotlin-android = "2.2.0"
 coreKtx = "1.16.0"
 activityKtx = "1.10.1"
-fragmentKtx = "1.8.6"
-appcompat = "1.7.0"
+fragmentKtx = "1.8.8"
+appcompat = "1.7.1"
 appcompatV7 = "28.0.0"
 material = "1.12.0"
 constraintlayout = "2.2.1"
-lifecycle = "2.8.7"
+lifecycle = "2.9.1"
 recyclerview = "1.4.0"
-koinAndroidExt = "3.0.1"
-koin = "3.5.6"
+koinAndroidExt = "3.0.2"
+koin = "4.1.0"
 
 lifecycle-extensions="2.2.0"
 lifecycleViewmodel = "2.8.3"
 lifecycleLivedata = "2.8.3"
 
-workRuntime="2.10.0"
-workRuntimeKtx="2.10.0"
+workRuntime="2.10.2"
+workRuntimeKtx="2.10.2"
 
-navigation = "2.8.9"
+navigation = "2.9.1"
 unpeopleLivedata= "4.4.1-beta1"
 multidex = "2.0.1"
 preferenceKtx= "1.2.1"
 startupruntime= "1.2.0"
 
-androidGradlePlugin = "8.9.1"
+androidGradlePlugin = "8.11.0"
 
 xxPermissions="18.5"
-androidTools = "31.9.1"
+androidTools = "31.11.0"
 unspecified = "1.1.0"
 
-androidComposeUi= "1.7.8"
-refresh-layout = "2.1.0"
+androidComposeUi= "1.8.3"
+refresh-layout = "2.1.1"
 
-retrofit = "2.11.0"
-converter_gson = "2.11.0"
-adapter_rxjava3 = "2.9.0"
-converter_scalars = "2.9.0"
-converter-simplexml = "2.9.0"
-jsoup="1.15.1"
+retrofit = "3.0.0"
+converter_gson = "3.0.0"
+adapter_rxjava3 = "3.0.0"
+converter_scalars = "3.0.0"
+converter-simplexml = "3.0.0"
+jsoup="1.21.1"
 
-rxjava = "3.0.0"
-rxAndroid = "3.0.0"
+rxjava = "3.1.11"
+rxAndroid = "3.0.2"
 rxLifecycle = "2.2.2"
 
-okhttp3 = "4.12.0"
-okio = "3.9.0"
-logging_interceptor = "4.12.0"
+okhttp3 = "5.1.0"
+okio = "3.15.0"
+logging_interceptor = "5.1.0"
 
 glide ="4.16.0"
 glideCompiler = "4.16.0"
 
-gosn="2.10.1"
+gosn="2.13.1"
 
 
-roomRuntime="2.7.0"
-roomCompiler="2.7.0"
+roomRuntime="2.7.2"
+roomCompiler="2.7.2"
 
 [libraries]
 coreKtx = { module = "androidx.core:core-ktx", version.ref = "coreKtx" }
