@@ -3,6 +3,7 @@ package com.module.utils.permissions
 
 import android.app.Activity
 import androidx.fragment.app.Fragment
+import com.hjq.permissions.permission.base.IPermission
 import com.module.utils.permissions.interfac.OnPermissionResult
 import com.module.utils.permissions.interfac.OnPermissionsDoNotAskAgain
 import com.module.utils.permissions.interfac.OnPermissionsShouldShowRationale
@@ -12,8 +13,12 @@ import com.module.utils.permissions.interfac.OnPermissionsShouldShowRationale
  * @receiver Activity
  * @param block [@kotlin.ExtensionFunctionType] Function1<XXPermissionsDSL, Unit>
  */
-inline fun Activity.xxPermissions(block: XXPermissionsDSL.() -> Unit) =
-    XXPermissionsDSL(XXPermissionsExt.with(this)).apply { block(this) }.xxPermissions.request()
+inline fun Activity.requestPermissions(block: XXPermissionsDSL.() -> Unit) =
+    XXPermissionsDSL(
+        XXPermissionsExt.with(this)
+    ).apply {
+        block(this)
+    }.xxPermissions.request()
 
 
 /**
@@ -21,26 +26,33 @@ inline fun Activity.xxPermissions(block: XXPermissionsDSL.() -> Unit) =
  * @receiver Fragment
  * @param block [@kotlin.ExtensionFunctionType] Function1<XXPermissionsDSL, Unit>
  */
-inline fun Fragment.xxPermissions(block: XXPermissionsDSL.() -> Unit) =
-    XXPermissionsDSL(XXPermissionsExt.with(requireActivity())).apply { block(this) }.xxPermissions.request()
+inline fun Fragment.requestPermissions(block: XXPermissionsDSL.() -> Unit) =
+    XXPermissionsDSL(
+        XXPermissionsExt.with(requireActivity())
+    ).apply {
+        block(this)
+    }.xxPermissions.request()
 
 
-class XXPermissionsDSL(@PublishedApi internal val xxPermissions: XXPermissionsExt) {
+class XXPermissionsDSL(
+    @PublishedApi internal val xxPermissions: XXPermissionsExt) {
+
+
 
     /**
      * 增加权限
      * @param permissions Array<out String>
      */
-    fun permissions(vararg permissions: String) {
-        xxPermissions.permissions(permissions)
-    }
+//    fun permissions(vararg permissions: IPermission) {
+//        xxPermissions.permission(permissions)
+//    }
 
     /**
      * 增加权限，数组形式
      * @param permissions Array<out String>
      */
     @JvmName("permissionsArray")
-    fun permissions(permissions: Array<out String>) {
+    fun permissions(permissions: Array<out IPermission>) {
         xxPermissions.permissions(permissions)
     }
 
@@ -48,13 +60,13 @@ class XXPermissionsDSL(@PublishedApi internal val xxPermissions: XXPermissionsEx
      * 增加权限，
      * @param permissions List<String>
      */
-    fun permissions(permissions: List<String>) {
+    fun permissions(permissions: List<IPermission>) {
         xxPermissions.permissions(permissions)
     }
 
 
     /**
-     * 当点击拒绝权限后，再次进去会走这个回调
+     * 告诉用户在设置中允许这些权限时调用。
      * @param onDoNotAskAgain OnPermissionsDoNotAskAgain
      */
     fun onDoNotAskAgain(onDoNotAskAgain: OnPermissionsDoNotAskAgain) {
@@ -76,5 +88,4 @@ class XXPermissionsDSL(@PublishedApi internal val xxPermissions: XXPermissionsEx
     fun onResult(onResult: OnPermissionResult) {
         xxPermissions.onResult(onResult)
     }
-
 }

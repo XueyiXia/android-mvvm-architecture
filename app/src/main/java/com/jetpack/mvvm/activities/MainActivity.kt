@@ -6,7 +6,7 @@ import android.view.KeyEvent
 import android.view.View
 import com.framework.mvvm.base.BaseActivity
 import com.google.android.material.bottomnavigation.BottomNavigationView
-import com.hjq.permissions.Permission
+import com.hjq.permissions.permission.PermissionLists
 import com.jetpack.mvvm.R
 import com.jetpack.mvvm.databinding.ActivityMainBinding
 import com.jetpack.mvvm.fragment.AddressBookFragment
@@ -14,7 +14,8 @@ import com.jetpack.mvvm.fragment.MallsFragment
 import com.jetpack.mvvm.fragment.UserFragment
 import com.jetpack.mvvm.ui.home.HomeFragment
 import com.jetpack.mvvm.ui.news.NewsListFragment
-import com.module.utils.permissions.xxPermissions
+import com.module.utils.permissions.requestPermissions
+import timber.log.Timber
 
 class MainActivity : BaseActivity<ActivityMainBinding>() {
 
@@ -42,6 +43,12 @@ class MainActivity : BaseActivity<ActivityMainBinding>() {
 
     private lateinit var mAHBottomNavigation: BottomNavigationView
 
+    private val permissionList=mutableListOf(
+        PermissionLists.getReadMediaImagesPermission(),
+        PermissionLists.getReadMediaVideoPermission(),
+        PermissionLists.getReadMediaAudioPermission()
+    )
+
 
     override fun bindDataBinding(): ActivityMainBinding {
         return ActivityMainBinding.inflate(layoutInflater)
@@ -67,27 +74,20 @@ class MainActivity : BaseActivity<ActivityMainBinding>() {
         initBottomNavigation()
 
 
-        xxPermissions {
-            // 申请相机权限
-            permissions(Permission.CAMERA)
-            // 申请位置权限
-            permissions(Permission.ACCESS_FINE_LOCATION, Permission.ACCESS_COARSE_LOCATION)
-            // 如果申请权限之前需要向用户展示权限申请理由，则走此回调
-//            onShouldShowRationale { shouldShowRationaleList, onUserResult ->
-//                Log.e("onResult", "shouldShowRationaleList: " + shouldShowRationaleList +
-//                        "\nonUserResult: " + onUserResult )
-//            }
-//
-//            onDoNotAskAgain { doNotAskAgainList, onUserResult ->
-//                Log.e("onResult", "doNotAskAgainList: " + doNotAskAgainList +
-//                        "\nonUserResult: " + onUserResult )
-//            }
+
+        requestPermissions {
+
+            permissions(permissionList)
+
+            onDoNotAskAgain { doNotAskAgainList, onUserResult ->
+                Log.e("onResult", "doNotAskAgainList: " + doNotAskAgainList +
+                        "\nonUserResult: " + onUserResult )
+            }
+
             // 权限申请结果
             onResult { allGranted, grantedList, deniedList ->
 
-                Log.e("onResult", "allGranted: " + allGranted +
-                        "\ngrantedList: " + grantedList +
-                        "\ndeniedList: " + deniedList)
+                Log.e("allGranted--","allGranted=$allGranted  ,grantedList=$grantedList  , deniedList=$deniedList")
             }
         }
 

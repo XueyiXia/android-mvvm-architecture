@@ -34,7 +34,7 @@ startupruntime= "1.2.0"
 
 androidGradlePlugin = "8.11.0"
 
-xxPermissions="18.5"
+xxPermissions="26.5"
 androidTools = "31.11.0"
 unspecified = "1.1.0"
 

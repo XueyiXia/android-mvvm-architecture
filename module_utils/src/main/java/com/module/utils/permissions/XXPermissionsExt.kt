@@ -2,12 +2,13 @@
 package com.module.utils.permissions
 
 import android.app.Activity
-import androidx.core.app.ActivityCompat
 import androidx.fragment.app.Fragment
-import com.hjq.permissions.IPermissionInterceptor
 import com.hjq.permissions.OnPermissionCallback
-import com.hjq.permissions.OnPermissionPageCallback
+import com.hjq.permissions.OnPermissionDescription
+import com.hjq.permissions.OnPermissionInterceptor
 import com.hjq.permissions.XXPermissions
+import com.hjq.permissions.fragment.factory.PermissionFragmentFactory
+import com.hjq.permissions.permission.base.IPermission
 import com.module.utils.permissions.interfac.OnPermissionResult
 import com.module.utils.permissions.interfac.OnPermissionsDoNotAskAgain
 import com.module.utils.permissions.interfac.OnPermissionsShouldShowRationale
@@ -22,7 +23,7 @@ import com.module.utils.permissions.interfac.OnPermissionsShouldShowRationale
  * @constructor
  */
 class XXPermissionsExt private constructor(private val activity: Activity) {
-    private val permissionList = mutableListOf<String>()
+    private var permissionList = mutableListOf<IPermission>()
     private var onResult: OnPermissionResult? = null
     private var onShouldShowRationale: OnPermissionsShouldShowRationale? = null
     private var onDoNotAskAgain: OnPermissionsDoNotAskAgain? = null
@@ -43,7 +44,7 @@ class XXPermissionsExt private constructor(private val activity: Activity) {
     /**
      * add permissions
      */
-    fun permissions(vararg permissions: String): XXPermissionsExt {
+    fun permissions(vararg permissions: IPermission): XXPermissionsExt {
         permissionList.addAll(permissions)
         return this
     }
@@ -52,7 +53,7 @@ class XXPermissionsExt private constructor(private val activity: Activity) {
      * add permissions
      */
     @JvmName("permissionsArray")
-    fun permissions(permissions: Array<out String>): XXPermissionsExt {
+    fun permissions(permissions: Array<out IPermission>): XXPermissionsExt {
         permissionList.addAll(permissions)
         return this
     }
@@ -60,7 +61,7 @@ class XXPermissionsExt private constructor(private val activity: Activity) {
     /**
      * add permissions
      */
-    fun permissions(permissions: List<String>): XXPermissionsExt {
+    fun permissions(permissions: List<IPermission>): XXPermissionsExt {
         permissionList.addAll(permissions)
         return this
     }
@@ -95,105 +96,111 @@ class XXPermissionsExt private constructor(private val activity: Activity) {
         return this
     }
 
-
     /**
      * 发起权限请求
      */
     fun request() {
         return XXPermissions.with(activity)
-            .permission(permissionList)
-            .interceptor(object : IPermissionInterceptor {
+            .permissions(permissionList)
+            .interceptor(object : OnPermissionInterceptor {
 
-                override fun launchPermissionRequest(
+                override fun onRequestPermissionStart(
                     activity: Activity,
-                    allList: List<String>,
+                    requestList: List<IPermission?>,
+                    fragmentFactory: PermissionFragmentFactory<*, *>,
+                    permissionDescription: OnPermissionDescription,
                     callback: OnPermissionCallback?
                 ) {
-                    val showRationale = onShouldShowRationale ?: return super.launchPermissionRequest(activity, allList, callback)
-                    val rationalePermissions = allList.filter {
-                        try {
-                            ActivityCompat.shouldShowRequestPermissionRationale(activity, it)
-                        } catch (e: Exception) {
-                            false
-                        }
-                    }
-                    if (rationalePermissions.isEmpty()) return super.launchPermissionRequest(activity, allList, callback)
-
-                    showRationale.onShouldShowRationale(rationalePermissions) { isAgree ->
-                        if (isAgree) {
-                            super.launchPermissionRequest(activity, allList, callback)
-                        } else {
-                            val newDenied = XXPermissions.getDenied(activity, allList)
-                            callback?.onGranted(allList - newDenied.toSet(), false)
-                            callback?.onDenied(newDenied, false)
-                        }
-                    }
+                    super.onRequestPermissionStart(
+                        activity,
+                        requestList,
+                        fragmentFactory,
+                        permissionDescription,
+                        callback
+                    )
                 }
 
-                override fun deniedPermissionRequest(
-                        activity: Activity,
-                        allList: List<String>,
-                        deniedList: List<String>,
-                        doNotAskAgain: Boolean,
-                        callback: OnPermissionCallback?
-                    ) {
-                        if (doNotAskAgain) {
-                            showPermissionSettingDialog(activity, allList, deniedList, callback)
-                        } else {
-                            val newDenied = XXPermissions.getDenied(activity, allList)
-                            callback?.onGranted(allList - newDenied.toSet(), false)
-                            callback?.onDenied(deniedList, false)
-                        }
+                override fun onRequestPermissionEnd(
+                    activity: Activity,
+                    skipRequest: Boolean,
+                    requestList: List<IPermission?>,
+                    grantedList: List<IPermission?>,
+                    deniedList: List<IPermission?>,
+                    callback: OnPermissionCallback?
+                ) {
+                    super.onRequestPermissionEnd(
+                        activity,
+                        skipRequest,
+                        requestList,
+                        grantedList,
+                        deniedList,
+                        callback
+                    )
+
+                    if (deniedList.isEmpty()) {
+                        return
                     }
-
-                    private fun showPermissionSettingDialog(
-                        activity: Activity,
-                        allList: List<String>,
-                        deniedList: List<String>,
-                        callback: OnPermissionCallback?
-                    ) {
-
-                        val onDoNotAskAgain = onDoNotAskAgain ?: return super.deniedPermissionRequest(activity, allList, deniedList, true, callback)
-                        val doNotAskAgainList = deniedList.filter {
-                            XXPermissions.isDoNotAskAgainPermissions(activity, it)
-                        }
-                        onDoNotAskAgain.onDoNotAskAgain(doNotAskAgainList) { isAgree ->
+                    val doNotAskAgain = XXPermissions.isDoNotAskAgainPermissions(activity, deniedList)
+                    if (!doNotAskAgain) {
+                        // 如果没有勾选不再询问选项，call back给用户
+                        onDoNotAskAgain?.onDoNotAskAgain(deniedList){isAgree->
                             if (isAgree) {
-                                XXPermissions.startPermissionActivity(activity, doNotAskAgainList, object :
-                                    OnPermissionPageCallback {
-                                    override fun onGranted() {
-                                        callback?.onGranted(allList, true)
-                                    }
+                                XXPermissions.startPermissionActivity(
+                                    activity,
+                                    deniedList,
+                                    object : OnPermissionCallback {
+                                        override fun onResult(grantedList: List<IPermission?>, deniedList: List<IPermission?>){
+                                            val latestDeniedList = XXPermissions.getDeniedPermissions(activity, requestList)
+                                            val allGranted = latestDeniedList.isEmpty()
+                                            if (!allGranted) {
+                                                return
+                                            }
 
-                                    override fun onDenied() {
-                                        val newDenied = XXPermissions.getDenied(activity, allList)
-                                        callback?.onGranted(allList - newDenied.toSet(), false)
-                                        callback?.onDenied(newDenied, true)
-                                    }
-                                })
-                            } else {
-                                val newDenied = XXPermissions.getDenied(activity, allList)
-                                callback?.onGranted(allList - newDenied.toSet(), false)
-                                callback?.onDenied(deniedList, true)
+                                            if (callback == null) {
+                                                return
+                                            }
+                                            // 用户全部授权了，回调成功给外层监听器，免得用户还要再发起权限申请
+                                        }
+
+                                    })
+
+                            }else {
+                                // 用户全部授权了，回调成功给外层监听器，免得用户还要再发起权限申请
+
                             }
                         }
+                        return
                     }
-                })
-            .request(object : OnPermissionCallback {
 
-                private var grantedList: List<String>? = null
 
-                override fun onGranted(permissions: List<String>, allGranted: Boolean) {
-                    if (allGranted) {
-                        onResult?.onResult(true, permissions, emptyList())
-                    } else {
-                        grantedList = permissions
-                    }
                 }
 
-                override fun onDenied(permissions: List<String>, doNotAskAgain: Boolean) {
-                    onResult?.onResult(false, grantedList.orEmpty(), permissions)
+                override fun dispatchPermissionRequest(
+                    activity: Activity,
+                    requestList: List<IPermission?>,
+                    fragmentFactory: PermissionFragmentFactory<*, *>,
+                    permissionDescription: OnPermissionDescription,
+                    callback: OnPermissionCallback?
+                ) {
+                    super.dispatchPermissionRequest(
+                        activity,
+                        requestList,
+                        fragmentFactory,
+                        permissionDescription,
+                        callback
+                    )
                 }
             })
+            .request { grantedList, deniedList ->
+
+                /**
+                 * 回调请求全选的最后结果
+                 * @param allGranted Boolean 授予权限的bool
+                 * @param grantedList List<String> 授予权限的列表
+                 * @param deniedList List<String> 拒绝权限的列表
+                 */
+                val allGranted = deniedList.isNotEmpty()
+                onResult?.onResult(allGranted, grantedList, deniedList)
+            }
     }
 }
