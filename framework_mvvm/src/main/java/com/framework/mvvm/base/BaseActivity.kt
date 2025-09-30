@@ -81,9 +81,8 @@ abstract class BaseActivity <VB : ViewDataBinding> : AppCompatActivity(){
         /**
          * 绑定UI
          */
-        _binding = bindDataBinding()
-        mBinding.lifecycleOwner = this
-        setContentView(mBinding.root)
+        bindUi()
+
 
 
         /**
@@ -211,6 +210,13 @@ abstract class BaseActivity <VB : ViewDataBinding> : AppCompatActivity(){
 
 
     /*****************************************************************华丽的分割线***************************************************************************/
+
+    protected fun bindUi(){
+        _binding = bindDataBinding()
+        mBinding.lifecycleOwner = this
+        setContentView(mBinding.root)
+    }
+
 
     protected abstract fun bindDataBinding(): VB
 

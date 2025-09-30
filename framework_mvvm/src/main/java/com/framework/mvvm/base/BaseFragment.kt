@@ -4,8 +4,6 @@ import android.app.Activity
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
-import android.os.Handler
-import android.os.Looper
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
@@ -31,8 +29,6 @@ abstract class BaseFragment<VB : ViewDataBinding> :Fragment() {
     }
 
     private lateinit var mActivity: AppCompatActivity
-
-    private val mHandler = Handler(Looper.getMainLooper())
 
     private var _binding: VB? = null
 
@@ -149,7 +145,6 @@ abstract class BaseFragment<VB : ViewDataBinding> :Fragment() {
 
     override fun onDestroy() {
         super.onDestroy()
-        mHandler.removeCallbacksAndMessages(null)
         resultLauncher.unregister()
         mBinding.unbind()
         _binding?.unbind()

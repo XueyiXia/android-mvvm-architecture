@@ -1,44 +1,44 @@
 [versions]
 compileSdk = "36"
-minSdk = "25"
+minSdk = "28"
 #noinspection OldTargetApi
 targetSdk = "36"
 buildToolsVersion = "35.0.0"
 
 
-org-jetbrains-kotlin-android = "2.2.0"
-coreKtx = "1.16.0"
-activityKtx = "1.10.1"
-fragmentKtx = "1.8.8"
+org-jetbrains-kotlin-android = "2.2.20"
+coreKtx = "1.17.0"
+activityKtx = "1.11.0"
+fragmentKtx = "1.8.9"
 appcompat = "1.7.1"
 appcompatV7 = "28.0.0"
-material = "1.12.0"
+material = "1.13.0"
 constraintlayout = "2.2.1"
-lifecycle = "2.9.1"
+lifecycle = "2.9.4"
 recyclerview = "1.4.0"
 koinAndroidExt = "3.0.2"
-koin = "4.1.0"
+koin = "4.1.1"
 
 lifecycle-extensions="2.2.0"
 lifecycleViewmodel = "2.8.3"
 lifecycleLivedata = "2.8.3"
 
-workRuntime="2.10.2"
-workRuntimeKtx="2.10.2"
+workRuntime="2.10.5"
+workRuntimeKtx="2.10.5"
 
-navigation = "2.9.1"
+navigation = "2.9.5"
 unpeopleLivedata= "4.4.1-beta1"
 multidex = "2.0.1"
 preferenceKtx= "1.2.1"
 startupruntime= "1.2.0"
 
-androidGradlePlugin = "8.11.0"
+androidGradlePlugin = "8.13.0"
 
 xxPermissions="26.5"
-androidTools = "31.11.0"
+androidTools = "31.13.0"
 unspecified = "1.1.0"
 
-androidComposeUi= "1.8.3"
+androidComposeUi= "1.9.2"
 refresh-layout = "2.1.1"
 
 retrofit = "3.0.0"
@@ -46,24 +46,27 @@ converter_gson = "3.0.0"
 adapter_rxjava3 = "3.0.0"
 converter_scalars = "3.0.0"
 converter-simplexml = "3.0.0"
-jsoup="1.21.1"
+jsoup="1.21.2"
 
-rxjava = "3.1.11"
+rxjava = "3.1.12"
 rxAndroid = "3.0.2"
 rxLifecycle = "2.2.2"
 
 okhttp3 = "5.1.0"
-okio = "3.15.0"
+okio = "3.16.0"
 logging_interceptor = "5.1.0"
 
-glide ="4.16.0"
-glideCompiler = "4.16.0"
+glide ="5.0.5"
+glideCompiler = "5.0.5"
 
-gosn="2.13.1"
+gosn="2.13.2"
 
 
-roomRuntime="2.7.2"
-roomCompiler="2.7.2"
+roomRuntime="2.8.1"
+roomCompiler="2.8.1"
+
+threetenabp="1.4.9"
+
 
 [libraries]
 coreKtx = { module = "androidx.core:core-ktx", version.ref = "coreKtx" }
@@ -141,6 +144,9 @@ glideCompiler = { module = "com.github.bumptech.glide:compiler", version.ref = "
 #room
 roomRuntime = { module = "androidx.room:room-runtime", version.ref = "roomRuntime" }
 roomCompiler = { module = "androidx.room:room-compiler", version.ref = "roomCompiler" }
+
+
+threetenabp = { module = "com.jakewharton.threetenabp:threetenabp", version.ref = "threetenabp" }
 
 
 [plugins]
