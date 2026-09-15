@@ -1,6 +1,4 @@
-
-
-package com.module.utils.permissions.interfac
+package com.framework.mvvm.utils.permissions.interfac
 
 fun interface OnPermissionResult {
     /**

@@ -1,4 +1,4 @@
-package com.module.utils
+package com.framework.mvvm.utils
 
 import java.lang.reflect.ParameterizedType
 import java.lang.reflect.Type

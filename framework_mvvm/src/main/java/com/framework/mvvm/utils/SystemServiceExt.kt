@@ -1,4 +1,4 @@
-package com.module.utils
+package com.framework.mvvm.utils
 
 import android.app.ActivityManager
 import android.app.AlarmManager

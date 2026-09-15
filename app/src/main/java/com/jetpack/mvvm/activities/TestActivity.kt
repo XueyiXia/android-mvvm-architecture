@@ -7,7 +7,6 @@ import android.util.Log
 import android.view.View
 import androidx.core.os.BundleCompat
 import com.framework.mvvm.base.BaseMvvmActivity
-import com.jetpack.mvvm.BR
 import com.jetpack.mvvm.R
 import com.jetpack.mvvm.bean.UserInfoBean
 import com.jetpack.mvvm.databinding.ActivityTestBinding
@@ -28,9 +27,12 @@ class TestActivity: BaseMvvmActivity<ActivityTestBinding, CommonViewModel>(){
     private val viewModel by viewModel<CommonViewModel>()
 
     private val mBundle=Bundle()
+    override fun inflateBinding(): ActivityTestBinding {
+        return ActivityTestBinding.inflate(layoutInflater)
+    }
 
     override fun initView(rootView: View, savedInstanceState: Bundle?) {
-        this.mBinding.setVariable(BR.CommonViewModel,this.mViewModel)
+//        this.mBinding.setVariable(BR.CommonViewModel,this.mViewModel)
 
         rootView.setBackgroundColor(this.resources.getColor(R.color.purple_200,null))
         val bundle=intent.extras

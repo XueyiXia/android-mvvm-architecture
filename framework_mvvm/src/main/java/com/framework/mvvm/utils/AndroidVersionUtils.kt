@@ -1,9 +1,9 @@
-package com.module.utils
+package com.framework.mvvm.utils
 
 import android.os.Build
 import androidx.annotation.ChecksSdkIntAtLeast
-import com.module.utils.AndroidVersionUtils.hasR
-import com.module.utils.AndroidVersionUtils.hasS
+import com.framework.mvvm.utils.AndroidVersionUtils.hasR
+import com.framework.mvvm.utils.AndroidVersionUtils.hasS
 
 
 /**

@@ -1,4 +1,4 @@
-package com.module.utils
+package com.framework.mvvm.utils
 
 
 import android.Manifest
@@ -20,6 +20,7 @@ import android.widget.TextView
 import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AlertDialog
 import androidx.fragment.app.Fragment
+import com.framework.mvvm.R
 import java.math.RoundingMode
 import java.text.NumberFormat
 import java.text.SimpleDateFormat

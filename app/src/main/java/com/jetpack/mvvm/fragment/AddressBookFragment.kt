@@ -1,13 +1,11 @@
 package com.jetpack.mvvm.fragment
 
 import android.os.Bundle
-import android.util.Log
+import android.view.LayoutInflater
 import android.view.View
+import android.view.ViewGroup
 import com.framework.mvvm.base.BaseMvvmFragment
-import com.framework.mvvm.base.BaseMvvmFragmentByOverrideBinding
-import com.framework.mvvm.utils.viewBinding
 import com.framework.mvvm.viewmodel.BaseViewModel
-import com.jetpack.mvvm.databinding.ActivitySplashBinding
 import com.jetpack.mvvm.databinding.FragmentAddressBookBinding
 import com.jetpack.mvvm.viewmodel.SplashViewModel
 import org.koin.androidx.viewmodel.ext.android.activityViewModel
@@ -21,14 +19,18 @@ import org.koin.androidx.viewmodel.ext.android.activityViewModel
 
 class AddressBookFragment : BaseMvvmFragment<FragmentAddressBookBinding, BaseViewModel>(){
 
-//    override val mViewDataBinding: (FragmentAddressBookBinding) by viewBinding(FragmentAddressBookBinding::inflate)
-
 
     private val viewModel by activityViewModel<SplashViewModel>()
+    override fun inflateBinding(
+        inflater: LayoutInflater,
+        container: ViewGroup?
+    ): FragmentAddressBookBinding {
+        return FragmentAddressBookBinding.inflate(inflater, container, false)
+    }
 
 
     override fun initView(rootView: View, savedInstanceState: Bundle?) {
-        mViewDataBinding.title.text="测试 WebView"
-        mViewDataBinding.webView.loadUrl("https://github.com/getActivity/XXPermissions")
+        mBinding.title.text="测试 WebView"
+        mBinding.webView.loadUrl("https://github.com/getActivity/XXPermissions")
     }
 }

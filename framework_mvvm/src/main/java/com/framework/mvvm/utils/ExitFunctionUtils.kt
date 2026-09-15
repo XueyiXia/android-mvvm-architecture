@@ -1,4 +1,4 @@
-package com.module.utils
+package com.framework.mvvm.utils
 
 import android.app.Activity
 import android.content.Context
@@ -18,6 +18,7 @@ import androidx.fragment.app.FragmentActivity
 import androidx.fragment.app.FragmentTransaction
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
+import kotlin.collections.iterator
 
 /**
  * @author: xiaxueyi

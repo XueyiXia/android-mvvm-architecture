@@ -1,12 +1,12 @@
 [versions]
-compileSdk = "34"
-minSdk = "25"
-targetSdk = "34"
-buildToolsVersion = "34.0.0"
+compileSdk = "36"
+minSdk = "26"
+targetSdk = "36"
+buildToolsVersion = "36.0.0"
 
 
-org-jetbrains-kotlin-android = "2.0.20"
-coreKtx = "1.13.1"
+org-jetbrains-kotlin-android = "2.4.20"
+coreKtx = "1.16.0"
 activityKtx = "1.9.3"
 fragmentKtx = "1.8.4"
 appcompat = "1.7.0"

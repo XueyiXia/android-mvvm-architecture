@@ -83,6 +83,9 @@ dependencies {
     implementation (libs.preferenceKtx)
     implementation (libs.supportMultidex)
 
-    api project(path: ':module_utils')
+    api(libs.koinAndroid)
+    api(libs.koinAndroidExt)
+    api(libs.xxPermissions)
+//    api project(path: ':module_utils')
 
 }

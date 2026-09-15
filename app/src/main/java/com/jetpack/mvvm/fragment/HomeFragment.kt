@@ -1,10 +1,10 @@
 package com.jetpack.mvvm.fragment
 
 import android.os.Bundle
+import android.view.LayoutInflater
 import android.view.View
+import android.view.ViewGroup
 import com.framework.mvvm.base.BaseMvvmFragment
-import com.jetpack.mvvm.activities.CudaActivity
-import com.jetpack.mvvm.activities.TouchActivity
 import com.jetpack.mvvm.databinding.FragmentHomeBinding
 import com.jetpack.mvvm.viewmodel.SplashViewModel
 
@@ -18,17 +18,16 @@ import com.jetpack.mvvm.viewmodel.SplashViewModel
 class HomeFragment :BaseMvvmFragment<FragmentHomeBinding, SplashViewModel>(){
 
 
+    override fun inflateBinding(
+        inflater: LayoutInflater,
+        container: ViewGroup?
+    ): FragmentHomeBinding {
+        return FragmentHomeBinding.inflate(inflater, container, false)
+    }
+
     override fun initView(rootView: View, savedInstanceState: Bundle?) {
 
 
-        mViewDataBinding.click.setOnClickListener {
-            startActivity(CudaActivity::class.java)
-        }
-
-
-        mViewDataBinding.touchLayout.setOnClickListener {
-            startActivity(TouchActivity::class.java)
-        }
     }
 
 }

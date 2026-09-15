@@ -5,9 +5,6 @@ import android.util.Log
 import android.view.View
 import android.widget.Toast
 import com.framework.mvvm.base.BaseMvvmActivity
-import com.jetpack.mvvm.BR
-import com.jetpack.mvvm.R
-import com.jetpack.mvvm.databinding.ActivityCudaBinding
 import com.jetpack.mvvm.databinding.ActivityTouchBinding
 import com.jetpack.mvvm.viewmodel.CommonViewModel
 
@@ -20,9 +17,13 @@ import com.jetpack.mvvm.viewmodel.CommonViewModel
 class TouchActivity: BaseMvvmActivity<ActivityTouchBinding, CommonViewModel>(){
 
 
+    override fun inflateBinding(): ActivityTouchBinding {
+        return ActivityTouchBinding.inflate(layoutInflater)
+    }
+
 
     override fun initView(rootView: View, savedInstanceState: Bundle?) {
-        this.mBinding.setVariable(BR.CommonViewModel,this.mViewModel)
+//        this.mBinding.setVariable(BR.CommonViewModel,this.mViewModel)
 
         mBinding.btnClick.setOnClickListener {
 

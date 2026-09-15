@@ -1,11 +1,10 @@
-
-package com.module.utils.permissions
+package com.framework.mvvm.utils.permissions
 
 import android.app.Activity
 import androidx.fragment.app.Fragment
-import com.module.utils.permissions.interfac.OnPermissionResult
-import com.module.utils.permissions.interfac.OnPermissionsDoNotAskAgain
-import com.module.utils.permissions.interfac.OnPermissionsShouldShowRationale
+import com.framework.mvvm.utils.permissions.interfac.OnPermissionResult
+import com.framework.mvvm.utils.permissions.interfac.OnPermissionsDoNotAskAgain
+import com.framework.mvvm.utils.permissions.interfac.OnPermissionsShouldShowRationale
 
 /**
  * Activity 中调用

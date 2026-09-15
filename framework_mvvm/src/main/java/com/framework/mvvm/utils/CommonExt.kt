@@ -1,4 +1,4 @@
-package com.module.utils
+package com.framework.mvvm.utils
 
 import android.annotation.SuppressLint
 import android.content.ClipData
@@ -160,7 +160,7 @@ fun setOnclickNoRepeat(vararg views: View?, interval: Long = 500, onClick: (View
  * @return Spanned
  */
 fun String.toHtml(flag: Int = Html.FROM_HTML_MODE_LEGACY): Spanned {
-    return if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.N) {
+    return if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
         Html.fromHtml(this, flag)
     } else {
         Html.fromHtml(this)

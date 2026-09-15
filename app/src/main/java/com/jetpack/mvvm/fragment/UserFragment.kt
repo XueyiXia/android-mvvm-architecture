@@ -1,16 +1,12 @@
 package com.jetpack.mvvm.fragment
 
-import android.content.Intent
 import android.os.Bundle
-import android.util.Log
+import android.view.LayoutInflater
 import android.view.View
-import androidx.activity.result.ActivityResultLauncher
-import androidx.activity.result.contract.ActivityResultContracts
+import android.view.ViewGroup
 import com.framework.mvvm.base.BaseMvvmFragment
 import com.jetpack.mvvm.activities.TestActivity
-import com.jetpack.mvvm.bean.UserInfoBean
 import com.jetpack.mvvm.databinding.FragmentUserBinding
-import com.jetpack.mvvm.utils.MvvmSCUtils
 import com.jetpack.mvvm.viewmodel.SplashViewModel
 
 /**
@@ -22,9 +18,17 @@ import com.jetpack.mvvm.viewmodel.SplashViewModel
 
 class UserFragment :BaseMvvmFragment<FragmentUserBinding, SplashViewModel>(){
 
+
+    override fun inflateBinding(
+        inflater: LayoutInflater,
+        container: ViewGroup?
+    ): FragmentUserBinding {
+        return FragmentUserBinding.inflate(inflater, container, false)
+    }
+
     override fun initView(rootView: View, savedInstanceState: Bundle?) {
 
-        mViewDataBinding.next.setOnClickListener {
+        mBinding.next.setOnClickListener {
             val bundle: Bundle = Bundle()
 //            bundle.putBinder(MvvmSCUtils.PARAM_BUNDLE,UserInfoBean)
             startActivity(TestActivity::class.java,bundle)

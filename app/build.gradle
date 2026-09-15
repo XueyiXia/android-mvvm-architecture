@@ -73,8 +73,6 @@ dependencies {
     implementation(libs.refresh.header)    // 经典刷新头
 
     //项目核心框架
-
-    implementation project(path: ':framework_mvvm')
     implementation project(':framework_mvvm')
 
 }

@@ -2,7 +2,6 @@ package com.framework.mvvm.base
 
 import android.Manifest
 import android.app.Activity
-import android.app.ActivityManager
 import android.content.Intent
 import android.content.pm.PackageManager
 import android.os.Build
@@ -10,21 +9,18 @@ import android.os.Bundle
 import android.util.Log
 import android.view.View
 import androidx.activity.result.ActivityResult
-import androidx.activity.result.ActivityResultCallback
 import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import androidx.core.view.WindowCompat
 import androidx.core.view.WindowInsetsCompat
 import androidx.core.view.WindowInsetsControllerCompat
+import androidx.databinding.ViewDataBinding
 import androidx.lifecycle.ViewModelProvider
-import com.framework.mvvm.R
 import com.framework.mvvm.utils.getVmClazz
 import com.framework.mvvm.viewmodel.BaseViewModel
-import com.google.android.material.snackbar.Snackbar
-import com.module.utils.notNull
+import com.framework.mvvm.utils.notNull
 import kotlin.system.exitProcess
 
 
@@ -35,13 +31,14 @@ import kotlin.system.exitProcess
  * @说明:
  */
 
-abstract class BaseActivity <VM : BaseViewModel> : AppCompatActivity(){
+abstract class BaseActivity <BINDING :ViewDataBinding> : AppCompatActivity(){
     companion object{
         private const val TAG = "BaseActivity"
         var exitTime: Long = 0 //退出程序的时间
     }
 
-    lateinit var mViewModel: VM
+    private var _binding: BINDING? = null
+    protected val mBinding: BINDING get() = _binding!!
 
 
     /**
@@ -81,29 +78,20 @@ abstract class BaseActivity <VM : BaseViewModel> : AppCompatActivity(){
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        Log.e(TAG, "跳转界面--->>" + this.javaClass.simpleName)
+        Log.e(TAG, "activity 跳转界面--->>" + this.javaClass.simpleName)
 
         /**
          * 绑定UI
          */
-        getDataBinding().notNull({
-            setContentView(it)
-        })
-
-        /**
-         * 实例化创建ViewModel
-         */
-        createViewModel()
+        _binding = inflateBinding()
+        mBinding.lifecycleOwner = this
+        this.setContentView(mBinding.root)
 
         /**
          * 函数入口
          */
-        initView(getDataBinding().rootView,savedInstanceState)
+        initView(mBinding.root,savedInstanceState)
 
-        /**
-         * 创建LiveData数据观察者
-         */
-        createObserver()
 
 
         /**
@@ -162,22 +150,11 @@ abstract class BaseActivity <VM : BaseViewModel> : AppCompatActivity(){
     }
 
 
-
-    /**
-     * 创建ViewModel
-     * @return VM
-     */
-    private fun createViewModel() {
-        val modelClass :Class<VM> = getVmClazz(this)
-        mViewModel= ViewModelProvider(this)[modelClass]
-    }
-
-
     /**
      * 获取绑定的View
      * @return View
      */
-    private fun getDataBinding(): View = createDataBinding()
+    private fun getDataBinding() = inflateBinding()
 
 
 
@@ -242,16 +219,15 @@ abstract class BaseActivity <VM : BaseViewModel> : AppCompatActivity(){
      * */
     open fun onPermissionGranted() = Unit
 
-    /**
-     * 创建DataBinding
-     * @return View
-     */
-    abstract fun createDataBinding(): View
+
+
 
     /**
-     * 创建LiveData数据观察者
+     * 根据泛型 BINDING 创建 ViewDataBinding 实例
      */
-    abstract fun createObserver()
+    // Abstract method for subclasses to inflate the binding directly
+    abstract fun inflateBinding(): BINDING
+
 
     /**
      * 入口函数
