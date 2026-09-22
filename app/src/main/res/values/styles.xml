@@ -3,14 +3,28 @@
 
     <!--应用程序基础主题方案 Activity跳转动画效果:退出向右隐藏，进入向右弹出，启动另一个Activity时本页面不动 -->
     <style name="AppLoaderStyle" parent="@style/Theme.AppCompat.Light.NoActionBar">
+
+        <item name="android:windowAnimationStyle">@style/default_animation</item>
         <!--标题栏底色-->
-        <item name="colorPrimaryDark">@color/color_333333</item>
+        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
         <!--状态栏底色-->
-        <item name="colorPrimary">@color/color_333333</item>
+        <item name="colorPrimary">@color/colorPrimary</item>
         <!--导航栏标题字体颜色-->
         <item name="android:textColorPrimary">@color/colorAccent</item>
         <!--窗口的背景颜色-->
         <item name="android:windowBackground">@color/default_background</item>
+
+        <!-- ToolBar溢出菜单的风格 -->
+        <item name="actionOverflowMenuStyle">@style/ToolBarOverflowMenuStyle</item>
+        <item name="android:textColor">@color/tool_bar_overflow_menu_text_color</item>
+        <item name="android:textSize">@dimen/sp_14</item>
+        <item name="android:actionMenuTextAppearance">@style/MenuTextStyle</item>
+    </style>
+
+    <!--菜单文字样式-->
+    <style name="MenuTextStyle">
+        <item name="android:paddingLeft">@dimen/dp_0</item>
+        <item name="android:paddingRight">@dimen/dp_25</item>
     </style>
 
     <!--启动页使用的Style-->
@@ -29,6 +43,26 @@
         <item name="android:statusBarColor">@android:color/transparent</item>
     </style>
 
+    <!--Activity 使用的主题-->
+    <style name="ActionBarTheme" parent="Theme.AppCompat.Light.NoActionBar">
+        <item name="android:windowAnimationStyle">@style/default_animation</item>
+        <item name="android:windowIsTranslucent">false</item>
+        <item name="android:windowDisablePreview">true</item>
+        <!--标题栏颜色-->
+        <item name="colorPrimary">@color/colorPrimary</item>
+        <!--状态栏颜色-->
+        <item name="colorPrimaryDark">@color/purple_200</item>
+        <!--窗口的背景颜色-->
+        <item name="android:windowBackground">@color/white</item>
+        <!-- ToolBar 子标题字体颜色 -->
+        <item name="actionMenuTextColor">@color/white</item>
+        <!-- ToolBar溢出菜单的风格 -->
+        <item name="actionOverflowMenuStyle">@style/ToolBarOverflowMenuStyle</item>
+        <item name="android:textColor">@color/tool_bar_overflow_menu_text_color</item>
+        <item name="android:textSize">@dimen/sp_15</item>
+    </style>
+
+
     <!--ToolBar 字体主题Style-->
     <style name="CollapsingExpandedTitleTextAppearance" parent="@android:style/Widget.TextView">
         <item name="android:textColor">@color/color_111111</item>
@@ -38,24 +72,15 @@
     </style>
 
 
-    <!--Activity 使用的主题-->
-    <style name="ActionBarTheme" parent="Theme.AppCompat.Light.NoActionBar">
-<!--        <item name="android:windowIsTranslucent">false</item>-->
-<!--        <item name="android:windowDisablePreview">true</item>-->
-<!--        &lt;!&ndash;标题栏颜色&ndash;&gt;-->
-<!--        <item name="colorPrimary">@color/colorPrimary</item>-->
-<!--        &lt;!&ndash;状态栏颜色&ndash;&gt;-->
-<!--        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>-->
-<!--        &lt;!&ndash;窗口的背景颜色&ndash;&gt;-->
-<!--        <item name="android:windowBackground">@color/white</item>-->
-<!--        &lt;!&ndash; ToolBar 子标题字体颜色 &ndash;&gt;-->
-<!--        <item name="actionMenuTextColor">@color/white</item>-->
-<!--        &lt;!&ndash; ToolBar溢出菜单的风格 &ndash;&gt;-->
-<!--        <item name="actionOverflowMenuStyle">@style/ToolBarOverflowMenuStyle</item>-->
-<!--        <item name="android:textColor">@color/tool_bar_overflow_menu_text_color</item>-->
-<!--        <item name="android:textSize">@dimen/sp_15</item>-->
-    </style>
 
+
+    <!--Activity默认的动画效果-->
+    <style name="default_animation" mce_bogus="1" parent="@android:style/Animation.Activity">
+        <item name="android:activityOpenEnterAnimation">@anim/activity_open_in_anim</item>
+        <item name="android:activityOpenExitAnimation">@anim/activity_open_out_anim</item>
+        <item name="android:activityCloseEnterAnimation">@anim/activity_close_in_anim</item>
+        <item name="android:activityCloseExitAnimation">@anim/activity_close_out_anim</item>
+    </style>
 
     <!--ToolBar溢出菜单样式-->
     <style name="ToolBarOverflowMenuStyle">
@@ -68,5 +93,14 @@
         <!-- 弹出层水平方向上的偏移，即距离屏幕左边的距离，负值会导致右边出现空隙 -->
         <item name="android:dropDownHorizontalOffset">0dp</item>
 
+    </style>
+
+
+    <style name="MainItemTextSelectStyle" >
+        <item name="android:textSize">@dimen/sp_15</item>
+    </style>
+
+    <style name="MainItemTextUnSelectStyle" >
+        <item name="android:textSize">@dimen/sp_13</item>
     </style>
 </resources>

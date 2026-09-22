@@ -2,6 +2,7 @@ package com.framework.mvvm.base
 
 import androidx.databinding.ViewDataBinding
 import com.framework.mvvm.viewmodel.BaseViewModel
+import org.koin.androidx.viewmodel.ext.android.activityViewModel
 
 /**
  * @author: xiaxueyi

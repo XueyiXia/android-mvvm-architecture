@@ -2,36 +2,45 @@
 <layout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
-    <androidx.constraintlayout.widget.ConstraintLayout
+
+
+    <data>
+
+        <variable
+            name="scaleViewModel"
+            type="com.jetpack.mvvm.viewmodel.DeviceViewModel" />
+
+    </data>
+
+
+    <LinearLayout
+        android:orientation="vertical"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-        <LinearLayout
-            android:orientation="vertical"
+        <FrameLayout
+            android:id="@+id/container"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" >
+            android:layout_height="0.0dp"
+            android:layout_weight="1.0"
+            android:visibility="visible"/>
 
-            <FrameLayout
-                android:id="@+id/container"
-                android:layout_width="match_parent"
-                android:layout_height="0.0dp"
-                android:layout_weight="1.0"
-                android:visibility="visible"/>
+        <com.google.android.material.bottomnavigation.BottomNavigationView
+            android:id="@+id/bottomNavigation"
+            android:layout_width="match_parent"
+            android:visibility="visible"
+            android:layout_height="wrap_content"
+            android:background="@color/white"
+            app:itemTextColor="@color/nav_text_color_selector"
+            app:menu="@menu/navigation_items"
+            app:labelVisibilityMode="labeled"
+            app:itemIconTint="@color/purple_200"
+            app:itemIconSize="@dimen/dp_22"
+            app:itemRippleColor="@color/color_111111"
+            app:itemTextAppearanceActive="@style/MainItemTextSelectStyle"
+            app:itemTextAppearanceInactive="@style/MainItemTextUnSelectStyle"
+            />
 
-            <com.google.android.material.bottomnavigation.BottomNavigationView
-                android:id="@+id/bottom_navigation"
-                android:layout_width="match_parent"
-                android:visibility="visible"
-                android:layout_height="wrap_content"
-                android:background="@color/white"
-                app:menu="@menu/navigation_items"/>
-        </LinearLayout>
-
-
-    </androidx.constraintlayout.widget.ConstraintLayout>
+    </LinearLayout>
 
 </layout>

@@ -5,70 +5,127 @@
     <data>
 
         <variable
-            name="viewmodel"
-            type="com.jetpack.mvvm.viewmodel.SplashViewModel" />
+            name="scaleViewModel"
+            type="com.jetpack.mvvm.viewmodel.DeviceViewModel" />
 
     </data>
-
-
 
     <LinearLayout
         android:orientation="vertical"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
+
         <TextView
-            android:id="@+id/tv_count"
+            android:id="@+id/tvStatus"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@{`连接状态: ` + scaleViewModel.uiState.connectStatus}"
+            android:layout_marginTop="@dimen/dp_22"
+            android:layout_marginStart="@dimen/dp_10"
+            android:textSize="@dimen/sp_20"
+            android:layout_gravity="center|start"/>
+
+
+        <TextView
+            android:id="@+id/tvBleName"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@{`蓝牙名称: ` + scaleViewModel.uiState.deviceName}"
+            android:layout_marginTop="@dimen/dp_12"
+            android:layout_marginStart="@dimen/dp_10"
+            android:textSize="@dimen/sp_20"
+            android:layout_gravity="center|start"/>
+
+
+        <Button
+            android:id="@+id/btnScan"
             android:layout_width="match_parent"
-            android:layout_height="@dimen/dp_45"
-            android:gravity="center"
-            android:text="click"
+            android:layout_height="@dimen/dp_50"
+            android:layout_marginTop="@dimen/dp_20"
+            android:text="扫描 ESP32"
+            app:onBindingScanListener="@{scaleViewModel.onScanClickListener}"/>
+
+        <Button
+            android:id="@+id/btnConnection"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/dp_50"
+            android:layout_marginTop="@dimen/dp_10"
+            android:text="开始连接"
+            app:onConnectionClickListener="@{scaleViewModel.onConnectionClickListener}"
+            />
+
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/dp_20"
+            android:text="体重"
+            android:textSize="@dimen/sp_15"
+            android:layout_marginStart="@dimen/dp_10"/>
+
+
+        <TextView
+            android:id="@+id/tvWeight"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@{scaleViewModel.uiState.weight}"
+            android:textColor="@color/purple_200"
+            android:textSize="@dimen/sp_25"
+            android:layout_marginStart="@dimen/dp_10"/>
+
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/dp_30"
+            android:text="体脂率"
             android:textSize="@dimen/sp_16"
-            android:textColor="@color/black"
-            android:background="@color/teal_700"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"/>
-
-        <TextView
-            android:id="@+id/click"
-            android:layout_width="match_parent"
-            android:layout_height="@dimen/dp_50"
-            android:textColor="@color/black"
-            android:gravity="center"
-            android:text="click"
-            android:layout_marginTop="@dimen/dp_20"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent" />
-
-        <TextView
-            android:id="@+id/next"
-            android:layout_width="match_parent"
-            android:layout_height="@dimen/dp_50"
-            android:textColor="@color/black"
-            android:gravity="center"
-            android:text="点击我"
-            android:layout_marginTop="@dimen/dp_20"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent" />
-
+            android:layout_marginStart="@dimen/dp_10"/>
 
 
         <TextView
-            android:id="@+id/touchLayout"
+            android:id="@+id/tvFat"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@{scaleViewModel.uiState.fat}"
+            android:textSize="@dimen/sp_25"
+            android:textColor="@color/purple_200"
+            android:layout_marginStart="@dimen/dp_10"/>
+
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/dp_30"
+            android:text="肌肉"
+            android:textSize="@dimen/sp_16"
+            android:layout_marginStart="@dimen/dp_10"/>
+
+
+        <TextView
+            android:id="@+id/tvMuscle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textColor="@color/purple_200"
+            android:text="@{scaleViewModel.uiState.muscle}"
+            android:textSize="@dimen/sp_25"
+            android:layout_marginStart="@dimen/dp_10"/>
+
+
+
+
+        <Button
+            android:id="@+id/btnMeasure"
             android:layout_width="match_parent"
             android:layout_height="@dimen/dp_50"
-            android:textColor="@color/black"
-            android:gravity="center"
-            android:text="touchLayout"
-            android:background="@color/teal_700"
-            android:layout_marginTop="@dimen/dp_20"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent" />
+            android:layout_marginTop="@dimen/dp_40"
+            android:text="开始测量"
+            app:onMeasureClickListener="@{scaleViewModel.onMeasureClickListener}"
+             />
+
 
     </LinearLayout>
+
 </layout>
 

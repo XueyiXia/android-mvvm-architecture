@@ -75,4 +75,6 @@ dependencies {
     //项目核心框架
     implementation project(':framework_mvvm')
 
+    implementation("com.google.code.gson:gson:2.14.0")
+
 }

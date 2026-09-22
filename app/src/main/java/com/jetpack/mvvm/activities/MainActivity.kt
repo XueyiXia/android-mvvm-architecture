@@ -4,10 +4,10 @@ import android.os.Bundle
 import android.util.Log
 import android.view.KeyEvent
 import android.view.View
+import com.framework.mvvm.BR
 import com.framework.mvvm.base.BaseMvvmActivity
 import com.framework.mvvm.utils.permissions.xxPermissions
 import com.framework.mvvm.viewmodel.BaseViewModel
-import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.hjq.permissions.Permission
 import com.jetpack.mvvm.R
 import com.jetpack.mvvm.databinding.ActivityMainBinding
@@ -15,6 +15,8 @@ import com.jetpack.mvvm.fragment.AddressBookFragment
 import com.jetpack.mvvm.fragment.HomeFragment
 import com.jetpack.mvvm.fragment.MallsFragment
 import com.jetpack.mvvm.fragment.UserFragment
+import com.jetpack.mvvm.viewmodel.DeviceViewModel
+import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class MainActivity : BaseMvvmActivity<ActivityMainBinding,BaseViewModel>() {
 
@@ -37,7 +39,7 @@ class MainActivity : BaseMvvmActivity<ActivityMainBinding,BaseViewModel>() {
 
     private var mAddressBookFragment: AddressBookFragment?=null
 
-    private lateinit var mAHBottomNavigation: BottomNavigationView
+    private val viewModel by viewModel<DeviceViewModel>()
 
 
     override fun inflateBinding(): ActivityMainBinding {
@@ -46,10 +48,10 @@ class MainActivity : BaseMvvmActivity<ActivityMainBinding,BaseViewModel>() {
 
 
     override fun initView(rootView: View, savedInstanceState: Bundle?) {
+        this.mBinding.setVariable(BR.viewmodel, this.viewModel)
+
         val data=intent?.extras
         Log.e("ActivityForResult", "get data--->>$data")
-
-        mAHBottomNavigation=findViewById(R.id.bottom_navigation)
 
 
         /**
@@ -69,6 +71,8 @@ class MainActivity : BaseMvvmActivity<ActivityMainBinding,BaseViewModel>() {
             permissions(Permission.CAMERA)
             // 申请位置权限
             permissions(Permission.ACCESS_FINE_LOCATION, Permission.ACCESS_COARSE_LOCATION)
+
+            permissions(Permission.BLUETOOTH_ADVERTISE,Permission.BLUETOOTH_SCAN,Permission.BLUETOOTH_CONNECT)
             // 如果申请权限之前需要向用户展示权限申请理由，则走此回调
 //            onShouldShowRationale { shouldShowRationaleList, onUserResult ->
 //                Log.e("onResult", "shouldShowRationaleList: " + shouldShowRationaleList +
@@ -208,7 +212,7 @@ class MainActivity : BaseMvvmActivity<ActivityMainBinding,BaseViewModel>() {
 
 
     private fun initBottomNavigation(){
-        mAHBottomNavigation.setOnItemSelectedListener { item ->
+        mBinding.bottomNavigation.setOnItemSelectedListener { item ->
             when (item.itemId) {
                 R.id.action_search -> commitFragment(TAG_HOME)
                 R.id.action_settings -> commitFragment(TAG_MALLS)
