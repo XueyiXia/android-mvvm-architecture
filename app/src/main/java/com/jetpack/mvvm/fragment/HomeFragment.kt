@@ -23,7 +23,6 @@ import org.koin.androidx.viewmodel.ext.android.activityViewModel
  * @说明:
  */
 
-@RequiresApi(Build.VERSION_CODES.TIRAMISU)
 class HomeFragment : BaseFragment<FragmentHomeBinding>(){
 
     companion object{

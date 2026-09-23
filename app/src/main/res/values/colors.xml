@@ -40,4 +40,38 @@
     <!-- 第二级，第三极默认的底色 #fafafa -->
     <color name="default_second_background">#fafafa</color>
 
+
+
+    <!-- 页面背景 -->
+    <color name="page_background">#F6F7FB</color>
+
+    <!-- 卡片 -->
+    <color name="card_white">#FFFFFF</color>
+
+    <!-- 文字 -->
+    <color name="text_primary">#1F2937</color>
+    <color name="text_secondary">#8A94A6</color>
+
+    <!-- 主色 -->
+    <color name="health_green">#4CAF50</color>
+
+    <!-- 进度圆环 -->
+    <color name="progress_track">#E8EEF5</color>
+
+    <!-- 数据颜色 -->
+    <color name="weight_color">#1F2937</color>
+    <color name="fat_orange">#FF7043</color>
+    <color name="muscle_blue">#42A5F5</color>
+    <color name="water_green">#26A69A</color>
+    <color name="bmi_purple">#7E57C2</color>
+
+    <!-- 健康指标 -->
+    <color name="heart_red">#EF5350</color>
+    <color name="oxygen_blue">#26C6DA</color>
+
+    <!-- 分割线 -->
+    <color name="divider">#E5E7EB</color>
+
+    <!-- 通用 -->
+
 </resources>

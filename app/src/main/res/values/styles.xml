@@ -2,7 +2,7 @@
 <resources>
 
     <!--应用程序基础主题方案 Activity跳转动画效果:退出向右隐藏，进入向右弹出，启动另一个Activity时本页面不动 -->
-    <style name="AppLoaderStyle" parent="@style/Theme.AppCompat.Light.NoActionBar">
+    <style name="AppLoaderStyle" parent="Theme.MaterialComponents.Light.NoActionBar">
 
         <item name="android:windowAnimationStyle">@style/default_animation</item>
         <!--标题栏底色-->
@@ -44,7 +44,7 @@
     </style>
 
     <!--Activity 使用的主题-->
-    <style name="ActionBarTheme" parent="Theme.AppCompat.Light.NoActionBar">
+    <style name="ActionBarTheme" parent="Theme.MaterialComponents.Light.NoActionBar">
         <item name="android:windowAnimationStyle">@style/default_animation</item>
         <item name="android:windowIsTranslucent">false</item>
         <item name="android:windowDisablePreview">true</item>

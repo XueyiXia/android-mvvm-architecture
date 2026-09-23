@@ -3,6 +3,7 @@ package com.jetpack.mvvm.viewmodel
 import android.Manifest
 import android.bluetooth.BluetoothDevice
 import android.os.Build
+import android.util.Log
 import android.view.View
 import androidx.annotation.RequiresApi
 import androidx.annotation.RequiresPermission
@@ -79,7 +80,8 @@ class DeviceViewModel(
     private fun observeConnection() {
         viewModelScope.launch {
             repository.connected.collect { connected ->
-                _uiState.value = _uiState.value.copy(connected = connected,connectStatus =if(uiState.value.connected){"已经连接蓝牙"}else{"未连接蓝牙"})
+                Log.d("observeConnection", " connected = $connected")
+                _uiState.value = _uiState.value.copy(connected = connected,connectStatus =if(connected){"已经连接蓝牙"}else{"未连接蓝牙"})
             }
         }
     }
@@ -194,6 +196,7 @@ class DeviceViewModel(
     // =====================================================
     // 连接设备
     // =====================================================
+    @RequiresPermission(Manifest.permission.BLUETOOTH_CONNECT)
     fun connect(device: BluetoothDevice) {
         repository.connect(device)
     }
@@ -203,7 +206,6 @@ class DeviceViewModel(
     // 开始测量
     // =====================================================
 
-    @RequiresApi(Build.VERSION_CODES.TIRAMISU)
     fun startMeasure() {
         if (!_uiState.value.connected) {
             _uiState.value = _uiState.value.copy(error = "请先连接设备")

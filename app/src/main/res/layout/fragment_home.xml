@@ -1,131 +1,294 @@
 <?xml version="1.0" encoding="utf-8"?>
-
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
+
     <data>
 
         <variable
             name="scaleViewModel"
-            type="com.jetpack.mvvm.viewmodel.DeviceViewModel" />
+            type="com.jetpack.mvvm.viewmodel.DeviceViewModel"/>
 
     </data>
 
-    <LinearLayout
-        android:orientation="vertical"
+
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:background="@color/page_background">
 
 
-        <TextView
-            android:id="@+id/tvStatus"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@{`连接状态: ` + scaleViewModel.uiState.connectStatus}"
-            android:layout_marginTop="@dimen/dp_22"
-            android:layout_marginStart="@dimen/dp_10"
-            android:textSize="@dimen/sp_20"
-            android:layout_gravity="center|start"/>
-
-
-        <TextView
-            android:id="@+id/tvBleName"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@{`蓝牙名称: ` + scaleViewModel.uiState.deviceName}"
-            android:layout_marginTop="@dimen/dp_12"
-            android:layout_marginStart="@dimen/dp_10"
-            android:textSize="@dimen/sp_20"
-            android:layout_gravity="center|start"/>
-
-
-        <Button
-            android:id="@+id/btnScan"
+        <androidx.core.widget.NestedScrollView
             android:layout_width="match_parent"
-            android:layout_height="@dimen/dp_50"
-            android:layout_marginTop="@dimen/dp_20"
-            android:text="扫描 ESP32"
-            app:onBindingScanListener="@{scaleViewModel.onScanClickListener}"/>
-
-        <Button
-            android:id="@+id/btnConnection"
-            android:layout_width="match_parent"
-            android:layout_height="@dimen/dp_50"
-            android:layout_marginTop="@dimen/dp_10"
-            android:text="开始连接"
-            app:onConnectionClickListener="@{scaleViewModel.onConnectionClickListener}"
-            />
+            android:layout_height="match_parent"
+            android:scrollbars="none">
 
 
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/dp_20"
-            android:text="体重"
-            android:textSize="@dimen/sp_15"
-            android:layout_marginStart="@dimen/dp_10"/>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:layout_margin="@dimen/dp_16">
 
 
-        <TextView
-            android:id="@+id/tvWeight"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="@{scaleViewModel.uiState.weight}"
-            android:textColor="@color/purple_200"
-            android:textSize="@dimen/sp_25"
-            android:layout_marginStart="@dimen/dp_10"/>
+                <!-- 完成状态 -->
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="✓ 测量完成"
+                    android:textSize="@dimen/sp_22"
+                    android:textStyle="bold"
+                    android:textColor="@color/health_green"/>
 
 
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/dp_30"
-            android:text="体脂率"
-            android:textSize="@dimen/sp_16"
-            android:layout_marginStart="@dimen/dp_10"/>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="身体数据分析完成"
+                    android:textSize="@dimen/sp_14"
+                    android:textColor="@color/text_secondary"
+                    android:layout_marginTop="@dimen/dp_6"/>
 
 
-        <TextView
-            android:id="@+id/tvFat"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="@{scaleViewModel.uiState.fat}"
-            android:textSize="@dimen/sp_25"
-            android:textColor="@color/purple_200"
-            android:layout_marginStart="@dimen/dp_10"/>
+                <!-- 健康评分 -->
+
+                <com.google.android.material.card.MaterialCardView
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/dp_300"
+                    android:layout_marginTop="@dimen/dp_20"
+                    app:cardCornerRadius="@dimen/dp_28"
+                    app:cardElevation="@dimen/dp_3"
+                    app:cardBackgroundColor="@color/card_white">
 
 
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/dp_30"
-            android:text="肌肉"
-            android:textSize="@dimen/sp_16"
-            android:layout_marginStart="@dimen/dp_10"/>
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:gravity="center"
+                        android:orientation="vertical">
 
 
-        <TextView
-            android:id="@+id/tvMuscle"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:textColor="@color/purple_200"
-            android:text="@{scaleViewModel.uiState.muscle}"
-            android:textSize="@dimen/sp_25"
-            android:layout_marginStart="@dimen/dp_10"/>
+                        <FrameLayout
+                            android:layout_width="@dimen/dp_190"
+                            android:layout_height="@dimen/dp_190">
+
+
+                            <com.google.android.material.progressindicator.CircularProgressIndicator
+                                android:id="@+id/healthProgress"
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:max="100"
+                                android:progress="88"
+                                android:layout_gravity="center"
+                                app:indicatorSize="@dimen/dp_180"
+                                app:trackThickness="@dimen/dp_12"
+                                app:indicatorColor="@color/health_green"
+                                app:trackColor="@color/progress_track"/>
+
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:gravity="center"
+                                android:layout_gravity="center"
+                                android:orientation="vertical">
+
+
+                                <TextView
+                                    android:id="@+id/tvHealthScore"
+                                    android:text="88"
+                                    android:textSize="@dimen/sp_48"
+                                    android:textStyle="bold"
+                                    android:textColor="@color/text_primary"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"/>
+
+
+                                <TextView
+                                    android:text="健康评分"
+                                    android:textSize="@dimen/sp_14"
+                                    android:textColor="@color/text_secondary"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"/>
+
+
+                            </LinearLayout>
+
+
+                        </FrameLayout>
+
+
+                        <TextView
+                            android:text="身体状态良好"
+                            android:textSize="@dimen/sp_16"
+                            android:textColor="@color/health_green"
+                            android:layout_marginTop="@dimen/dp_16"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"/>
+
+
+                    </LinearLayout>
+
+                </com.google.android.material.card.MaterialCardView>
 
 
 
-
-        <Button
-            android:id="@+id/btnMeasure"
-            android:layout_width="match_parent"
-            android:layout_height="@dimen/dp_50"
-            android:layout_marginTop="@dimen/dp_40"
-            android:text="开始测量"
-            app:onMeasureClickListener="@{scaleViewModel.onMeasureClickListener}"
-             />
+                <!-- 核心数据 -->
 
 
-    </LinearLayout>
+                <TextView
+                    android:text="身体指标"
+                    android:textSize="@dimen/sp_20"
+                    android:textStyle="bold"
+                    android:textColor="@color/text_primary"
+                    android:layout_marginTop="@dimen/dp_24"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"/>
+
+
+
+                <com.google.android.material.card.MaterialCardView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/dp_12"
+                    app:cardCornerRadius="@dimen/dp_20"
+                    app:cardBackgroundColor="@color/card_white">
+
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:padding="@dimen/dp_16"
+                        android:orientation="vertical">
+
+
+                        <!-- 体重 -->
+
+                        <TextView
+                            android:text="@{`体重       `+scaleViewModel.uiState.weight+` kg`}"
+                            android:textSize="@dimen/sp_18"
+                            android:textStyle="bold"
+                            android:textColor="@color/weight_color"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"/>
+
+
+                        <View
+                            android:layout_width="match_parent"
+                            android:layout_height="@dimen/dp_1"
+                            android:background="@color/divider"
+                            android:layout_marginTop="@dimen/dp_12"/>
+
+
+                        <TextView
+                            android:text="@{`体脂率     `+scaleViewModel.uiState.fat+` %`}"
+                            android:textSize="@dimen/sp_16"
+                            android:textColor="@color/fat_orange"
+                            android:layout_marginTop="@dimen/dp_12"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"/>
+
+
+                        <TextView
+                            android:text="@{`肌肉量     `+scaleViewModel.uiState.muscle+` kg`}"
+                            android:textSize="@dimen/sp_16"
+                            android:textColor="@color/muscle_blue"
+                            android:layout_marginTop="@dimen/dp_12"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"/>
+
+
+                        <TextView
+                            android:text="@{`水分       `+scaleViewModel.uiState.water+` %`}"
+                            android:textSize="@dimen/sp_16"
+                            android:textColor="@color/water_green"
+                            android:layout_marginTop="@dimen/dp_12"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"/>
+
+
+                        <TextView
+                            android:text="@{`BMI          `+scaleViewModel.uiState.bmi}"
+                            android:textSize="@dimen/sp_16"
+                            android:textColor="@color/bmi_purple"
+                            android:layout_marginTop="@dimen/dp_12"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"/>
+
+
+                    </LinearLayout>
+
+
+                </com.google.android.material.card.MaterialCardView>
+
+
+
+                <!-- 健康数据 -->
+
+
+                <TextView
+                    android:text="健康数据"
+                    android:textSize="@dimen/sp_20"
+                    android:textStyle="bold"
+                    android:textColor="@color/text_primary"
+                    android:layout_marginTop="@dimen/dp_24"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"/>
+
+
+                <com.google.android.material.card.MaterialCardView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/dp_12"
+                    app:cardCornerRadius="@dimen/dp_20"
+                    app:cardBackgroundColor="@color/card_white">
+
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical"
+                        android:padding="@dimen/dp_16">
+
+
+                        <TextView
+                            android:text="@{`心率       `+scaleViewModel.uiState.heartRate+` bpm`}"
+                            android:textSize="@dimen/sp_16"
+                            android:textColor="@color/heart_red"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"/>
+
+
+                        <TextView
+                            android:text="@{`血压       `+scaleViewModel.uiState.systolic+` / `+scaleViewModel.uiState.diastolic+` mmHg`}"
+                            android:textSize="@dimen/sp_16"
+                            android:layout_marginTop="@dimen/dp_12"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"/>
+
+
+                        <TextView
+                            android:text="@{`血氧       `+scaleViewModel.uiState.oxygen+` %`}"
+                            android:textSize="@dimen/sp_16"
+                            android:textColor="@color/oxygen_blue"
+                            android:layout_marginTop="@dimen/dp_12"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"/>
+
+
+                    </LinearLayout>
+
+
+                </com.google.android.material.card.MaterialCardView>
+
+
+
+            </LinearLayout>
+
+
+        </androidx.core.widget.NestedScrollView>
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
 </layout>
-
