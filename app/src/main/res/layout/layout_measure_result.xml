@@ -5,19 +5,22 @@
     <data>
         <variable
             name="scaleViewModel"
-            type="com.jetpack.mvvm.viewmodel.DeviceViewModel" />
+            type="com.jetpack.mvvm.viewmodel.DeviceViewModel"/>
     </data>
 
-    <ScrollView
+    <androidx.core.widget.NestedScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:padding="@dimen/dp_16">
+        android:padding="@dimen/dp_16"
+        android:scrollbars="none">
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical">
 
+
+            <!-- 健康评分 -->
             <com.google.android.material.card.MaterialCardView
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/dp_200"
@@ -37,18 +40,19 @@
                         android:text="@{String.valueOf(scaleViewModel.uiState.score)}"
                         android:textColor="@color/health_green"
                         android:textSize="@dimen/sp_50"
-                        android:textStyle="bold" />
+                        android:textStyle="bold"/>
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="健康评分"
                         android:textColor="@color/text_secondary"
-                        android:textSize="@dimen/sp_16" />
+                        android:textSize="@dimen/sp_16"/>
 
                 </LinearLayout>
 
             </com.google.android.material.card.MaterialCardView>
+
 
             <TextView
                 android:layout_width="wrap_content"
@@ -57,8 +61,10 @@
                 android:text="身体指标"
                 android:textColor="@color/text_primary"
                 android:textSize="@dimen/sp_22"
-                android:textStyle="bold" />
+                android:textStyle="bold"/>
 
+
+            <!-- 体重 -->
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/dp_60"
@@ -66,10 +72,11 @@
                 android:background="@drawable/bg_metric_card"
                 android:gravity="center_vertical"
                 android:paddingStart="@dimen/dp_16"
-                android:text="@{`体重  `+scaleViewModel.uiState.weight+` kg`}"
-                android:textColor="@color/number_color"
-                android:textSize="@dimen/sp_18" />
+                android:text="@{`体重     `+scaleViewModel.uiState.weight+` kg`}"
+                android:textSize="@dimen/sp_18"/>
 
+
+            <!-- 体脂 -->
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/dp_60"
@@ -77,9 +84,11 @@
                 android:background="@drawable/bg_metric_card"
                 android:gravity="center_vertical"
                 android:paddingStart="@dimen/dp_16"
-                android:text="@{`体脂  `+scaleViewModel.uiState.fat+` %`}"
-                android:textSize="@dimen/sp_18" />
+                android:text="@{`体脂率   `+scaleViewModel.uiState.fat+` %`}"
+                android:textSize="@dimen/sp_18"/>
 
+
+            <!-- 肌肉 -->
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/dp_60"
@@ -87,11 +96,72 @@
                 android:background="@drawable/bg_metric_card"
                 android:gravity="center_vertical"
                 android:paddingStart="@dimen/dp_16"
-                android:text="@{`肌肉  `+scaleViewModel.uiState.muscle+` kg`}"
-                android:textSize="@dimen/sp_18" />
+                android:text="@{`肌肉量   `+scaleViewModel.uiState.muscle+` kg`}"
+                android:textSize="@dimen/sp_18"/>
+
+
+            <!-- 水分 -->
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/dp_60"
+                android:layout_marginTop="@dimen/dp_10"
+                android:background="@drawable/bg_metric_card"
+                android:gravity="center_vertical"
+                android:paddingStart="@dimen/dp_16"
+                android:text="@{`身体水分 `+scaleViewModel.uiState.water+` %`}"
+                android:textSize="@dimen/sp_18"/>
+
+
+            <!-- BMI -->
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/dp_60"
+                android:layout_marginTop="@dimen/dp_10"
+                android:background="@drawable/bg_metric_card"
+                android:gravity="center_vertical"
+                android:paddingStart="@dimen/dp_16"
+                android:text="@{`BMI       `+scaleViewModel.uiState.bmi}"
+                android:textSize="@dimen/sp_18"/>
+
+
+            <!-- 血压 -->
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/dp_60"
+                android:layout_marginTop="@dimen/dp_10"
+                android:background="@drawable/bg_metric_card"
+                android:gravity="center_vertical"
+                android:paddingStart="@dimen/dp_16"
+                android:text="@{`血压      `+scaleViewModel.uiState.systolic+`/`+scaleViewModel.uiState.diastolic+` mmHg`}"
+                android:textSize="@dimen/sp_18"/>
+
+
+            <!-- 心率 -->
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/dp_60"
+                android:layout_marginTop="@dimen/dp_10"
+                android:background="@drawable/bg_metric_card"
+                android:gravity="center_vertical"
+                android:paddingStart="@dimen/dp_16"
+                android:text="@{`心率      `+scaleViewModel.uiState.heartRate+` bpm`}"
+                android:textSize="@dimen/sp_18"/>
+
+
+            <!-- 血氧 -->
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/dp_60"
+                android:layout_marginTop="@dimen/dp_10"
+                android:background="@drawable/bg_metric_card"
+                android:gravity="center_vertical"
+                android:paddingStart="@dimen/dp_16"
+                android:text="@{`血氧      `+scaleViewModel.uiState.oxygen+` %`}"
+                android:textSize="@dimen/sp_18"/>
+
 
         </LinearLayout>
 
-    </ScrollView>
+    </androidx.core.widget.NestedScrollView>
 
 </layout>

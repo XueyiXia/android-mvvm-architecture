@@ -36,7 +36,7 @@
                 android:progress="@{scaleViewModel.uiState.progress}"
                 android:max="100"
                 app:indicatorColor="@color/health_green"
-                app:indicatorSize="@dimen/dp_220"
+                app:indicatorSize="@dimen/dp_210"
                 app:trackColor="@color/progress_track"
                 app:trackThickness="@dimen/dp_12" />
 

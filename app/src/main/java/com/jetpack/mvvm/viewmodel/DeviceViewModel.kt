@@ -44,7 +44,8 @@ class DeviceViewModel(
                     Log.d("DeviceViewModel", "device= :${device}")
                     _uiState.value = _uiState.value.copy(
                         deviceName = device.name ?: "",
-                        deviceState = DeviceState.CONNECTING
+                        deviceState = DeviceState.CONNECTING,
+                        device = device
 
                     )
                 }
@@ -52,17 +53,18 @@ class DeviceViewModel(
         }
     }
 
-    private fun observeConnection() {
+    private fun observeConnection(){
         viewModelScope.launch {
             repository.connected.collect { connected ->
-                Log.d("DeviceViewModel", "connected=$connected")
-                _uiState.value = _uiState.value.copy(
-                    deviceState = if (connected) {
-                        DeviceState.READY
-                    } else {
-                        DeviceState.DISCONNECTED
-                    }
-                )
+                if(connected){
+                    _uiState.value = _uiState.value.copy(
+                        deviceState = DeviceState.READY,
+                        statusText = "请站上秤",
+                        progress = 0
+                    )
+
+                }
+
             }
         }
     }
@@ -118,40 +120,35 @@ class DeviceViewModel(
 
     @RequiresPermission(Manifest.permission.BLUETOOTH_CONNECT)
     fun connectDevice() {
-//        _uiState.value.connectStatus?.let {
-//            repository.connect(it)
-//
-//        } ?: run {
-//            _uiState.value =
-//                _uiState.value.copy(
-//                    statusText = "未发现设备"
-//                )
-//        }
+        _uiState.value.device?.let {
+            repository.connect(it)
+
+        } ?: run {
+            _uiState.value =
+                _uiState.value.copy(
+                    statusText = "未发现设备"
+                )
+        }
     }
 
     fun startMeasure() {
-//        if (!_uiState.value.) {
-//            _uiState.value = _uiState.value.copy(
-//                deviceState = DeviceState.ERROR,
-//            )
-//            return
-//        }
-
         _uiState.value = _uiState.value.copy(
-            deviceState = DeviceState.MEASURING
+            deviceState = DeviceState.MEASURING,
+            progress = 10,
+            statusText = "正在测量"
         )
-
         repository.startMeasure()
     }
 
     private fun updateHealthData(data: DeviceUiState) {
         _uiState.value = _uiState.value.copy(
             deviceState = DeviceState.COMPLETE,
-            weight = data.weight.toString(),
-            fat = data.fat.toString(),
-            muscle = data.muscle.toString(),
-            water = data.water.toString(),
-            bmi = data.bmi.toString(),
+            progress = calculateProgress(data),
+            weight = data.weight,
+            fat = data.fat,
+            muscle = data.muscle,
+            water = data.water,
+            bmi = data.bmi,
             systolic = data.systolic,
             diastolic = data.diastolic,
             heartRate = data.heartRate,
@@ -172,6 +169,43 @@ class DeviceViewModel(
         _uiState.value = _uiState.value.copy(
 
         )
+    }
+
+
+    private fun calculateProgress(
+        data: DeviceUiState
+    ):Int{
+
+
+        var progress=0
+
+
+        if((data.weight.toFloatOrNull() ?: 0f) > 0){
+            progress +=20
+        }
+
+
+        if((data.fat.toFloatOrNull() ?: 0f) > 0){
+            progress +=20
+        }
+
+
+        if((data.muscle.toFloatOrNull() ?: 0f) > 0){
+            progress +=20
+        }
+
+
+        if((data.water.toFloatOrNull() ?: 0f) > 0){
+            progress +=20
+        }
+
+
+        if((data.bmi.toFloatOrNull() ?: 0f) > 0){
+            progress +=20
+        }
+
+
+        return progress
     }
 
     override fun onCleared() {

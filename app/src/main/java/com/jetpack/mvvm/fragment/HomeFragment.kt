@@ -13,8 +13,13 @@ import com.jetpack.mvvm.BR
 import com.jetpack.mvvm.ble.DeviceState
 import com.jetpack.mvvm.databinding.FragmentHomeBinding
 import com.jetpack.mvvm.viewmodel.DeviceViewModel
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.Job
+import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 import org.koin.androidx.viewmodel.ext.android.activityViewModel
+import kotlin.time.Duration.Companion.milliseconds
 
 /**
  * @author: xiaxueyi
@@ -30,6 +35,10 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(){
     }
 
     private val viewModel by activityViewModel<DeviceViewModel>()
+
+
+    private val job = Job()
+    private val coroutineScope= CoroutineScope(Dispatchers.Main+job)
 
     override fun inflateBinding(
         inflater: LayoutInflater,
@@ -98,12 +107,18 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(){
             DeviceState.DISCONNECTED,
             DeviceState.SCANNING,
             DeviceState.CONNECTING,
-            DeviceState.READY,
+
             DeviceState.ERROR -> {
                 mBinding.layoutConnect.root.visibility = View.VISIBLE
             }
+            DeviceState.READY,
             DeviceState.MEASURING -> {
+                mBinding.layoutConnect.root.visibility = View.GONE
                 mBinding.layoutMeasure.root.visibility = View.VISIBLE
+                coroutineScope.launch {
+                    delay(1000L.milliseconds)
+                    viewModel.startMeasure()
+                }
             }
             DeviceState.COMPLETE -> {
                 mBinding.layoutResult.root.visibility = View.VISIBLE

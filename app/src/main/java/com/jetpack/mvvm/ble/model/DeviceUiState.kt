@@ -9,6 +9,7 @@ data class DeviceUiState(
     val connectStatus:String = "未连接",
     val deviceName:String = "",
     val deviceState: DeviceState = DeviceState.DISCONNECTED,
+    val device: BluetoothDevice ? =null,
     val progress:Int = 0,
     val rssi:Int = 0,
     val statusText:String = "未连接设备",
