@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+        <variable
+            name="scaleViewModel"
+            type="com.jetpack.mvvm.viewmodel.DeviceViewModel" />
+    </data>
+
+    <LinearLayout
+        android:id="@+id/measureRoot"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/page_background"
+        android:gravity="center"
+        android:orientation="vertical">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="正在测量"
+            android:textColor="@color/text_primary"
+            android:textSize="@dimen/sp_25"
+            android:textStyle="bold" />
+
+        <FrameLayout
+            android:layout_width="@dimen/dp_220"
+            android:layout_height="@dimen/dp_220"
+            android:layout_marginTop="@dimen/dp_40">
+
+            <com.google.android.material.progressindicator.CircularProgressIndicator
+                android:id="@+id/progress"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:progress="@{scaleViewModel.uiState.progress}"
+                android:max="100"
+                app:indicatorColor="@color/health_green"
+                app:indicatorSize="@dimen/dp_220"
+                app:trackColor="@color/progress_track"
+                app:trackThickness="@dimen/dp_12" />
+
+            <TextView
+                android:id="@+id/tvProgress"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:text="@{String.valueOf(scaleViewModel.uiState.progress)+`%`}"
+                android:textColor="@color/text_primary"
+                android:textSize="@dimen/sp_36"
+                android:textStyle="bold" />
+
+        </FrameLayout>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/dp_30"
+            android:text="请保持站立"
+            android:textColor="@color/text_primary"
+            android:textSize="@dimen/sp_18" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/dp_8"
+            android:text="正在分析身体数据..."
+            android:textColor="@color/text_secondary"
+            android:textSize="@dimen/sp_14" />
+
+    </LinearLayout>
+
+</layout>

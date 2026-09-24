@@ -22,6 +22,7 @@ class BleRepository(
     private val gson = Gson()
     val devices = bleManager.devices
     val connected = bleManager.connected
+    val rssi = bleManager.rssi
 
     val data =
         bleManager.data

@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+        <variable
+            name="scaleViewModel"
+            type="com.jetpack.mvvm.viewmodel.DeviceViewModel"/>
+    </data>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/page_background"
+        android:gravity="center"
+        android:orientation="vertical"
+        android:padding="@dimen/dp_20">
+
+        <com.google.android.material.card.MaterialCardView
+            android:layout_width="@dimen/dp_300"
+            android:layout_height="wrap_content"
+            app:cardBackgroundColor="@color/card_white"
+            app:cardCornerRadius="@dimen/dp_24"
+            app:cardElevation="@dimen/dp_4">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:gravity="center"
+                android:orientation="vertical"
+                android:padding="@dimen/dp_20">
+
+                <ImageView
+                    android:layout_width="@dimen/dp_80"
+                    android:layout_height="@dimen/dp_80"
+                    android:src="@drawable/ic_scale"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/dp_16"
+                    android:text="智能体脂秤"
+                    android:textColor="@color/text_primary"
+                    android:textSize="@dimen/sp_22"
+                    android:textStyle="bold"/>
+
+                <TextView
+                    android:id="@+id/tvConnectStatus"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/dp_12"
+                    android:text="@{scaleViewModel.uiState.statusText}"
+                    android:textColor="@color/text_secondary"
+                    android:textSize="@dimen/sp_14"/>
+
+                <TextView
+                    android:id="@+id/tvDeviceName"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/dp_12"
+                    android:text="@{`设备: `+scaleViewModel.uiState.deviceName}"
+                    android:textColor="@color/text_primary"
+                    android:textSize="@dimen/sp_16"/>
+
+                <TextView
+                    android:id="@+id/tvDeviceRssi"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/dp_8"
+                    android:text="@{`信号: `+scaleViewModel.uiState.rssi+` dBm`}"
+                    android:textColor="@color/text_secondary"
+                    android:textSize="@dimen/sp_14"/>
+
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/btnScan"
+                    android:layout_width="@dimen/dp_200"
+                    android:layout_height="@dimen/dp_48"
+                    android:layout_marginTop="@dimen/dp_20"
+                    android:text="扫描设备"
+                    android:textColor="@android:color/white"
+                    app:backgroundTint="@color/button_green"
+                    app:cornerRadius="@dimen/dp_24"
+                    app:onBindingScanListener="@{()->scaleViewModel.startScan()}"/>
+
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/btnConnect"
+                    android:layout_width="@dimen/dp_200"
+                    android:layout_height="@dimen/dp_48"
+                    android:layout_marginTop="@dimen/dp_10"
+                    android:text="连接设备"
+                    android:textColor="@android:color/white"
+                    app:backgroundTint="@color/button_green"
+                    app:cornerRadius="@dimen/dp_24"
+                    app:onConnectionClickListener="@{()->scaleViewModel.connectDevice()}"/>
+
+            </LinearLayout>
+
+        </com.google.android.material.card.MaterialCardView>
+
+    </LinearLayout>
+
+</layout>

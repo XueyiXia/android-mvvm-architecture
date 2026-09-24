@@ -1,16 +1,16 @@
 package com.jetpack.mvvm.fragment
 
-import android.os.Build
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
-import androidx.annotation.RequiresApi
+import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
+import androidx.lifecycle.repeatOnLifecycle
 import com.framework.mvvm.base.BaseFragment
 import com.jetpack.mvvm.BR
+import com.jetpack.mvvm.ble.DeviceState
 import com.jetpack.mvvm.databinding.FragmentHomeBinding
 import com.jetpack.mvvm.viewmodel.DeviceViewModel
 import kotlinx.coroutines.launch
@@ -41,7 +41,7 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(){
     override fun initView(rootView: View, savedInstanceState: Bundle?) {
         this.mBinding.setVariable(BR.scaleViewModel, this.viewModel)
 
-        initListener()
+        observeState()
     }
 
 
@@ -55,9 +55,9 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(){
 
         viewModel.onConnectionClickListener.observe(viewLifecycleOwner){
             Log.d("onScanClickListener","----开始连接蓝牙")
-            viewModel.uiState.value.device?.let {
-                viewModel.connect(it)
-            }
+//            viewModel.uiState.value.device?.let {
+//                viewModel.connect(it)
+//            }
 
         }
 
@@ -70,12 +70,45 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(){
 
         lifecycleScope.launch {
             viewModel.uiState.collect {
-                Toast.makeText(requireActivity(),it.error, Toast.LENGTH_SHORT).show()
+
 
             }
 
         }
 
+    }
+
+
+    private fun observeState() {
+        viewLifecycleOwner.lifecycleScope.launch {
+            repeatOnLifecycle(Lifecycle.State.STARTED) {
+                viewModel.uiState.collect {
+                    renderState(it.deviceState)
+                }
+            }
+        }
+    }
+
+    private fun renderState(state: DeviceState) {
+        mBinding.layoutConnect.root.visibility = View.GONE
+        mBinding.layoutMeasure.root.visibility = View.GONE
+        mBinding.layoutResult.root.visibility = View.GONE
+        Log.d("renderState","----state $state")
+        when(state) {
+            DeviceState.DISCONNECTED,
+            DeviceState.SCANNING,
+            DeviceState.CONNECTING,
+            DeviceState.READY,
+            DeviceState.ERROR -> {
+                mBinding.layoutConnect.root.visibility = View.VISIBLE
+            }
+            DeviceState.MEASURING -> {
+                mBinding.layoutMeasure.root.visibility = View.VISIBLE
+            }
+            DeviceState.COMPLETE -> {
+                mBinding.layoutResult.root.visibility = View.VISIBLE
+            }
+        }
     }
 
 }

@@ -23,13 +23,13 @@ object BleBindingAdapter {
     }
 
 
-    @JvmStatic
-    @BindingAdapter("onBindingScanListener", requireAll = false)
-    fun Button.onBindingScanListener(onBindingScanListener : IntLiveData) {
-        this.setOnClickListener {
-            onBindingScanListener.value=0
-        }
-    }
+//    @JvmStatic
+//    @BindingAdapter("onBindingScanListener", requireAll = false)
+//    fun Button.onBindingScanListener(onBindingScanListener : IntLiveData) {
+//        this.setOnClickListener {
+//            onBindingScanListener.value=0
+//        }
+//    }
 
 
     @JvmStatic
@@ -42,12 +42,38 @@ object BleBindingAdapter {
     }
 
 
+//    @JvmStatic
+//    @BindingAdapter("onConnectionClickListener", requireAll = false)
+//    fun Button.onConnectionClickListener(clickListener : MutableLiveData<View>) {
+//        this.setOnClickListener {
+//            clickListener.value=it
+//        }
+//
+//    }
+
+
+    @JvmStatic
+    @BindingAdapter("onClick")
+    fun setOnClick(
+        view: View,
+        listener: View.OnClickListener?
+    ){
+
+        view.setOnClickListener(listener)
+
+    }
+
+
+    @JvmStatic
+    @BindingAdapter("onBindingScanListener", requireAll = false)
+    fun onBindingScanListener(view: View, listener: View.OnClickListener?) {
+        view.setOnClickListener(listener)
+    }
+
+
     @JvmStatic
     @BindingAdapter("onConnectionClickListener", requireAll = false)
-    fun Button.onConnectionClickListener(clickListener : MutableLiveData<View>) {
-        this.setOnClickListener {
-            clickListener.value=it
-        }
-
+    fun onConnectionClickListener(view: View, listener: View.OnClickListener?) {
+        view.setOnClickListener(listener)
     }
 }

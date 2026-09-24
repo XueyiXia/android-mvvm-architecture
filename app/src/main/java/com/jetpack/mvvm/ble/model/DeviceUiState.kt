@@ -1,48 +1,26 @@
 package com.jetpack.mvvm.ble.model
 
 import android.bluetooth.BluetoothDevice
+import com.jetpack.mvvm.ble.DeviceState
+
 
 data class DeviceUiState(
 
-    val devices: List<BluetoothDevice> = emptyList(),
-    // 连接状态
-    val connected:Boolean = false,
-
-    val connectStatus: String = "未连接",
-
-    val device: BluetoothDevice?=null,
-
-    // 蓝牙设备名称
-    val deviceName:String = "--",
-
-
-    // 体重
-    val weight:String = "-- kg",
-
-
-    // 体脂
-    val fat:String = "-- %",
-
-
-    // 肌肉
-    val muscle:String = "-- kg",
-
-
-    // 电量
-    val battery:String = "-- %",
-
-
-    val water: String = "--",
-    val bmi: String = "--",
-
-    val systolic: String = "--",
-    val diastolic: String = "--",
-
-    val heartRate: String = "--",
-    val oxygen: String = "--",
-
-    val measuring: Boolean = false,
-
-    val error: String? = null
+    val connectStatus:String = "未连接",
+    val deviceName:String = "",
+    val deviceState: DeviceState = DeviceState.DISCONNECTED,
+    val progress:Int = 0,
+    val rssi:Int = 0,
+    val statusText:String = "未连接设备",
+    val weight:String = "0",
+    val fat:String = "0",
+    val muscle:String = "0",
+    val water:String = "0",
+    val bmi:String = "0",
+    val systolic:String = "0",
+    val diastolic:String = "0",
+    val heartRate:String = "0",
+    val oxygen:String = "0",
+    val score:Int = 0
 
 )

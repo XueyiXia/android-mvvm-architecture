@@ -63,6 +63,12 @@ class BleManager(
     private var commandCharacteristic: BluetoothGattCharacteristic? = null
 
     // --------------------------------------------------
+    // 设备信号
+    // --------------------------------------------------
+    private val _rssi = MutableStateFlow(0)
+    val rssi = _rssi.asStateFlow()
+
+    // --------------------------------------------------
     // 扫描设备
     // --------------------------------------------------
     private val _devices = MutableStateFlow<List<BluetoothDevice>>(emptyList())
@@ -143,6 +149,7 @@ class BleManager(
                 if (current.none { it.address == device.address }) {
                     current.add(device)
                     _devices.value = current
+                    _rssi.value = result.rssi
                 }
             }
         }

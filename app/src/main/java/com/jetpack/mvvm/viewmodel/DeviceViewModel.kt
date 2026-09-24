@@ -2,15 +2,14 @@ package com.jetpack.mvvm.viewmodel
 
 import android.Manifest
 import android.bluetooth.BluetoothDevice
-import android.os.Build
 import android.util.Log
 import android.view.View
-import androidx.annotation.RequiresApi
 import androidx.annotation.RequiresPermission
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.framework.mvvm.livedata.IntLiveData
+import com.jetpack.mvvm.ble.DeviceState
 import com.jetpack.mvvm.ble.model.DeviceUiState
 import com.jetpack.mvvm.ble.repository.BleRepository
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -22,10 +21,6 @@ class DeviceViewModel(
     private val repository: BleRepository
 ) : ViewModel() {
 
-    // =====================================================
-    // UI State
-    // =====================================================
-
     private val _uiState = MutableStateFlow(DeviceUiState())
     val uiState: StateFlow<DeviceUiState> = _uiState.asStateFlow()
 
@@ -33,217 +28,151 @@ class DeviceViewModel(
     val onMeasureClickListener = MutableLiveData<View>()
     val onConnectionClickListener = MutableLiveData<View>()
 
-    // =====================================================
-    // 初始化
-    // =====================================================
-
     init {
-
         observeDevices()
-
         observeConnection()
-
         observeHealthData()
-
+        observeRssiData()
         observeError()
     }
 
-
-    // =====================================================
-    // 监听扫描设备
-    // =====================================================
-
     private fun observeDevices() {
-
         viewModelScope.launch {
             repository.devices.collect { devices ->
-                if (devices.isNotEmpty()){
-                    val deviceName = devices[0].name
+                if (devices.isNotEmpty()) {
+                    val device = devices[0]
+                    Log.d("DeviceViewModel", "device= :${device}")
                     _uiState.value = _uiState.value.copy(
-                        devices = devices,
-                        deviceName=deviceName,
-                        device= devices[0]
-
+                        deviceName = device.name ?: "",
+                        deviceState = DeviceState.CONNECTING
 
                     )
                 }
-
             }
         }
     }
-
-
-    // =====================================================
-    // 监听 BLE 连接状态
-    // =====================================================
 
     private fun observeConnection() {
         viewModelScope.launch {
             repository.connected.collect { connected ->
-                Log.d("observeConnection", " connected = $connected")
-                _uiState.value = _uiState.value.copy(connected = connected,connectStatus =if(connected){"已经连接蓝牙"}else{"未连接蓝牙"})
+                Log.d("DeviceViewModel", "connected=$connected")
+                _uiState.value = _uiState.value.copy(
+                    deviceState = if (connected) {
+                        DeviceState.READY
+                    } else {
+                        DeviceState.DISCONNECTED
+                    }
+                )
             }
         }
     }
-
-
-    // =====================================================
-    // 监听健康数据
-    // =====================================================
 
     private fun observeHealthData() {
-
         viewModelScope.launch {
-
             repository.data.collect { data ->
-
-                _uiState.value =
-                    _uiState.value.copy(
-                        weight =
-                            String.format(
-                                "%.1f kg",
-                                data.weight
-                            ),
-
-                        fat =
-                            String.format(
-                                "%.1f %%",
-                                data.fat
-                            ),
-
-                        muscle =
-                            String.format(
-                                "%.1f kg",
-                                data.muscle
-                            ),
-
-                        water =
-                            String.format(
-                                "%.1f %%",
-                                data.water
-                            ),
-
-                        bmi =
-                            String.format(
-                                "%.1f",
-                                data.bmi
-                            ),
-
-                        systolic =
-                            data.systolic,
-
-                        diastolic =
-                            data.diastolic,
-
-                        heartRate =
-                            data.heartRate,
-
-                        oxygen =
-                            String.format(
-                                "%d %%",
-                                data.oxygen
-                            ),
-
-                        measuring = false,
-
-                        error = null
-                    )
+                Log.d("DeviceViewModel", "data=$data")
+                updateHealthData(data)
             }
         }
     }
 
 
-    // =====================================================
-    // 监听错误
-    // =====================================================
+    private fun observeRssiData() {
+        viewModelScope.launch {
+            repository.rssi.collect { rssi ->
+                Log.d("DeviceViewModel", "rssi=${rssi}")
+                _uiState.value = _uiState.value.copy(rssi = rssi)
+            }
+        }
+    }
 
     private fun observeError() {
-
         viewModelScope.launch {
-
             repository.error.collect { message ->
-
-                _uiState.value =
-                    _uiState.value.copy(
-                        measuring = false,
-                        error = message
-                    )
+                _uiState.value = _uiState.value.copy(
+                    deviceState = DeviceState.ERROR,
+                )
             }
         }
     }
 
-
-    // =====================================================
-    // 开始扫描
-    // =====================================================
-
     fun startScan() {
-
+        _uiState.value = _uiState.value.copy(
+            deviceState = DeviceState.SCANNING
+        )
         repository.scan()
     }
 
-
-    // =====================================================
-    // 停止扫描
-    // =====================================================
-
     fun stopScan() {
-
         repository.stopScan()
     }
 
+//    @RequiresPermission(Manifest.permission.BLUETOOTH_CONNECT)
+//    fun connect(device: BluetoothDevice) {
+//        _uiState.value = _uiState.value.copy(
+//            deviceState = DeviceState.CONNECTING
+//        )
+//        repository.connect(device)
+//    }
 
-    // =====================================================
-    // 连接设备
-    // =====================================================
+
     @RequiresPermission(Manifest.permission.BLUETOOTH_CONNECT)
-    fun connect(device: BluetoothDevice) {
-        repository.connect(device)
+    fun connectDevice() {
+//        _uiState.value.connectStatus?.let {
+//            repository.connect(it)
+//
+//        } ?: run {
+//            _uiState.value =
+//                _uiState.value.copy(
+//                    statusText = "未发现设备"
+//                )
+//        }
     }
 
-
-    // =====================================================
-    // 开始测量
-    // =====================================================
-
     fun startMeasure() {
-        if (!_uiState.value.connected) {
-            _uiState.value = _uiState.value.copy(error = "请先连接设备")
-            return
-        }
+//        if (!_uiState.value.) {
+//            _uiState.value = _uiState.value.copy(
+//                deviceState = DeviceState.ERROR,
+//            )
+//            return
+//        }
 
-        _uiState.value =
-            _uiState.value.copy(
-                measuring = true,
-                error = null
-            )
+        _uiState.value = _uiState.value.copy(
+            deviceState = DeviceState.MEASURING
+        )
 
         repository.startMeasure()
     }
 
+    private fun updateHealthData(data: DeviceUiState) {
+        _uiState.value = _uiState.value.copy(
+            deviceState = DeviceState.COMPLETE,
+            weight = data.weight.toString(),
+            fat = data.fat.toString(),
+            muscle = data.muscle.toString(),
+            water = data.water.toString(),
+            bmi = data.bmi.toString(),
+            systolic = data.systolic,
+            diastolic = data.diastolic,
+            heartRate = data.heartRate,
+            oxygen = data.oxygen,
+            score = calculateScore(data)
+        )
+    }
 
-    // =====================================================
-    // 断开连接
-    // =====================================================
+    private fun calculateScore(data: DeviceUiState): Int {
+        return 88
+    }
 
     fun disconnect() {
-
         repository.disconnect()
     }
 
-
-    // =====================================================
-    // 清除错误
-    // =====================================================
-
     fun clearError() {
-        _uiState.value = _uiState.value.copy(error = null)
+        _uiState.value = _uiState.value.copy(
+
+        )
     }
-
-
-    // =====================================================
-    // ViewModel 销毁
-    // =====================================================
 
     override fun onCleared() {
         repository.release()
