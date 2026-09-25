@@ -12,13 +12,15 @@ import com.framework.mvvm.livedata.IntLiveData
 import com.jetpack.mvvm.ble.DeviceState
 import com.jetpack.mvvm.ble.model.DeviceUiState
 import com.jetpack.mvvm.ble.repository.BleRepository
+import com.jetpack.mvvm.wifi.WifiRepository
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.launch
 
 class DeviceViewModel(
-    private val repository: BleRepository
+    private val repository: BleRepository,
+    private val wifiRepository : WifiRepository
 ) : ViewModel() {
 
     private val _uiState = MutableStateFlow(DeviceUiState())
@@ -139,6 +141,22 @@ class DeviceViewModel(
         )
         repository.startMeasure()
     }
+
+
+    fun startWifiMeasure() {
+        _uiState.value = _uiState.value.copy(
+            deviceState = DeviceState.MEASURING,
+            progress = 10,
+            statusText = "正在测量"
+        )
+        viewModelScope.launch {
+            val json = wifiRepository.measure()
+            Log.d("startWifiMeasure","$json")
+
+            updateHealthData(json)
+        }
+    }
+
 
     private fun updateHealthData(data: DeviceUiState) {
         _uiState.value = _uiState.value.copy(

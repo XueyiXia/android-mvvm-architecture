@@ -86,6 +86,12 @@ dependencies {
     api(libs.koinAndroid)
     api(libs.koinAndroidExt)
     api(libs.xxPermissions)
+
+    api(libs.retrofit)
+    api(libs.retrofit.converter.gson)
+    api(libs.okhttp)
+    api(libs.logging.interceptor)
+
 //    api project(path: ':module_utils')
 
 }

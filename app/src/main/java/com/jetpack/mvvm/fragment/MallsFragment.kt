@@ -5,11 +5,16 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import com.framework.mvvm.base.BaseFragment
 import com.framework.mvvm.base.BaseMvvmFragment
+import com.jetpack.mvvm.BR
 import com.jetpack.mvvm.activities.TestActivity
 import com.jetpack.mvvm.databinding.FragmentMallsBinding
 import com.jetpack.mvvm.utils.MvvmSCUtils
+import com.jetpack.mvvm.viewmodel.DeviceViewModel
 import com.jetpack.mvvm.viewmodel.SplashViewModel
+import org.koin.androidx.viewmodel.ext.android.activityViewModel
+import kotlin.getValue
 
 /**
  * @author: xiaxueyi
@@ -18,8 +23,10 @@ import com.jetpack.mvvm.viewmodel.SplashViewModel
  * @说明:
  */
 
-class MallsFragment : BaseMvvmFragment<FragmentMallsBinding, SplashViewModel>(){
+class MallsFragment : BaseFragment<FragmentMallsBinding>(){
 
+
+    private val viewModel by activityViewModel<DeviceViewModel>()
 
     override fun inflateBinding(
         inflater: LayoutInflater,
@@ -30,46 +37,9 @@ class MallsFragment : BaseMvvmFragment<FragmentMallsBinding, SplashViewModel>(){
 
 
     override fun initView(rootView: View, savedInstanceState: Bundle?) {
+        this.mBinding.setVariable(BR.wifiViewModel, this.viewModel)
         Log.e("onViewCreated+++++++", "MallsFragment")
 
-        mBinding.next.setOnClickListener {
-            startActivityForResult(TestActivity::class.java){ activityResult->
-                Log.e("launcherCallback666","activityResult: ->> $activityResult")
-                val bundleResult=activityResult.data?.getBundleExtra(MvvmSCUtils.commonResultCode)
-                val key1=bundleResult?.getInt(MvvmSCUtils.key1,-1)
-                val key2=bundleResult?.getString(MvvmSCUtils.key2,)
-                val key3=bundleResult?.getCharSequenceArrayList(MvvmSCUtils.key3)
-                Log.e("launcherCallback666","key1: ->> $key1   , key2: ->> $key2  ,  key3: ->> $key3 ")
-            }
-        }
-
-
-
-
-        mBinding.nextHasParams.setOnClickListener {
-
-            val bundle: Bundle = Bundle()
-            bundle.putInt(MvvmSCUtils.key1,100)
-            bundle.putString(MvvmSCUtils.key2,"字符串")
-            bundle.putCharSequenceArrayList(MvvmSCUtils.key3, arrayListOf("1","2"))
-
-
-            startActivityForResult(TestActivity::class.java,bundle){ activityResult->
-                Log.e("launcherCallback666","activityResult: ->> $activityResult")
-                val bundleResult=activityResult.data?.getBundleExtra(MvvmSCUtils.commonResultCode)
-                val key1=bundleResult?.getInt(MvvmSCUtils.key1,-1)
-                val key2=bundleResult?.getString(MvvmSCUtils.key2,)
-                val key3=bundleResult?.getCharSequenceArrayList(MvvmSCUtils.key3)
-                Log.e("launcherCallback666","key1: ->> $key1   , key2: ->> $key2  ,  key3: ->> $key3 ")
-            }
-        }
-
-
-        mBinding.next1.setOnClickListener{
-            val bundle: Bundle = Bundle()
-            bundle.putInt(MvvmSCUtils.key1,100)
-            bundle.putString(MvvmSCUtils.key2,"字符串")
-            startActivity(TestActivity::class.java,bundle)
-        }
+        viewModel.startWifiMeasure()
     }
 }

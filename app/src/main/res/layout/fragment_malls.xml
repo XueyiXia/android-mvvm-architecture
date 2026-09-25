@@ -2,48 +2,29 @@
 
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
+
+
     <data>
 
         <variable
-            name="viewmodel"
-            type="com.jetpack.mvvm.viewmodel.SplashViewModel" />
+            name="wifiViewModel"
+            type="com.jetpack.mvvm.viewmodel.DeviceViewModel"/>
 
     </data>
 
-
-
-    <LinearLayout
-        android:orientation="vertical"
+    <FrameLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:background="@color/page_background">
 
-        <TextView
-            android:id="@+id/next"
+
+        <include
+            android:id="@+id/layoutResult"
             android:layout_width="match_parent"
-            android:layout_height="@dimen/dp_50"
-            android:textColor="@color/purple_500"
-            android:gravity="center"
-            android:text="不携带参数调整" />
+            android:layout_height="match_parent"
+            layout="@layout/layout_measure_result"
+            app:scaleViewModel="@{wifiViewModel}"/>
 
-
-        <TextView
-            android:id="@+id/next_has_params"
-            android:layout_width="match_parent"
-            android:layout_height="@dimen/dp_50"
-            android:textColor="@color/purple_500"
-            android:gravity="center"
-            android:text="携带参数调整" />
-
-
-        <TextView
-            android:id="@+id/next_1"
-            android:layout_width="match_parent"
-            android:layout_height="@dimen/dp_50"
-            android:textColor="@color/purple_500"
-            android:gravity="center"
-            android:text="不携带。只是跳转" />
-
-
-    </LinearLayout>
+    </FrameLayout>
 </layout>
 

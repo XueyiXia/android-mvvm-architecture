@@ -36,6 +36,11 @@ unspecified = "1.1.0"
 
 androidComposeUi= "1.7.4"
 refresh-layout = "2.1.0"
+
+retrofit = "3.0.0"
+okhttp = "4.12.0"
+gson = "2.11.0"
+
 [libraries]
 coreKtx = { module = "androidx.core:core-ktx", version.ref = "coreKtx" }
 appcompat = { module = "androidx.appcompat:appcompat", version.ref = "appcompat"}
@@ -78,6 +83,12 @@ lint-tests = { group = "com.android.tools.lint", name = "lint-tests", version.re
 
 refresh-layout = { module = "io.github.scwang90:refresh-layout-kernel", version.ref = "refresh-layout" }
 refresh-header = { module = "io.github.scwang90:refresh-header-classics", version.ref = "refresh-layout" }
+
+
+retrofit = { module = "com.squareup.retrofit2:retrofit", version.ref = "retrofit" }
+retrofit-converter-gson = { module = "com.squareup.retrofit2:converter-gson", version.ref = "retrofit" }
+okhttp = { module = "com.squareup.okhttp3:okhttp", version.ref = "okhttp" }
+logging-interceptor = { module = "com.squareup.okhttp3:logging-interceptor", version.ref = "okhttp" }
 
 [plugins]
 android-application = { id = "com.android.application", version.ref = "androidGradlePlugin" }
