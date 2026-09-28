@@ -40,6 +40,6 @@ class MallsFragment : BaseFragment<FragmentMallsBinding>(){
         this.mBinding.setVariable(BR.wifiViewModel, this.viewModel)
         Log.e("onViewCreated+++++++", "MallsFragment")
 
-        viewModel.startWifiMeasure()
+//        viewModel.startWifiMeasure()
     }
 }

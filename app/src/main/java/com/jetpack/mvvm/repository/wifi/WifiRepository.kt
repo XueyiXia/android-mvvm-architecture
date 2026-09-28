@@ -1,4 +1,4 @@
-package com.jetpack.mvvm.wifi
+package com.jetpack.mvvm.repository.wifi
 
 import com.jetpack.mvvm.net.RetrofitClient
 

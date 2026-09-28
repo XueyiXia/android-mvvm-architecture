@@ -1,22 +1,18 @@
-package com.jetpack.mvvm.ble.repository
-
+package com.jetpack.mvvm.repository.ble
 
 import android.Manifest
 import android.bluetooth.BluetoothDevice
-import android.os.Build
 import android.util.Log
-import androidx.annotation.RequiresApi
 import androidx.annotation.RequiresPermission
-import com.framework.mvvm.utils.PermissionManager
 import com.google.gson.Gson
+import com.jetpack.mvvm.MqttManager
 import com.jetpack.mvvm.ble.BleManager
 import com.jetpack.mvvm.ble.model.DeviceUiState
 import kotlinx.coroutines.flow.map
-import kotlin.jvm.java
-
 
 class BleRepository(
-    private val bleManager: BleManager
+    private val bleManager: BleManager,
+    private val mqttManager : MqttManager
 ) {
 
     private val gson = Gson()
@@ -27,7 +23,7 @@ class BleRepository(
     val data =
         bleManager.data
             .map { json ->
-                Log.d("getJSon","${json}")
+                Log.d("getJSon","==:${json}")
                 gson.fromJson(
                     json,
                     DeviceUiState::class.java

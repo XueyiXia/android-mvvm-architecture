@@ -5,11 +5,13 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.view.isVisible
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
 import com.framework.mvvm.base.BaseFragment
 import com.jetpack.mvvm.BR
+import com.jetpack.mvvm.activities.AddDeviceActivity
 import com.jetpack.mvvm.ble.DeviceState
 import com.jetpack.mvvm.databinding.FragmentHomeBinding
 import com.jetpack.mvvm.viewmodel.DeviceViewModel
@@ -17,7 +19,9 @@ import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.delay
+import kotlinx.coroutines.isActive
 import kotlinx.coroutines.launch
+import org.eclipse.paho.client.mqttv3.MqttClient
 import org.koin.androidx.viewmodel.ext.android.activityViewModel
 import kotlin.time.Duration.Companion.milliseconds
 
@@ -35,6 +39,8 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(){
     }
 
     private val viewModel by activityViewModel<DeviceViewModel>()
+
+    private var mqttClient: MqttClient? = null
 
 
     private val job = Job()
@@ -85,6 +91,9 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(){
 
         }
 
+
+
+
     }
 
 
@@ -111,7 +120,10 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(){
             DeviceState.ERROR -> {
                 mBinding.layoutConnect.root.visibility = View.VISIBLE
             }
-            DeviceState.READY,
+            DeviceState.READY->{
+
+                startActivity(AddDeviceActivity::class.java)
+            }
             DeviceState.MEASURING -> {
                 mBinding.layoutConnect.root.visibility = View.GONE
                 mBinding.layoutMeasure.root.visibility = View.VISIBLE
@@ -121,7 +133,28 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(){
                 }
             }
             DeviceState.COMPLETE -> {
+
                 mBinding.layoutResult.root.visibility = View.VISIBLE
+
+                viewLifecycleOwner.lifecycleScope.launch {
+                    repeatOnLifecycle(
+                        Lifecycle.State.RESUMED
+                    ){
+
+                        while(true){
+                            try {
+                                viewModel.startMeasure(true)
+                                delay(15000.milliseconds)
+                                Log.e("ESP32","请求成功:")
+                            }catch(e:Exception){
+                                Log.e("ESP32","请求失败:${e.message}")
+                            }
+
+
+                        }
+                    }
+                }
+
             }
         }
     }

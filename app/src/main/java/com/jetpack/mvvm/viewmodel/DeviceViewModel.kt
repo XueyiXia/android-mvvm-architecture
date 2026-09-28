@@ -1,7 +1,6 @@
 package com.jetpack.mvvm.viewmodel
 
 import android.Manifest
-import android.bluetooth.BluetoothDevice
 import android.util.Log
 import android.view.View
 import androidx.annotation.RequiresPermission
@@ -11,8 +10,8 @@ import androidx.lifecycle.viewModelScope
 import com.framework.mvvm.livedata.IntLiveData
 import com.jetpack.mvvm.ble.DeviceState
 import com.jetpack.mvvm.ble.model.DeviceUiState
-import com.jetpack.mvvm.ble.repository.BleRepository
-import com.jetpack.mvvm.wifi.WifiRepository
+import com.jetpack.mvvm.repository.ble.BleRepository
+import com.jetpack.mvvm.repository.wifi.WifiRepository
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
@@ -133,7 +132,11 @@ class DeviceViewModel(
         }
     }
 
-    fun startMeasure() {
+    fun startMeasure(isFinished: Boolean=false) {
+        if (isFinished){
+            repository.startMeasure()
+            return
+        }
         _uiState.value = _uiState.value.copy(
             deviceState = DeviceState.MEASURING,
             progress = 10,
@@ -141,6 +144,8 @@ class DeviceViewModel(
         )
         repository.startMeasure()
     }
+
+
 
 
     fun startWifiMeasure() {

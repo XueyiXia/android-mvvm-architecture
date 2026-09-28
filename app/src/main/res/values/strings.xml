@@ -6,4 +6,20 @@
     <string name="user">我的</string>
 
     <string name="get_back">返回</string>
+
+
+    <string name="wifi_select">选择WiFi</string>
+    <string name="scan_wifi">扫描WiFi</string>
+    <string name="connect_device">连接设备</string>
+    <string name="wifi_password">WiFi密码</string>
+    <string name="wifi_security">%1$s  %2$d dBm</string>
+
+
+    <string name="connect_wifi">连接WiFi</string>
+    <string name="wifi_password_hint">请输入WiFi密码</string>
+    <string name="wifi_connecting">正在连接...</string>
+    <string name="wifi_success">连接成功</string>
+    <string name="wifi_failed">密码错误，请重新输入</string>
+    <string name="connect">连接</string>
+    <string name="cancel">取消</string>
 </resources>

@@ -4,6 +4,7 @@ import android.app.Application
 import android.content.Context
 import androidx.multidex.MultiDex
 import com.jetpack.mvvm.di.bleModule
+import com.jetpack.mvvm.di.scanWifiModule
 import org.koin.android.ext.koin.androidContext
 import org.koin.core.context.startKoin
 import org.koin.core.module.Module
@@ -48,6 +49,7 @@ class AppLoader : Application() {
     private fun getKoinModules(): MutableList<Module> {
         val modules = mutableListOf<Module>()
         modules.add(bleModule)
+        modules.add(scanWifiModule)
         return modules
     }
 }

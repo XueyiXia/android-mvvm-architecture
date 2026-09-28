@@ -103,4 +103,13 @@
     <style name="MainItemTextUnSelectStyle" >
         <item name="android:textSize">@dimen/sp_13</item>
     </style>
+
+    <!-- WiFi 密码 Dialog：透明窗口 + 圆角自定义内容 -->
+    <style name="WifiPasswordDialog" parent="Theme.MaterialComponents.Light.Dialog.Alert">
+        <item name="android:windowBackground">@android:color/transparent</item>
+        <item name="android:backgroundDimEnabled">true</item>
+        <item name="android:backgroundDimAmount">0.45</item>
+        <item name="android:windowMinWidthMajor">85%</item>
+        <item name="android:windowMinWidthMinor">85%</item>
+    </style>
 </resources>

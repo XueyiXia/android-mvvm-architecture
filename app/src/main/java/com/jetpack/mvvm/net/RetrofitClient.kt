@@ -33,6 +33,7 @@ object RetrofitClient {
     private val client=OkHttpClient.Builder()
         .addInterceptor(logger)
         .addInterceptor(jsonLogger)
+        .retryOnConnectionFailure(true)
         .connectTimeout(10,TimeUnit.SECONDS)
         .readTimeout(10,TimeUnit.SECONDS)
         .writeTimeout(10,TimeUnit.SECONDS)

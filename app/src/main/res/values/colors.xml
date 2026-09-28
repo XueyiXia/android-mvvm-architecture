@@ -79,4 +79,10 @@
 
     <!-- 按钮 -->
     <color name="button_green">#16C784</color>
+
+
+
+    <color name="text_gray">#666666</color>
+    <color name="bg_page">#F7F8FA</color>
+    <color name="primary">#1677FF</color>
 </resources>
