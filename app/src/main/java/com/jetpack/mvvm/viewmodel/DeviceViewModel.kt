@@ -231,6 +231,8 @@ class DeviceViewModel(
         return progress
     }
 
+
+
     override fun onCleared() {
         repository.release()
         super.onCleared()

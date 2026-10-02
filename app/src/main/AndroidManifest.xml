@@ -6,56 +6,47 @@
     <uses-feature
         android:name="android.hardware.camera"
         android:required="false" />
+
     <uses-permission android:name="android.permission.CAMERA" />
     <uses-permission android:name="android.permission.VIBRATE" />
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="android.permission.BLUETOOTH_ADVERTISE" />
-
     <uses-permission
         android:name="android.permission.BLUETOOTH_SCAN"
         android:usesPermissionFlags="neverForLocation" />
-
-    <uses-permission
-        android:name="android.permission.BLUETOOTH_CONNECT" />
-
+    <uses-permission android:name="android.permission.BLUETOOTH_CONNECT" />
     <uses-permission
         android:name="android.permission.BLUETOOTH"
         android:maxSdkVersion="30" />
-
     <uses-permission
         android:name="android.permission.BLUETOOTH_ADMIN"
         android:maxSdkVersion="30" />
-
     <uses-permission
         android:name="android.permission.ACCESS_FINE_LOCATION"
         android:maxSdkVersion="30" />
-
-    <uses-permission android:name="android.permission.NEARBY_WIFI_DEVICES"/>
-    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE"/>
-    <uses-permission android:name="android.permission.CHANGE_WIFI_STATE"/>
-
+    <uses-permission android:name="android.permission.NEARBY_WIFI_DEVICES" />
+    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
+    <uses-permission android:name="android.permission.CHANGE_WIFI_STATE" />
 
     <application
         android:name=".AppLoader"
         android:allowBackup="true"
         android:dataExtractionRules="@xml/data_extraction_rules"
         android:fullBackupContent="@xml/backup_rules"
-        android:usesCleartextTraffic="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:theme="@style/AppLoaderStyle">
-
-
+        android:theme="@style/AppLoaderStyle"
+        android:usesCleartextTraffic="true">
         <activity
             android:name=".activities.SplashMvvmActivity"
             android:exported="true"
             android:theme="@style/SplashTheme">
-
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
 
@@ -63,41 +54,34 @@
                 android:name="android.app.lib_name"
                 android:value="" />
         </activity>
-
         <activity
             android:name=".activities.MainActivity"
             android:launchMode="singleTask"
-            android:windowSoftInputMode="adjustResize"
-            android:theme="@style/ActionBarTheme"/>
-
+            android:theme="@style/ActionBarTheme"
+            android:windowSoftInputMode="adjustResize" />
         <activity
             android:name=".activities.TestActivity"
             android:launchMode="standard"
-            android:windowSoftInputMode="adjustResize"
-            android:theme="@style/ActionBarTheme"/>
-
-
+            android:theme="@style/ActionBarTheme"
+            android:windowSoftInputMode="adjustResize" />
         <activity
             android:name=".activities.CudaActivity"
             android:launchMode="standard"
-            android:windowSoftInputMode="adjustResize"
-            android:theme="@style/ActionBarTheme"/>
-
+            android:theme="@style/ActionBarTheme"
+            android:windowSoftInputMode="adjustResize" />
         <activity
             android:name=".activities.TouchActivity"
             android:launchMode="standard"
-            android:windowSoftInputMode="adjustResize"
-            android:theme="@style/ActionBarTheme"/>
-
-
-
+            android:theme="@style/ActionBarTheme"
+            android:windowSoftInputMode="adjustResize" />
         <activity
             android:name=".activities.AddDeviceActivity"
-            android:launchMode="standard"
-            android:windowSoftInputMode="adjustResize"
-            android:theme="@style/ActionBarTheme"/>
-
-
+            android:theme="@style/ActionBarTheme"
+            android:windowSoftInputMode="adjustResize" />
+        <activity
+            android:name=".activities.DeviceBindActivity"
+            android:exported="false"
+            android:windowSoftInputMode="adjustResize" />
     </application>
 
 </manifest>

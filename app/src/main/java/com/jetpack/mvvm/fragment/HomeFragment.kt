@@ -120,16 +120,14 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(){
             DeviceState.ERROR -> {
                 mBinding.layoutConnect.root.visibility = View.VISIBLE
             }
-            DeviceState.READY->{
-
-                startActivity(AddDeviceActivity::class.java)
-            }
+            DeviceState.READY,
             DeviceState.MEASURING -> {
                 mBinding.layoutConnect.root.visibility = View.GONE
                 mBinding.layoutMeasure.root.visibility = View.VISIBLE
                 coroutineScope.launch {
-                    delay(1000L.milliseconds)
+
                     viewModel.startMeasure()
+                    delay(2000.milliseconds)
                 }
             }
             DeviceState.COMPLETE -> {
@@ -143,7 +141,7 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(){
 
                         while(true){
                             try {
-                                viewModel.startMeasure(true)
+//                                viewModel.startMeasure(true)
                                 delay(15000.milliseconds)
                                 Log.e("ESP32","请求成功:")
                             }catch(e:Exception){

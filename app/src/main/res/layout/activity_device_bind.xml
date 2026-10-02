@@ -1,0 +1,206 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+
+    <data>
+
+        <variable
+            name="deviceBindViewModel"
+            type="com.jetpack.mvvm.viewmodel.DeviceBindViewModel" />
+
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/bg_page">
+
+
+        <TextView
+            android:id="@+id/tvTitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="添加设备"
+            android:textColor="@color/text_primary"
+            android:textSize="@dimen/sp_28"
+            android:textStyle="bold"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            android:layout_marginStart="@dimen/dp_24"
+            android:layout_marginTop="@dimen/dp_56"/>
+
+
+        <TextView
+            android:id="@+id/tvSubTitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="搜索附近的智能设备"
+            android:textColor="@color/text_secondary"
+            android:textSize="@dimen/sp_15"
+            app:layout_constraintTop_toBottomOf="@id/tvTitle"
+            app:layout_constraintStart_toStartOf="parent"
+            android:layout_marginStart="@dimen/dp_24"
+            android:layout_marginTop="@dimen/dp_10"/>
+
+
+
+        <com.google.android.material.card.MaterialCardView
+            android:id="@+id/cardScan"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/dp_20"
+            android:layout_marginEnd="@dimen/dp_20"
+            android:layout_marginTop="@dimen/dp_32"
+            app:cardCornerRadius="@dimen/dp_20"
+            app:cardElevation="0dp"
+            app:cardBackgroundColor="@color/white"
+            app:layout_constraintTop_toBottomOf="@id/tvSubTitle">
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:gravity="center"
+                android:padding="@dimen/dp_24">
+
+
+                <FrameLayout
+                    android:id="@+id/layoutBluetooth"
+                    android:layout_width="@dimen/dp_120"
+                    android:layout_height="@dimen/dp_120">
+
+
+                    <View
+                        android:id="@+id/viewPulse"
+                        android:layout_width="@dimen/dp_96"
+                        android:layout_height="@dimen/dp_96"
+                        android:layout_gravity="center"
+                        android:background="@drawable/bg_bluetooth_pulse"/>
+
+
+                    <FrameLayout
+                        android:layout_width="@dimen/dp_80"
+                        android:layout_height="@dimen/dp_80"
+                        android:layout_gravity="center"
+                        android:background="@drawable/bg_device_icon">
+
+
+                        <ImageView
+                            android:id="@+id/ivBluetooth"
+                            android:layout_width="@dimen/dp_36"
+                            android:layout_height="@dimen/dp_36"
+                            android:layout_gravity="center"
+                            android:src="@drawable/ic_bluetooth_white"/>
+
+
+                    </FrameLayout>
+
+
+                    <ProgressBar
+                        android:id="@+id/progressScan"
+                        android:layout_width="@dimen/dp_28"
+                        android:layout_height="@dimen/dp_28"
+                        android:layout_gravity="center"
+                        android:layout_marginEnd="@dimen/dp_4"
+                        android:layout_marginBottom="@dimen/dp_4"
+                        android:indeterminateTint="@color/colorPrimary" />
+
+
+                </FrameLayout>
+
+
+                <TextView
+                    android:id="@+id/tvStatus"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="正在搜索附近设备..."
+                    android:textColor="@color/text_primary"
+                    android:textSize="@dimen/sp_16"
+                    android:layout_marginTop="@dimen/dp_16"/>
+
+
+                <TextView
+                    android:id="@+id/tvTip"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="请确保设备已开启"
+                    android:textColor="@color/text_secondary"
+                    android:textSize="@dimen/sp_13"
+                    android:layout_marginTop="@dimen/dp_8"/>
+
+
+            </LinearLayout>
+
+
+        </com.google.android.material.card.MaterialCardView>
+
+
+
+
+        <TextView
+            android:id="@+id/tvDeviceTitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="发现设备"
+            android:textColor="@color/text_primary"
+            android:textSize="@dimen/sp_18"
+            android:textStyle="bold"
+            app:layout_constraintTop_toBottomOf="@id/cardScan"
+            app:layout_constraintStart_toStartOf="parent"
+            android:layout_marginStart="@dimen/dp_24"
+            android:layout_marginTop="@dimen/dp_28"/>
+
+
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/recyclerDevice"
+            android:layout_width="match_parent"
+            android:layout_height="0.0dp"
+            android:layout_marginStart="@dimen/dp_20"
+            android:layout_marginEnd="@dimen/dp_20"
+            android:layout_marginTop="@dimen/dp_16"
+            android:clipToPadding="false"
+            android:paddingBottom="@dimen/dp_20"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tvDeviceTitle"
+            />
+
+
+
+        <TextView
+            android:id="@+id/tvEmpty"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="暂未发现设备"
+            android:textColor="@color/text_secondary"
+            android:textSize="@dimen/sp_14"
+            android:visibility="gone"
+            tools:visibility="visible"
+            app:layout_constraintTop_toTopOf="@id/recyclerDevice"
+            app:layout_constraintBottom_toBottomOf="@id/recyclerDevice"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"/>
+
+
+
+        <TextView
+            android:id="@+id/tvBottomTip"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="打开蓝牙并靠近设备进行绑定"
+            android:textColor="@color/text_secondary"
+            android:textSize="@dimen/sp_13"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:layout_marginBottom="@dimen/dp_32"/>
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</layout>

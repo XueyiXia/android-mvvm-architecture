@@ -7,6 +7,7 @@ import com.jetpack.mvvm.repository.ble.BleRepository
 import com.jetpack.mvvm.viewmodel.DeviceViewModel
 import com.jetpack.mvvm.repository.wifi.WifiRepository
 import com.jetpack.mvvm.viewmodel.AddDeviceViewModel
+import com.jetpack.mvvm.viewmodel.DeviceBindViewModel
 import org.koin.androidx.viewmodel.dsl.viewModel
 import org.koin.dsl.module
 
@@ -57,7 +58,19 @@ val scanWifiModule = module {
 
     viewModel {
         AddDeviceViewModel(
-            scanner = get()
+            scanner = get(),get()
+        )
+    }
+}
+
+
+val bindingDeviceModule = module {
+
+
+
+    viewModel {
+        DeviceBindViewModel(
+             get()
         )
     }
 }

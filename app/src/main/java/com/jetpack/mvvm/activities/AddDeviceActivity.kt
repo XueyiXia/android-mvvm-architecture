@@ -70,13 +70,15 @@ class AddDeviceActivity : BaseActivity<ActivityAddDeviceBinding>() {
             .create()
 
         btnCancel.setOnClickListener { dialog.dismiss() }
-        btnConnect.setOnClickListener {
+
+        btnConnect.setOnClickListener  {
             val password = etPassword.text?.toString().orEmpty()
             if (password.isBlank()) {
                 Toast.makeText(this, R.string.wifi_password_hint, Toast.LENGTH_SHORT).show()
                 return@setOnClickListener
             }
-            Log.d("Wifi", "连接:${wifi.ssid}, password长度=${password.length}")
+            Log.d("Wifi", "连接:${wifi.ssid},password= :${password} , password长度=${password.length}")
+            viewModel.sendWifiConfig(wifi.ssid,password)
             dialog.dismiss()
         }
 
@@ -108,5 +110,12 @@ class AddDeviceActivity : BaseActivity<ActivityAddDeviceBinding>() {
 
     companion object {
         private const val DIALOG_WIDTH_RATIO = 0.82f
+    }
+
+
+    override fun onBackPressedCallback(): Boolean {
+        finish()
+        return false
+
     }
 }

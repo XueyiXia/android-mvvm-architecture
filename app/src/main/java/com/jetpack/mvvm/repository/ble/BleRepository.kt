@@ -10,50 +10,112 @@ import com.jetpack.mvvm.ble.BleManager
 import com.jetpack.mvvm.ble.model.DeviceUiState
 import kotlinx.coroutines.flow.map
 
+
+
+
 class BleRepository(
-    private val bleManager: BleManager,
-    private val mqttManager : MqttManager
-) {
+    private val bleManager:BleManager,
+    private val mqttManager:MqttManager
+){
 
-    private val gson = Gson()
-    val devices = bleManager.devices
-    val connected = bleManager.connected
-    val rssi = bleManager.rssi
+    private val gson=Gson()
 
-    val data =
-        bleManager.data
-            .map { json ->
-                Log.d("getJSon","==:${json}")
-                gson.fromJson(
-                    json,
-                    DeviceUiState::class.java
-                )
-            }
+    val devices=bleManager.devices
 
-    val error = bleManager.error
-    fun scan() {
+    val connected=bleManager.connected
+
+    val rssi=bleManager.rssi
+
+
+    val data=
+        bleManager.data.map{json->
+            Log.d("getJSon","==:${json}")
+            gson.fromJson(
+                json,
+                DeviceUiState::class.java
+            )
+        }
+
+
+    val error=bleManager.error
+
+
+
+    // ===============================
+    // BLE扫描
+    // 原逻辑保留
+    // ===============================
+
+    fun scan(){
         bleManager.startScan()
     }
 
-    fun stopScan() {
+
+    fun stopScan(){
         bleManager.stopScan()
     }
 
+
+    // ===============================
+    // BLE连接
+    // 原逻辑保留
+    // ===============================
+
     @RequiresPermission(Manifest.permission.BLUETOOTH_CONNECT)
-    fun connect(device: BluetoothDevice) {
+    fun connect(device:BluetoothDevice){
         bleManager.connect(device)
+    }
+
+
+        // ===============================
+        // WIFI状态
+        // 新增
+        // ===============================
+
+    val wifiStatus= bleManager.wifiStatus
+
+    // ===============================
+    // WIFI配置
+    // 新增
+    // ===============================
+
+    fun sendWifiConfig(
+        ssid:String,
+        password:String
+    ){
+
+        val json="""
+                    {
+                    "type":"wifi",
+                    "ssid":"$ssid",
+                    "password":"$password"
+                    }
+                    """.trimIndent()
+
+
+        bleManager.writeCommand(json)
 
     }
 
-    fun startMeasure() {
+
+
+// ===============================
+// 测量
+// 原逻辑保留
+// ===============================
+
+    fun startMeasure(){
         bleManager.startMeasure()
     }
 
-    fun disconnect() {
+
+    fun disconnect(){
         bleManager.disconnect()
     }
 
-    fun release() {
+
+    fun release(){
         bleManager.release()
     }
+
 }

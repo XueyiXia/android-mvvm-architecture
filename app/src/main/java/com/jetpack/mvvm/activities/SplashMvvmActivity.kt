@@ -26,7 +26,7 @@ class SplashMvvmActivity  : BaseMvvmActivity<ActivitySplashBinding,SplashViewMod
         Log.e("SplashActivity", "initView--->>" + this.javaClass.simpleName)
 
 
-        startActivity(Intent(this@SplashMvvmActivity, MainActivity::class.java))
+        startActivity(Intent(this@SplashMvvmActivity, DeviceBindActivity::class.java))
         finish()
     }
 

@@ -8,6 +8,7 @@ import android.os.Build
 import android.os.Bundle
 import android.util.Log
 import android.view.View
+import androidx.activity.OnBackPressedCallback
 import androidx.activity.result.ActivityResult
 import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.contract.ActivityResultContracts
@@ -21,6 +22,7 @@ import androidx.lifecycle.ViewModelProvider
 import com.framework.mvvm.utils.getVmClazz
 import com.framework.mvvm.viewmodel.BaseViewModel
 import com.framework.mvvm.utils.notNull
+import com.google.android.material.snackbar.Snackbar
 import kotlin.system.exitProcess
 
 
@@ -32,6 +34,7 @@ import kotlin.system.exitProcess
  */
 
 abstract class BaseActivity <BINDING :ViewDataBinding> : AppCompatActivity(){
+
     companion object{
         private const val TAG = "BaseActivity"
         var exitTime: Long = 0 //退出程序的时间
@@ -98,6 +101,12 @@ abstract class BaseActivity <BINDING :ViewDataBinding> : AppCompatActivity(){
          * 检查权限
          */
         checkPermissionGranted()
+
+
+        /**
+         *
+         */
+        initBackPressed()
 
     }
 
@@ -207,11 +216,67 @@ abstract class BaseActivity <BINDING :ViewDataBinding> : AppCompatActivity(){
             try {
                 finish()
                 exitProcess(0)
-                System.gc()
             } catch (e: RuntimeException) {
                 e.printStackTrace()
             }
         }
+    }
+
+    private fun initBackPressed() {
+
+        onBackPressedDispatcher.addCallback(
+            this,
+            object : OnBackPressedCallback(true) {
+
+                override fun handleOnBackPressed() {
+                    if (onBackPressedCallback()) {
+                        return
+                    }
+                    finish()
+                }
+            }
+        )
+    }
+
+
+    fun showSnackbar(
+        message:CharSequence,
+        actionText:CharSequence?=null,
+        action:()->Unit={}
+    ){
+
+        val snackbar=
+            Snackbar.make(
+                mBinding.root,
+                message,
+                Snackbar.LENGTH_INDEFINITE
+            )
+
+
+        if(actionText!=null){
+
+            snackbar.setAction(
+                actionText
+            ){
+                action()
+            }
+
+        }
+
+
+        snackbar.show()
+
+    }
+
+
+    /**
+     * 子类复写返回事件
+     *
+     * return true: 已处理，不执行默认返回
+     * return false: 执行默认finish
+     */
+    protected open fun onBackPressedCallback(): Boolean {
+        return false
     }
 
     /**

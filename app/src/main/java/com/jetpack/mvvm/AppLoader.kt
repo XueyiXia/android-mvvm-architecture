@@ -3,6 +3,7 @@ package com.jetpack.mvvm
 import android.app.Application
 import android.content.Context
 import androidx.multidex.MultiDex
+import com.jetpack.mvvm.di.bindingDeviceModule
 import com.jetpack.mvvm.di.bleModule
 import com.jetpack.mvvm.di.scanWifiModule
 import org.koin.android.ext.koin.androidContext
@@ -50,6 +51,7 @@ class AppLoader : Application() {
         val modules = mutableListOf<Module>()
         modules.add(bleModule)
         modules.add(scanWifiModule)
+        modules.add(bindingDeviceModule)
         return modules
     }
 }

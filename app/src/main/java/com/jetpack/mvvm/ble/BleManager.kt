@@ -53,6 +53,14 @@ class BleManager(
             UUID.fromString(
                 "00002902-0000-1000-8000-00805f9b34fb"
             )
+
+
+        const val WIFI_SERVICE_UUID =
+            "87654321-1234-5678-1234-56789abcdef0"
+
+
+        const val WIFI_STATUS_UUID =
+            "87654321-1234-5678-1234-56789abcdef1"
     }
 
 
@@ -61,6 +69,11 @@ class BleManager(
     private var bluetoothGatt: BluetoothGatt? = null
     private var dataCharacteristic: BluetoothGattCharacteristic? = null
     private var commandCharacteristic: BluetoothGattCharacteristic? = null
+
+    private var wifiStatusCharacteristic: BluetoothGattCharacteristic?=null
+
+    private val _wifiStatus=MutableSharedFlow<String>(extraBufferCapacity=10)
+    val wifiStatus=_wifiStatus.asSharedFlow()
 
     // --------------------------------------------------
     // 设备信号
@@ -240,6 +253,12 @@ class BleManager(
 
             dataCharacteristic = service.getCharacteristic(DATA_UUID)
             commandCharacteristic = service.getCharacteristic(COMMAND_UUID)
+
+
+            val wifiService = gatt.getService(UUID.fromString(WIFI_SERVICE_UUID))
+            wifiStatusCharacteristic = wifiService?.getCharacteristic(UUID.fromString(WIFI_STATUS_UUID))
+
+
             if (dataCharacteristic == null) {
                 emitError("找不到 Data Characteristic")
                 return
@@ -260,6 +279,7 @@ class BleManager(
             }
 
             enableNotification(gatt)
+            enableWifiNotification(gatt)
         }
 
 
@@ -293,6 +313,20 @@ class BleManager(
                 }
 
             }
+
+
+            if(characteristic.uuid== UUID.fromString(WIFI_STATUS_UUID)){
+                val json= characteristic.value.toString(Charsets.UTF_8)
+                Log.d(
+                    "BLE_WIFI",
+                    json
+                )
+
+                _wifiStatus.tryEmit(
+                    json
+                )
+
+            }
         }
 
         override fun onCharacteristicChanged(gatt: BluetoothGatt, characteristic: BluetoothGattCharacteristic, value: ByteArray) {
@@ -309,6 +343,19 @@ class BleManager(
 //                val data = value.toString(Charsets.UTF_8)
 //                println("BLE DATA: $data")
 //                _data.tryEmit(data)
+
+
+                if(characteristic.uuid== UUID.fromString(WIFI_STATUS_UUID)){
+                    val json= characteristic.value.toString(Charsets.UTF_8)
+
+                    Log.d("BLE_WIFI",
+                        json
+                    )
+                    _wifiStatus.tryEmit(
+                        json
+                    )
+
+                }
             }
         }
 
@@ -374,6 +421,57 @@ class BleManager(
         }
     }
 
+
+
+    @SuppressLint("MissingPermission")
+    private fun enableWifiNotification(gatt:BluetoothGatt){
+
+        val characteristic=
+            wifiStatusCharacteristic?:return
+
+
+        val result=
+            gatt.setCharacteristicNotification(
+                characteristic,
+                true
+            )
+
+
+        if(!result){
+            Log.e(
+                "BLE_WIFI",
+                "enable wifi notify failed"
+            )
+            return
+        }
+
+
+        val descriptor=
+            characteristic.getDescriptor(
+                CCCD_UUID
+            )?:return
+
+
+
+        if(Build.VERSION.SDK_INT>=Build.VERSION_CODES.TIRAMISU){
+
+            gatt.writeDescriptor(
+                descriptor,
+                BluetoothGattDescriptor.ENABLE_NOTIFICATION_VALUE
+            )
+
+        }else{
+
+            descriptor.value=
+                BluetoothGattDescriptor.ENABLE_NOTIFICATION_VALUE
+
+            gatt.writeDescriptor(
+                descriptor
+            )
+
+        }
+
+    }
     // ==================================================
     // 开始测量
     // ==================================================
@@ -428,6 +526,7 @@ class BleManager(
         dataCharacteristic = null
         commandCharacteristic = null
         _connected.value = false
+        wifiStatusCharacteristic=null
     }
 
     // ==================================================
@@ -484,5 +583,35 @@ class BleManager(
         }
 
         return null
+    }
+
+
+    /**
+     *
+     */
+    @RequiresPermission(Manifest.permission.BLUETOOTH_CONNECT)
+    fun writeCommand(data:String){
+        val characteristic=commandCharacteristic ?: return
+        val value =data.toByteArray(
+            Charsets.UTF_8
+        )
+
+        characteristic.writeType = BluetoothGattCharacteristic.WRITE_TYPE_DEFAULT
+
+
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
+            val result = bluetoothGatt?.writeCharacteristic(
+                characteristic,
+                value,
+                BluetoothGattCharacteristic.WRITE_TYPE_DEFAULT
+            )
+            Log.d("writeCommand", "write result=$result")
+        } else {
+            characteristic.value = value
+            characteristic.writeType = BluetoothGattCharacteristic.WRITE_TYPE_DEFAULT
+            val result = bluetoothGatt?.writeCharacteristic(characteristic)
+            Log.d("writeCommand", "legacy write result=$result")
+        }
+
     }
 }
